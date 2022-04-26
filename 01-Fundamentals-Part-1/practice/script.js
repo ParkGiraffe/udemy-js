@@ -55,3 +55,25 @@
 
 // // null
 // console.log(typeof null); // object <- 아무 의미를 지니지 않는다. typeof에서 null일 경우 null이라고 출력하지 않고 object로 출력된다. 따라서 JS에서 버그나 에러로 간주한다. (legacy한 이유로 현재도 수정되지는 않는 버그이다. typeof사용에 유의해야 할 필요가 있는 정보이다.)
+
+// // [2-13] let, const and var 
+// // let은 변수 선언
+// let age = 30;
+// age = 31;
+
+// // const는 상수 선언 (immutable)
+// const birthYear = 1991;
+// // birthYear = 1990; // TypeError
+
+// // const job // 'const' declarations must be initialized. 상수는 무조건 초기값을 필요로 한다.
+
+// // 변수 선언 방식으로 var도 있지만 이제는 쓰지 않는 방법이다. 
+// // let, const와 var의 작동 방식은 매우 다르다. (Section7에서 설명 예정.)
+// // let: block-scoped
+// // var: function-scoped
+// var job = 'programmar';
+// jab = 'teacher';
+
+// // let, var을 적지 않아도 변수는 선언되나 매우 끔직한 방식이다. 이렇게 설정하면 JS에서 전역변수로 설정하기 때문이다.
+// lastName = 'Schmedtamnn';
+// console.log(lastName);
