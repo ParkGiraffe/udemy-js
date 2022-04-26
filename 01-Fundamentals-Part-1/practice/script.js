@@ -77,3 +77,45 @@
 // // let, var을 적지 않아도 변수는 선언되나 매우 끔직한 방식이다. 이렇게 설정하면 JS에서 전역변수로 설정하기 때문이다.
 // lastName = 'Schmedtamnn';
 // console.log(lastName);
+
+// // [2-13] Basic Operators
+// // math operators
+// // minus
+
+// const now = 2022
+// const ageYosep = now - 2000;
+// const ageJonas = now - 1991;
+// console.log(ageYosep, ageJonas);
+
+// // times, devide, exponentiation
+// console.log(ageJonas * 2, ageYosep / 2, 2 ** 3);
+
+// // plus
+// // plus operator는 String 결합에도 사용할 수 있다.'
+
+// const firstName = 'Yosep';
+// const lastName = 'Park';
+// console.log(firstName + ' ' + lastName); // Yosep Park
+
+// // typeof operator
+
+// // assignment operators(할당 연산자, =)
+// let x = 10 + 5; 
+// console.log(x) // 15
+
+// x += 10; // x = x + 10
+// x *= 4; // x = x * 4
+// x++; // x = x + 1
+// x--; // x = x - 1
+
+// // comparison operators
+// // 참일 경우 true, 아니면 false.
+// // >, <, >=, <=
+// console.log(ageJonas > ageYosep); // true
+// console.log(ageYosep <= 20); // false
+
+
+// // 연산자의 실행 순서
+// // 다른 종류의 연산자가 혼합되어 있을 경우, 계산을 먼저 한 후에, 비교를 한다.
+// console.log(now - 1991 > now - 2018);
+
