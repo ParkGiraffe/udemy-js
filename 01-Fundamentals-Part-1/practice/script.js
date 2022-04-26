@@ -119,3 +119,23 @@
 // // 다른 종류의 연산자가 혼합되어 있을 경우, 계산을 먼저 한 후에, 비교를 한다.
 // console.log(now - 1991 > now - 2018);
 
+// // [2-15] Operator Precedence
+// // 연산자 우선순위에 대해 설명한 사이트 (table에서 Precedence 숫자가 높을수록 우선순위가 높다.) : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence
+
+
+// const now = 2037;
+// const ageJonas = now - 1991;
+// const ageSarah = now - 2018;
+
+// console.log(now - 1991 > now - 2018);
+
+// let x, y;
+// x = y = 25 - 10 - 5; x = y = 10, x = 10 // '='는 right to left, 수학 연산자는 right to left
+// console.log(x, y);
+
+// // +,- 보다 *,/ 이 우선순위가 높기 때문에, 평균값을 구하는 경우에는 ()를 넣어줘야 한다.
+// const averageAge1 = ageJonas + ageSarah / 2 // 55.5
+// const averageAge2 = (ageJonas + ageSarah) / 2 // 32.5
+// console.log(averageAge1, averageAge2)
+
+
