@@ -222,27 +222,73 @@ GOOD LUCK
 
 
 
-// [2-18] Taking Decisions: if / else Statements
-const age = 22;
-if (age >= 18) {
-    console.log(`Joseph can start driving license 🚗`);
-} else {
-    const yearsLeft = 18 - age;
-    console.log(`Joseph is too young. Wait another ${yearsLeft} years :)`);
+// // [2-18] Taking Decisions: if / else Statements
+// const age = 22;
+// if (age >= 18) {
+//     console.log(`Joseph can start driving license 🚗`);
+// } else {
+//     const yearsLeft = 18 - age;
+//     console.log(`Joseph is too young. Wait another ${yearsLeft} years :)`);
+// }
+
+// // 이러한 if/else statements를 control structure라고 부른다.
+// // control structure는 코드 블록을 실행해야 하는 블록과 실행해야 하지 말아야 할 블록으로 나누어서 제어 권한을 제공한다.
+
+
+
+// // if else문을 통해서 조건부로 변수를 생성할 수 있다.
+// const birthYear = 2000;
+// let century;
+// if (birthYear <= 2000) {
+//     century = 20;
+// } else {
+//     century = 21;
+// }
+
+// console.log(century);
+
+
+///////////////////////////////////////////////////////////////
+/*
+[2-19] Coding Challenge #2
+Use the BMI example from Challenge #1, and the code you already wrote, and
+improve it.
+
+Your tasks:
+1. Print a nice output to the console, saying who has the higher BMI. The message
+is either "Mark's BMI is higher than John's!" or "John's BMI is higher than Mark's!"
+2. Use a template literal to include the BMI values in the outputs. Example: "Mark's
+BMI (28.3) is higher than John's (23.9)!"
+
+Hint: Use an if/else statement 
+
+GOOD LUCK 
+
+*/
+
+const weightsMarks = 78;
+const heightsMarks = 1.69;
+const weightsJohn = 92;
+const heightsJohn = 1.95;
+
+function calculateBMI (weights, heights) {
+    let bmi = weights / (heights ** 2);
+    return bmi;
 }
 
-// 이러한 if/else statements를 control structure라고 부른다.
-// control structure는 코드 블록을 실행해야 하는 블록과 실행해야 하지 말아야 할 블록으로 나누어서 제어 권한을 제공한다.
+const bmiMarks = calculateBMI(weightsMarks, heightsMarks);
+const bmiJohn = calculateBMI(weightsJohn, heightsJohn);
 
+const markHigherBMI = bmiMarks > bmiJohn;
 
-
-// if else문을 통해서 조건부로 변수를 생성할 수 있다.
-const birthYear = 2000;
-let century;
-if (birthYear <= 2000) {
-    century = 20;
+if (markHigherBMI) {
+    console.log(`Mark's BMI (${bmiMarks}) is higher than John's (${bmiJohn})!`);
 } else {
-    century = 21;
+    console.log(`John's BMI (${bmiJohn}) is higher than John's (${bmiMarks})!`);
 }
 
-console.log(century);
+
+
+
+
+///////////////////////////////////////////////////////////////
