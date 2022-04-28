@@ -192,27 +192,57 @@ GOOD LUCK
 
 ///////////////////////////////////////////////////////////////
 
-// [2-17] Strings and Template Literals
-// template literals는 백틱(₩)을 사용해서 시작한다.
-// 그 다음 ${}를 이용해서 변수 값을 쉽게 String으로 변환하여 넣을 수 있다. 
-// 그래서 대부분 개발자들은 String을 선언할 때 백틱만 사용한다.
-const firstName = `joseph`;
-const year = 2022;
+// // [2-17] Strings and Template Literals
+// // template literals는 백틱(₩)을 사용해서 시작한다.
+// // 그 다음 ${}를 이용해서 변수 값을 쉽게 String으로 변환하여 넣을 수 있다. 
+// // 그래서 대부분 개발자들은 String을 선언할 때 백틱만 사용한다.
+// const firstName = `joseph`;
+// const year = 2022;
+// const birthYear = 2000;
+// const job = `teacher`;
+
+// const joseph = `I'm ${firstName}, a ${year - birthYear} years old ${job}!`;
+// console.log(joseph);
+// console.log(`Just a regular string....`);
+
+
+// // template Strings가 있기 전에는 \n\을 이용해서 줄바꿈을 했다. (다른 언어는 대부분 \n이다.)
+// console.log('String with \n\
+// multiple \n\
+// lines');
+
+
+// // 현재는 template strings를 통해 단순히 return(enter)키만 눌러도 줄바꿈을 구현할 수 있다.
+// console.log(`String with
+// multiple
+// lines`);
+
+
+
+
+
+
+// [2-18] Taking Decisions: if / else Statements
+const age = 22;
+if (age >= 18) {
+    console.log(`Joseph can start driving license 🚗`);
+} else {
+    const yearsLeft = 18 - age;
+    console.log(`Joseph is too young. Wait another ${yearsLeft} years :)`);
+}
+
+// 이러한 if/else statements를 control structure라고 부른다.
+// control structure는 코드 블록을 실행해야 하는 블록과 실행해야 하지 말아야 할 블록으로 나누어서 제어 권한을 제공한다.
+
+
+
+// if else문을 통해서 조건부로 변수를 생성할 수 있다.
 const birthYear = 2000;
-const job = `teacher`;
+let century;
+if (birthYear <= 2000) {
+    century = 20;
+} else {
+    century = 21;
+}
 
-const joseph = `I'm ${firstName}, a ${year - birthYear} years old ${job}!`;
-console.log(joseph);
-console.log(`Just a regular string....`);
-
-
-// template Strings가 있기 전에는 \n\을 이용해서 줄바꿈을 했다. (다른 언어는 대부분 \n이다.)
-console.log('String with \n\
-multiple \n\
-lines');
-
-
-// 현재는 template strings를 통해 단순히 return(enter)키만 눌러도 줄바꿈을 구현할 수 있다.
-console.log(`String with
-multiple
-lines`);
+console.log(century);
