@@ -266,29 +266,70 @@ GOOD LUCK
 
 */
 
-const weightsMarks = 78;
-const heightsMarks = 1.69;
-const weightsJohn = 92;
-const heightsJohn = 1.95;
+// const weightsMarks = 78;
+// const heightsMarks = 1.69;
+// const weightsJohn = 92;
+// const heightsJohn = 1.95;
 
-function calculateBMI (weights, heights) {
-    let bmi = weights / (heights ** 2);
-    return bmi;
-}
+// function calculateBMI (weights, heights) {
+//     let bmi = weights / (heights ** 2);
+//     return bmi;
+// }
 
-const bmiMarks = calculateBMI(weightsMarks, heightsMarks);
-const bmiJohn = calculateBMI(weightsJohn, heightsJohn);
+// const bmiMarks = calculateBMI(weightsMarks, heightsMarks);
+// const bmiJohn = calculateBMI(weightsJohn, heightsJohn);
 
-const markHigherBMI = bmiMarks > bmiJohn;
+// const markHigherBMI = bmiMarks > bmiJohn;
 
-if (markHigherBMI) {
-    console.log(`Mark's BMI (${bmiMarks}) is higher than John's (${bmiJohn})!`);
-} else {
-    console.log(`John's BMI (${bmiJohn}) is higher than John's (${bmiMarks})!`);
-}
-
-
-
-
+// if (markHigherBMI) {
+//     console.log(`Mark's BMI (${bmiMarks}) is higher than John's (${bmiJohn})!`);
+// } else {
+//     console.log(`John's BMI (${bmiJohn}) is higher than John's (${bmiMarks})!`);
+// }
 
 ///////////////////////////////////////////////////////////////
+
+// [2-20] Type Conversion and Coercion
+
+// type conversion
+// 유저가 숫자를 입력했더라도, 그 값이 String으로 들어올 수 있다.
+const inputYear = '1991';
+console.log(inputYear + 18) // 199118로 출력 된다.
+
+
+// 이러한 경우를 대비하여 값의 Data type을 변환시킬 수 있다.
+// Number 타입의 경우 Number() 함수를 사용하면 된다.
+console.log(Number(inputYear) + 18); // 2009
+
+
+// 만약 일반 String 데이터가 Number 안에 들어올 경우 NaN으로 출력 된다.
+console.log(Number('Jonas')); // NaN => Not a Number 라는 뜻을 지닌다.
+console.log(typeof NaN); // number
+// NaN은 number 타입을 지닌 것으로 나온다. 하지만 invalid number이기 때문에 옳지 못한 값을 가진 상태이다.
+
+// number 타입을 String 타입으로 변경할 수 있다.
+console.log(String(23), 23);
+// 이렇게 직접 타입을 변환시킬 수 있지만, JS가 자동으로 유형 강제 변환을 시키기 때문에 쓸 일이 많지는 않다.
+
+
+// type coercion
+// JS는 상황에 따라 강제로 유형변환을 일으킨다.
+console.log(`I am ` + 23 + ` years old`); // 'I am 23 years old'
+console.log('23' - '10' - 3); // 10
+console.log('23' + '10' + 3); // '23103'
+console.log('23' * '2'); // 46
+console.log('23' / '2'); // 11.5
+// 다른 언어의 경우 type conversion을 전부 지정한 후 적용시켜야 하는 번거로움이 있는데, JS는 엄청 편하게 구현할 수 있다.
+// 하지만 JS에 익숙치 않은 사람에게는 더 큰 혼란을 줄 수 있다는 문제점도 있다. 
+
+
+// 응용 문제
+let n = '1' + 1; 
+n = n - 1;
+console.log(n); // 10
+
+let x = 2 + 3 + 4 + '5';
+console.log(x); // '95'
+
+let y = '10' - '4' - '3' - 2 + '5'
+console.log(y) // '15'
