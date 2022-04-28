@@ -168,26 +168,51 @@ m tall.
 GOOD LUCK
  */
 
-const weightsMarks1 = 78;
-const heightsMarks1 = 1.69;
-const weightsJohn1 = 92;
-const heightsJohn1 = 1.95;
+// const weightsMarks1 = 78;
+// const heightsMarks1 = 1.69;
+// const weightsJohn1 = 92;
+// const heightsJohn1 = 1.95;
 
 
-const weightsMarks2 = 95;
-const heightsMarks2 = 1.88;
-const weightsJohn2 = 85;
-const heightsJohn2 = 1.76;
+// const weightsMarks2 = 95;
+// const heightsMarks2 = 1.88;
+// const weightsJohn2 = 85;
+// const heightsJohn2 = 1.76;
 
 
-function calculateBMI (weights, heights) {
-    let bmi = weights / (heights ** 2);
-    return bmi;
-}
+// function calculateBMI (weights, heights) {
+//     let bmi = weights / (heights ** 2);
+//     return bmi;
+// }
 
-const markHigherBMI1 = calculateBMI(weightsMarks1, heightsMarks1) > calculateBMI(weightsJohn1, heightsJohn1);
-const markHigherBMI2 = calculateBMI(weightsMarks2, heightsMarks2) > calculateBMI(weightsJohn2, heightsJohn2);
+// const markHigherBMI1 = calculateBMI(weightsMarks1, heightsMarks1) > calculateBMI(weightsJohn1, heightsJohn1);
+// const markHigherBMI2 = calculateBMI(weightsMarks2, heightsMarks2) > calculateBMI(weightsJohn2, heightsJohn2);
 
-console.log(markHigherBMI1, markHigherBMI2);
+// console.log(markHigherBMI1, markHigherBMI2);
 
 ///////////////////////////////////////////////////////////////
+
+// [2-17] Strings and Template Literals
+// template literals는 백틱(₩)을 사용해서 시작한다.
+// 그 다음 ${}를 이용해서 변수 값을 쉽게 String으로 변환하여 넣을 수 있다. 
+// 그래서 대부분 개발자들은 String을 선언할 때 백틱만 사용한다.
+const firstName = `joseph`;
+const year = 2022;
+const birthYear = 2000;
+const job = `teacher`;
+
+const joseph = `I'm ${firstName}, a ${year - birthYear} years old ${job}!`;
+console.log(joseph);
+console.log(`Just a regular string....`);
+
+
+// template Strings가 있기 전에는 \n\을 이용해서 줄바꿈을 했다. (다른 언어는 대부분 \n이다.)
+console.log('String with \n\
+multiple \n\
+lines');
+
+
+// 현재는 template strings를 통해 단순히 return(enter)키만 눌러도 줄바꿈을 구현할 수 있다.
+console.log(`String with
+multiple
+lines`);
