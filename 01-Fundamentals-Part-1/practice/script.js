@@ -337,32 +337,67 @@ GOOD LUCK
 
 
 
-// [2-21] Truthy and Falsy Values
+// // [2-21] Truthy and Falsy Values
 
-// 5 falsy values: 0, '', undefined, null, NaN
-// falsy values란 Boolean 타입으로 변환되었을 때 false 값을 반환하는 걸 의미한다.
-// 반대로 위의 종류를 제외한 값들은 모두 falsy value이다.
+// // 5 falsy values: 0, '', undefined, null, NaN
+// // falsy values란 Boolean 타입으로 변환되었을 때 false 값을 반환하는 걸 의미한다.
+// // 반대로 위의 종류를 제외한 값들은 모두 falsy value이다.
 
-console.log(Boolean(0)); // false
-console.log(Boolean(undefined)); // false
-console.log(Boolean('joseph')); // true
-console.log(Boolean({})); // true - empty object도 true로 변환된다.
-console.log(Boolean('')); // false
+// console.log(Boolean(0)); // false
+// console.log(Boolean(undefined)); // false
+// console.log(Boolean('joseph')); // true
+// console.log(Boolean({})); // true - empty object도 true로 변환된다.
+// console.log(Boolean('')); // false
 
-const money = 0;
-if (money) {
-    console.log("Don't spend it all ;)");
-} else {
-    console.log('You should get a job!');
-}
-// -> You should get a job!
+// const money = 0;
+// if (money) {
+//     console.log("Don't spend it all ;)");
+// } else {
+//     console.log('You should get a job!');
+// }
+// // -> You should get a job!
 
-let height;
-if (height) {
-    console.log('YAY! Height is defined');
-} else {
-    console.log('Height is UNDEFINED');
-}
-// -> Height is UNDEFINED
+// let height;
+// if (height) {
+//     console.log('YAY! Height is defined');
+// } else {
+//     console.log('Height is UNDEFINED');
+// }
+// // -> Height is UNDEFINED
 
 
+
+// // [2-22] Equality Operators: == vs ===
+// // === is called the strict equality operator. It's strict because it does not perform type coercion. 즉, 타입까지 완전히 같은 경우에 사용
+// // == is called the loose equality operator actually does type coercion. 즉, 타입이 달라도 내용물이 같으면 true 값을 반환.
+
+// 18 === 18 // true
+// 18 == 18 // true
+// 18 === '18' // false
+// 18 == '18' // true
+
+// // '=='는 많은 버그를 유발할 수 있어서 일반적으로는 사용하지 않는 것을 원칙으로 한다.
+
+
+// // prompt()는 사용자가 값을 입력할 수 있는 팝업을 띄운다. 입력받은 값을 변수에 저장할 수 있다.그 데이터 유형은 String이다.
+// // const favourite = prompt("What's your favourite number?");
+// // console.log(favourite); //'23'
+// // console.log(typeof favourite); // String
+
+// // if (favourite == 23) { // '23' == 23
+// //     console.log('Cool! 23 is an amazing number!');
+// // }
+
+
+// // == 사용을 피하기 위해서 값을 Number()를 이용해 타입을 고정시키고 ===를 사용하는 것이 바람직하다.
+// const favourite = Number(prompt("What's your favourite number?"));
+// console.log(favourite); // 23
+// console.log(typeof favourite); // Number
+
+// if (favourite === 23) { // 23 === 23
+//     console.log('Cool! 23 is an amazing number!');
+// }
+
+
+// // !== - '같지 않음'도 Strict과 loose(!=) 버전이 있다. 이 역시 일반적으로 strict 버전을 사용한다.
+// if (favourite !== 23) console.log('Why not 23?');
