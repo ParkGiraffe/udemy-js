@@ -333,3 +333,36 @@ GOOD LUCK
 
 // let y = '10' - '4' - '3' - 2 + '5'
 // console.log(y) // '15'
+
+
+
+
+// [2-21] Truthy and Falsy Values
+
+// 5 falsy values: 0, '', undefined, null, NaN
+// falsy values란 Boolean 타입으로 변환되었을 때 false 값을 반환하는 걸 의미한다.
+// 반대로 위의 종류를 제외한 값들은 모두 falsy value이다.
+
+console.log(Boolean(0)); // false
+console.log(Boolean(undefined)); // false
+console.log(Boolean('joseph')); // true
+console.log(Boolean({})); // true - empty object도 true로 변환된다.
+console.log(Boolean('')); // false
+
+const money = 0;
+if (money) {
+    console.log("Don't spend it all ;)");
+} else {
+    console.log('You should get a job!');
+}
+// -> You should get a job!
+
+let height;
+if (height) {
+    console.log('YAY! Height is defined');
+} else {
+    console.log('Height is UNDEFINED');
+}
+// -> Height is UNDEFINED
+
+
