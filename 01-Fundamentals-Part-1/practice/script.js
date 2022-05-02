@@ -401,3 +401,27 @@ GOOD LUCK
 
 // // !== - '같지 않음'도 Strict과 loose(!=) 버전이 있다. 이 역시 일반적으로 strict 버전을 사용한다.
 // if (favourite !== 23) console.log('Why not 23?');
+
+
+
+
+
+// [2-24] Logical Operators
+// and: &&
+// or: ||
+// not: !
+
+const hasDriversLicense = true;
+const hasGoodVision = true;
+
+console.log(hasDriversLicense && hasGoodVision); // true
+console.log(hasDriversLicense || hasGoodVision); // true
+console.log(!hasDriversLicense); // false
+
+const isTired = true;
+
+if (hasDriversLicense && hasGoodVision && !isTired) {
+    console.log('Joseph is able to drive!');
+} else {
+    console.log('Someone else should drive...')
+}
