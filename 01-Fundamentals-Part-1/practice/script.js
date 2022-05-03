@@ -465,50 +465,73 @@ GOOD LUCK
 // ///////////////////////////////////////////////////////////////
 
 
-// [2-26] The Switch Statement
-// switch문은 해당하는 데이터가 어떤 케이스에 부합하는 지에 따라 그 구문의 ':' 이후에 나오는 코드를 실행한다.
-// case 값 : 이후에는 따로 {}로 묶는 거 없이 여러 줄의 코드를 작성할 수 있다.
-// break를 하지 않으면 그 다음 case의 구문들까지 같이 실행한다. 즉, 한 번 case에 진입하면 break가 나올 때까지 계속 다음 코드를 실행한다.
-// 모든 케이스에 부합하지 않는 값일 경우를 위한 default case를 추가한다.
-// switch 구문은 strict comparison(===)을 한다.
+// // [2-26] The Switch Statement
+// // switch문은 해당하는 데이터가 어떤 케이스에 부합하는 지에 따라 그 구문의 ':' 이후에 나오는 코드를 실행한다.
+// // case 값 : 이후에는 따로 {}로 묶는 거 없이 여러 줄의 코드를 작성할 수 있다.
+// // break를 하지 않으면 그 다음 case의 구문들까지 같이 실행한다. 즉, 한 번 case에 진입하면 break가 나올 때까지 계속 다음 코드를 실행한다.
+// // 모든 케이스에 부합하지 않는 값일 경우를 위한 default case를 추가한다.
+// // switch 구문은 strict comparison(===)을 한다.
 
-const day = 'monday';
+// const day = 'monday';
 
-switch(day) {
-    case 'monday': // day === 'monday'
-        console.log('Plan course structure');
-        console.log('Go to coding meetup');
-        break;
-    case 'tuesday':
-        console.log('Prepare theory videos');
-        break;
-    case 'wednesday':
-    case 'thursday':
-        console.log('Write code example');
-        break;
-    case 'friday' :
-        console.log('Record videos');
-        break;
-    case 'saturday' :
-    case 'sunday' :
-        console.log('Enjoy the weekend :D');
-        break;
-    default:
-        console.log('Not a valid day!');
+// switch(day) {
+//     case 'monday': // day === 'monday'
+//         console.log('Plan course structure');
+//         console.log('Go to coding meetup');
+//         break;
+//     case 'tuesday':
+//         console.log('Prepare theory videos');
+//         break;
+//     case 'wednesday':
+//     case 'thursday':
+//         console.log('Write code example');
+//         break;
+//     case 'friday' :
+//         console.log('Record videos');
+//         break;
+//     case 'saturday' :
+//     case 'sunday' :
+//         console.log('Enjoy the weekend :D');
+//         break;
+//     default:
+//         console.log('Not a valid day!');
+// }
+
+// if (day === 'monday') {
+//     console.log('Plan course structure');
+//     console.log('Go to coding meetup');
+// } else if (day === 'tuesday') {
+//     console.log('Prepare theory videos');
+// } else if (day === 'thrusday' || day === 'wednesday') {
+//     console.log('Write code example');
+// } else if (day === 'friday') {
+//     console.log('Record videos');
+// } else if (day === 'saturday' || day === 'sunday') {
+//     console.log('Enjoy the weekend :D');
+// } else {
+//     console.log('Not a valid day!');
+// }
+
+
+
+
+
+
+// [2-27] Statements and Expressions
+// expressions produce values
+// statements are like full sentences that translate our actions.
+
+if (23 > 18) {
+    const str = '23 is bigger';
 }
 
-if (day === 'monday') {
-    console.log('Plan course structure');
-    console.log('Go to coding meetup');
-} else if (day === 'tuesday') {
-    console.log('Prepare theory videos');
-} else if (day === 'thrusday' || day === 'wednesday') {
-    console.log('Write code example');
-} else if (day === 'friday') {
-    console.log('Record videos');
-} else if (day === 'saturday' || day === 'sunday') {
-    console.log('Enjoy the weekend :D');
-} else {
-    console.log('Not a valid day!');
-}
+// '23 is bigger' 부분은 expressions이다. 하나의 값을 생성하는 코드이기 때문이다.
+// const str = '23 is bigger'은 statements이다. str이라는 변수에 expressions를 집어넣는 action을 진술하기 때문이다.
+// 흔히들 보는 ;(세미콜론)으로 끝나는 문장은 모두 statement이다.
+// if/else statements, switch statements 또한 값을 생성하는 것이 아니라 하나의 비교 과정을 진술하는 것이기에 statements라고 하는 것이다.
 
+// 이러한 구분이 필요한 이유가 JS에선 존재한다.
+// template literal ( ${} )을 사용할 때, ${} 안에는 무조건 expression만 넣을 수 있다. 
+
+console.log(`I'm ${2037 - 1991} years old`)
+// console.log(`I'm ${if()} years old`) // Expression expected. SyntaxError 발생.
