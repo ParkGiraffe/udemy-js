@@ -517,21 +517,38 @@ GOOD LUCK
 
 
 
-// [2-27] Statements and Expressions
-// expressions produce values
-// statements are like full sentences that translate our actions.
+// // [2-27] Statements and Expressions
+// // expressions produce values
+// // statements are like full sentences that translate our actions.
 
-if (23 > 18) {
-    const str = '23 is bigger';
-}
+// if (23 > 18) {
+//     const str = '23 is bigger';
+// }
 
-// '23 is bigger' 부분은 expressions이다. 하나의 값을 생성하는 코드이기 때문이다.
-// const str = '23 is bigger'은 statements이다. str이라는 변수에 expressions를 집어넣는 action을 진술하기 때문이다.
-// 흔히들 보는 ;(세미콜론)으로 끝나는 문장은 모두 statement이다.
-// if/else statements, switch statements 또한 값을 생성하는 것이 아니라 하나의 비교 과정을 진술하는 것이기에 statements라고 하는 것이다.
+// // '23 is bigger' 부분은 expressions이다. 하나의 값을 생성하는 코드이기 때문이다.
+// // const str = '23 is bigger'은 statements이다. str이라는 변수에 expressions를 집어넣는 action을 진술하기 때문이다.
+// // 흔히들 보는 ;(세미콜론)으로 끝나는 문장은 모두 statement이다.
+// // if/else statements, switch statements 또한 값을 생성하는 것이 아니라 하나의 비교 과정을 진술하는 것이기에 statements라고 하는 것이다.
 
-// 이러한 구분이 필요한 이유가 JS에선 존재한다.
-// template literal ( ${} )을 사용할 때, ${} 안에는 무조건 expression만 넣을 수 있다. 
+// // 이러한 구분이 필요한 이유가 JS에선 존재한다.
+// // template literal ( ${} )을 사용할 때, ${} 안에는 무조건 expression만 넣을 수 있다. 
 
-console.log(`I'm ${2037 - 1991} years old`)
-// console.log(`I'm ${if()} years old`) // Expression expected. SyntaxError 발생.
+// console.log(`I'm ${2037 - 1991} years old`)
+// // console.log(`I'm ${if()} years old`) // Expression expected. SyntaxError 발생.
+
+
+
+
+// [2-28] The Conditional (Ternary) Operator
+// 삼항연산자 ? 참일 때 : 거짓일 때
+const age = 23;
+age >= 18 ? console.log('I like to drink wine') : console.log('I like to drink water');
+
+// Operator는 값을 만든다. 따라서 expression에 속한다. -> 변수에 담을 수 있다.
+const drink = age >= 18? 'wine' : 'water';
+console.log(drink); // wine
+
+// 또, expressions이기 때문에 if/else statement와는 다르게 삼항연산자는 template literal에 사용할 수 있다.
+console.log(`I like to drink ${age >= 18 ? 'wine' : 'water'}`);
+
+// 일반적으로 긴 조건문일 때는 if/else 문을 사용하나, 짧은 구문일 때나 JS의 expressions를 필요로 하는 부분(ex: template literal)에서는 삼항 연산자를 사용한다.
