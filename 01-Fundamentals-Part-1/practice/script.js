@@ -430,36 +430,85 @@ GOOD LUCK
 
 
 
-///////////////////////////////////////////////////////////////
-/*
-[2-25] Coding Challenge #3
+// ///////////////////////////////////////////////////////////////
+// /*
+// [2-25] Coding Challenge #3
 
-There are two gymnastics teams, Dolphins and Koalas. They compete against each other 3 times. The winner with the highest average score wins a trophy!
-Your tasks:
-1. Calculate the average score for each team,using the test data below
-2. Compare the team's average scores to determine the winner of the competition,
-and print it to the console. Don't forget that there can be a draw, so test for that
-as well (draw means they have the same average score)
-3. Bonus 1 : Include a requirement for a minimum score of 100. With this rule,a
-team only wins if it has a higher score than the other team, and the same time a score of at least 100 points. Hint: Use a logical operator to test for minimum score, as well as multiple else-if blocks 😉
-4. Bonus 2 : Minimum score also applies to a draw! So a draw only happens when both teams have the same score and both have a score greater or equal 100 points. Otherwise, no team wins the trophy
-Test data:
-§ Data 1: Dolphins score 96, 108 and 89. Koalas score 88, 91 and 110
-§ Data Bonus 1: Dolphins score 97, 112 and 101. Koalas score 109, 95 and 123 § Data Bonus 2: Dolphins score 97, 112 and 101. Koalas score 109, 95 and 106
-*/
+// There are two gymnastics teams, Dolphins and Koalas. They compete against each other 3 times. The winner with the highest average score wins a trophy!
+// Your tasks:
+// 1. Calculate the average score for each team,using the test data below
+// 2. Compare the team's average scores to determine the winner of the competition,
+// and print it to the console. Don't forget that there can be a draw, so test for that
+// as well (draw means they have the same average score)
+// 3. Bonus 1 : Include a requirement for a minimum score of 100. With this rule,a
+// team only wins if it has a higher score than the other team, and the same time a score of at least 100 points. Hint: Use a logical operator to test for minimum score, as well as multiple else-if blocks 😉
+// 4. Bonus 2 : Minimum score also applies to a draw! So a draw only happens when both teams have the same score and both have a score greater or equal 100 points. Otherwise, no team wins the trophy
+// Test data:
+// § Data 1: Dolphins score 96, 108 and 89. Koalas score 88, 91 and 110
+// § Data Bonus 1: Dolphins score 97, 112 and 101. Koalas score 109, 95 and 123 § Data Bonus 2: Dolphins score 97, 112 and 101. Koalas score 109, 95 and 106
+// */
 
 
-const scoreDolphins = (96 + 108 + 89) / 3;
-const scoreKoalas = (88 + 91 + 110) / 3;
+// const scoreDolphins = (96 + 108 + 89) / 3;
+// const scoreKoalas = (88 + 91 + 110) / 3;
 
-if (scoreDolphins > scoreKoalas && scoreDolphins >= 100) {
-    console.log(`Dolphins win the trophy 🏆`);
-} else if (scoreKoalas > scoreDolphins && scoreKoalas >= 100) {
-    console.log(`Koalas win the trophy 🏆`);
-} else if (scoreKoalas === scoreDolphins && scoreDolphins >= 100 && scoreKoalas >= 100) {
-    console.log(`Both win the trophy 🏆`);
-} else {
-    console.log(`No one wins the trophy 🏆`);
+// if (scoreDolphins > scoreKoalas && scoreDolphins >= 100) {
+//     console.log(`Dolphins win the trophy 🏆`);
+// } else if (scoreKoalas > scoreDolphins && scoreKoalas >= 100) {
+//     console.log(`Koalas win the trophy 🏆`);
+// } else if (scoreKoalas === scoreDolphins && scoreDolphins >= 100 && scoreKoalas >= 100) {
+//     console.log(`Both win the trophy 🏆`);
+// } else {
+//     console.log(`No one wins the trophy 🏆`);
+// }
+
+// ///////////////////////////////////////////////////////////////
+
+
+// [2-26] The Switch Statement
+// switch문은 해당하는 데이터가 어떤 케이스에 부합하는 지에 따라 그 구문의 ':' 이후에 나오는 코드를 실행한다.
+// case 값 : 이후에는 따로 {}로 묶는 거 없이 여러 줄의 코드를 작성할 수 있다.
+// break를 하지 않으면 그 다음 case의 구문들까지 같이 실행한다. 즉, 한 번 case에 진입하면 break가 나올 때까지 계속 다음 코드를 실행한다.
+// 모든 케이스에 부합하지 않는 값일 경우를 위한 default case를 추가한다.
+// switch 구문은 strict comparison(===)을 한다.
+
+const day = 'monday';
+
+switch(day) {
+    case 'monday': // day === 'monday'
+        console.log('Plan course structure');
+        console.log('Go to coding meetup');
+        break;
+    case 'tuesday':
+        console.log('Prepare theory videos');
+        break;
+    case 'wednesday':
+    case 'thursday':
+        console.log('Write code example');
+        break;
+    case 'friday' :
+        console.log('Record videos');
+        break;
+    case 'saturday' :
+    case 'sunday' :
+        console.log('Enjoy the weekend :D');
+        break;
+    default:
+        console.log('Not a valid day!');
 }
 
-///////////////////////////////////////////////////////////////
+if (day === 'monday') {
+    console.log('Plan course structure');
+    console.log('Go to coding meetup');
+} else if (day === 'tuesday') {
+    console.log('Prepare theory videos');
+} else if (day === 'thrusday' || day === 'wednesday') {
+    console.log('Write code example');
+} else if (day === 'friday') {
+    console.log('Record videos');
+} else if (day === 'saturday' || day === 'sunday') {
+    console.log('Enjoy the weekend :D');
+} else {
+    console.log('Not a valid day!');
+}
+
