@@ -29,29 +29,78 @@
 
 
 
-// [3-33] Functions
-// JS의 함수 키워드는 function 이다.
-// 함수를 불러온다는 표현으로 calling or running or invoking functions 라는 단어를 사용한다.
+// // [3-33] Functions
+// // JS의 함수 키워드는 function 이다.
+// // 함수를 불러온다는 표현으로 calling or running or invoking functions 라는 단어를 사용한다.
 
-function logger() {
-    console.log('My name is yosep');
+// function logger() {
+//     console.log('My name is yosep');
+// }
+// logger();
+
+
+
+// function fruitProcessor(apples, oranges) {
+//     const juice = `Juice with ${apple} apples and ${oranges} oranges.`;
+//     return juice;
+// }
+
+// const appleJuice = fruitProcessor(5, 0);
+// console.log(appleJuice);
+
+// const appleOrangeJuice = fruitProcessor(2, 4);
+// console.log(appleOrangeJuice);
+
+// // console.log()는 JS의 built-in function이다.
+
+// const num = Number('23');
+// // Number()도 JS의 built-in function이다. 
+
+
+
+
+
+
+
+
+// [3-34] Functions Declarations vs Expressions
+// return에 반환하고자 하는 expression을 적는다.
+
+// Function declaration
+function calcAge1(birthYear) {
+    return 2022 - birthYear;
 }
-logger();
+
+const age1 = calcAge1(2000);
+console.log(age1); // 22
 
 
+// anonymous function.
+// Function expression
+const calcAge2 = function (birthYear) {
+    return 2022 - birthYear;
+}
+const age2 = calcAge2(2000);
+console.log(age1, age2); // 22 22 
+// function이 expression이 되어서 calcAge2에 저장된다. 그리고 calcAge2는 함수가 된다.
+// JS에서 function은 value가 된다. 물론 타입은 없다. string, number와 같은 타입은 없지만 value가 된다.
 
-function fruitProcessor(apples, oranges) {
-    const juice = `Juice with ${apple} apples and ${oranges} oranges.`;
-    return juice;
+
+// Functions Declarations vs Expressions의 차이 : Expressions의 경우 무조건 함수가 먼저 선언된 후에 call 할 수 있다.
+
+/*
+const age1 = calcAge1(2000);
+function calcAge1(birthYear) {
+    return 2022 - birthYear;
 }
 
-const appleJuice = fruitProcessor(5, 0);
-console.log(appleJuice);
+console.log(age1); // 22 - OK
 
-const appleOrangeJuice = fruitProcessor(2, 4);
-console.log(appleOrangeJuice);
+const age2 = calcAge2(2000);
+const calcAge2 = function (birthYear) {
+    return 2022 - birthYear;
+}
+console.log(age1, age2); // ReferenceError
+*/
 
-// console.log()는 JS의 built-in function이다.
-
-const num = Number('23');
-// Number()도 JS의 built-in function이다. 
+// JS 개발자들은 각각 선호에 따라 두 방법을 혼용해서 사용한다. 그래서 두 방법에 대해 잘 숙지하고 있어야만 한다.
