@@ -137,3 +137,22 @@ console.log(yearsUntilRetirement2(2000, 'joseph'));
 
 
 // arrow function이 간단하고 좋긴 하지만, 그렇다고 arrow function만 쓸 수 있는 건 아니다. 대표적으로 'this'키워드를 사용할 수 없다.
+
+
+
+
+
+// [3-36] Functions Calling Other Functions
+// 함수 안에 또 함수를 불러오는 방법
+function cutFruitPieces(fruit) {
+    return fruit * 4;
+}
+
+function fruitProcessor(apples, oranges) {
+    const applePieces = cutFruitPieces(apples);
+    const oragePieces = cutFruitPieces(oranges);
+
+    const juice = `Juice with ${applePieces} piece of apple and ${oragePieces} piece of orange.`;
+    return juice;
+}
+console.log(fruitProcessor(2, 3));
