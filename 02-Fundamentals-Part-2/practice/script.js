@@ -287,5 +287,52 @@
 
 
 
+// [3-40] Basic Array Operations (Methods)
+
+// Add elements
+// arrayName.push() : push 함수는 ()안에 있는 argument를 array의 맨 뒤에 요소로 삽입시킨다.
+// push()함수 자체는 array에 push하고 난 후, 그 array의 length를 return 한다.
+const friends = ['Michael', 'Steven', 'Peter'];
+const newLength = friends.push('Jay');
+console.log(friends); // ['Michael', 'Steven', 'Peter', 'Jay'];
+console.log(newLength); // 4
+
+// arrayName.unshift() : unshift 함수는 ()안에 있는 argument를 array의 맨 앞에 요소로 삽입시킨다.
+friends.unshift('John'); // ['John', 'Michael', 'Steven', 'Peter', 'Jay']
+
+
+// Remove elements
+// arrayName.pop() : push의 반대로 맨 뒤의 요소를 제거 한다.
+// pop()함수는 pop한 값을 return 한다.
+friends.pop();
+const popped = friends.pop();
+console.log(popped); // Peter
+console.log(friends); // ['John', 'Michael', 'Steven']
+
+// arrayName.unshift() : shift의 반대
+// shift()함수도 제거한 값을 return 한다.
+friends.shift();
+console.log(friends); // ['Michael', 'Steven']
+
+// 요소의 index를 계산하는 방법
+// arrayName.indexOf()를 사용하면, ()안에 있는 argument와 동일한 arrayElement를 찾아서, 해당하는 arrayElement의 index값을 return 한다. (zero-based에 기반한다.)
+// 이때 비교는 strict 비교이다.
+console.log(friends.indexOf('Steven')); // 1
+console.log(friends.indexOf('Bob')); // -1
+// 해당하는 arrayElement가 없을 경우엔 -1을 return 한다.
+
+
+// 특정 값이 array 안에 있는 지 확인하는 방법
+// arrayName.includes() 함수를 사용하면, ()안에 있는 argument와 동일한 arrayElement를 찾아서, 여부에 따라 boolean 값을 return 한다.
+// 이때 비교는 strict 비교이다.
+console.log(friends.includes('Steven')); // true
+console.log(friends.includes('Bob')); // false
+
+// exercise
+if (friends.includes('Steven')) {
+    console.log('You have a friend called Steven');
+}
+
+
 
 
