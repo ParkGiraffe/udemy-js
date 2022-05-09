@@ -187,53 +187,105 @@
 
 
 
-////////////////////////////////////////////////////////
-/* [3-38] Coding Challenge #1
-Back to the two gymnastics teams, the Dolphins and the Koalas! There is a new
-gymnastics discipline, which works differently.
-Each team competes 3 times, and then the average of the 3 scores is calculated (so
-one average score per team).
-A team only wins if it has at least double the average score of the other team.
-Otherwise, no team wins!
+// ////////////////////////////////////////////////////////
+// /* [3-38] Coding Challenge #1
+// Back to the two gymnastics teams, the Dolphins and the Koalas! There is a new
+// gymnastics discipline, which works differently.
+// Each team competes 3 times, and then the average of the 3 scores is calculated (so
+// one average score per team).
+// A team only wins if it has at least double the average score of the other team.
+// Otherwise, no team wins!
 
-Your tasks:
-1. Create an arrow function 'calcAverage' to calculate the average of 3 scores
-2. Use the function to calculate the average for both teams
-3. Create a function 'checkWinner' that takes the average score of each team
-as parameters ('avgDolhins' and 'avgKoalas'), and then logs the winner
-to the console, together with the victory points, according to the rule above.
-Example: "Koalas win (30 vs. 13)"
-4. Use the 'checkWinner' function to determine the winner for both Data 1 and
-Data 2
-5. Ignore draws this time
+// Your tasks:
+// 1. Create an arrow function 'calcAverage' to calculate the average of 3 scores
+// 2. Use the function to calculate the average for both teams
+// 3. Create a function 'checkWinner' that takes the average score of each team
+// as parameters ('avgDolhins' and 'avgKoalas'), and then logs the winner
+// to the console, together with the victory points, according to the rule above.
+// Example: "Koalas win (30 vs. 13)"
+// 4. Use the 'checkWinner' function to determine the winner for both Data 1 and
+// Data 2
+// 5. Ignore draws this time
 
-Test data:
-§ Data 1: Dolphins score 44, 23 and 71. Koalas score 65, 54 and 49
-§ Data 2: Dolphins score 85, 54 and 41. Koalas score 23, 34 and 27
+// Test data:
+// § Data 1: Dolphins score 44, 23 and 71. Koalas score 65, 54 and 49
+// § Data 2: Dolphins score 85, 54 and 41. Koalas score 23, 34 and 27
 
-Hints:
-§ To calculate average of 3 values, add them all together and divide by 3
-§ To check if number A is at least double number B, check for A >= 2 * B.
-Apply this to the team's average scores �
+// Hints:
+// § To calculate average of 3 values, add them all together and divide by 3
+// § To check if number A is at least double number B, check for A >= 2 * B.
+// Apply this to the team's average scores �
 
-GOOD LUCK �
+// GOOD LUCK �
 
-*/
+// */
 
-const calcAverage = (score1, score2, score3) => {
-    return (score1 + score2 + score3) / 3;
-}
+// const calcAverage = (score1, score2, score3) => {
+//     return (score1 + score2 + score3) / 3;
+// }
 
-const checkWinner = (avgDolphins, avgKoalas) => {
-    if (avgDolphins >= avgKoalas * 2) {
-        console.log(`Dolphins win (${avgDolphins} vs ${avgKoalas})`);
-    } else if (avgKoalas >= avgDolphins * 2) {
-        console.log(`Koalas win (${avgKoalas} vs ${avgDolphins})`);
-    }
-}
-const avgDolphins = calcAverage(44, 23, 71);
-const avgKoalas = calcAverage(65, 54, 49);
-checkWinner(avgDolphins, avgKoalas);
+// const checkWinner = (avgDolphins, avgKoalas) => {
+//     if (avgDolphins >= avgKoalas * 2) {
+//         console.log(`Dolphins win (${avgDolphins} vs ${avgKoalas})`);
+//     } else if (avgKoalas >= avgDolphins * 2) {
+//         console.log(`Koalas win (${avgKoalas} vs ${avgDolphins})`);
+//     }
+// }
+// const avgDolphins = calcAverage(44, 23, 71);
+// const avgKoalas = calcAverage(65, 54, 49);
+// checkWinner(avgDolphins, avgKoalas);
 
-////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+// // [3-39] Introduction to Arrays
+
+// // Array literal syntax
+// const friends = ['Michael', 'Steven'];
+
+// // Array function
+// const years = new Array(1991, 2004, 2000);
+
+
+// // Array 안의 요소 불러오기
+// console.log(friends[0]);
+// console.log(friends[1-1]);
+// // Array는 zero-based라서 0부터 시작.
+// // [] 안에는 모든 종류의 number expressions가 들어올 수 있다. array를 선언할 때도 아니면 array를 호출할 때도.
+
+// // Array 길이 return
+// console.log(friends.length);
+// console.log(friends[friends.length - 1]); // 맨 마지막 번째의 요소
+// // '.length'를 객체의 property라고 부른다.
+// // 요소의 개수를 말하는 것이기 때문에 '끝 번 요소 + 1'의 값이 나온다.
+
+
+
+// // Array 요소 변경하기
+// friends[1] = 'jay';
+// console.log(friends);
+// // friends array를 const로 선언했지만, 그 안의 요소는 변경할 수 있다. 왜냐하면 const는 primitive value만 교체할 수 없게 하고, array는 primitive value가 아니기 때문이다. 
+
+// // 반대로 array 전체를 교체하는 것은 불가능하다.
+// friends = ['jay', 'yosep']; // TypeError: Assignment to constant variable.
+
+
+
+// // array 안에는 서로 다른 타입의 데이터도 함께 가질 수 있고, 다른 변수를 가져올 수도 있다.
+// // 심지어 array를 요소로 가져올 수 있다.
+// const firstName = 'yosep';
+// const yosep = [firstName, 'park', 2022 - 2000, 'teacher', friends];
+// console.log(yosep);
+
+
+
+
+
+
+
 
