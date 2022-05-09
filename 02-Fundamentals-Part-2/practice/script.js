@@ -111,48 +111,76 @@
 
 
 
-// [2-35] Arrow Functions
+// // [2-35] Arrow Functions
 
-// Arrow Function
-// Arrow Function은 Function Exrpessions의 special form이다.
+// // Arrow Function
+// // Arrow Function은 Function Exrpessions의 special form이다.
 
-// 한 줄 함수일 경우 : parameter => return할 Exrpession
-const calcAge3 = birthYear => 2022 - birthYear;
+// // 한 줄 함수일 경우 : parameter => return할 Exrpession
+// const calcAge3 = birthYear => 2022 - birthYear;
 
-// 여러 줄의 코드를 필요로 하는 경우 : {}를 삽입하고 그 안에 return 키워드를 사용한다.
-const yearsUntilRetirement = birthYear => {
-    const age = 2037 - birthYear;
+// // 여러 줄의 코드를 필요로 하는 경우 : {}를 삽입하고 그 안에 return 키워드를 사용한다.
+// const yearsUntilRetirement = birthYear => {
+//     const age = 2037 - birthYear;
+//     const retirement = 65 - age;
+//     return retirement;
+// }
+
+// // 여러 개의 parameter를 필요로 하는 경우 : parameter를 적는 부분에 ()를 넣고, 여러 개의 parameters를 적는다.
+// const yearsUntilRetirement2 = (birthYear, firstName) => {
+//     const age = 2037 - birthYear;
+//     const retirement = 65 - age;
+//     // return retirement;
+//     return `${firstName} retires in ${retirement} years`;
+// }
+// console.log(yearsUntilRetirement2(2000, 'joseph'));
+
+
+// // arrow function이 간단하고 좋긴 하지만, 그렇다고 arrow function만 쓸 수 있는 건 아니다. 대표적으로 'this'키워드를 사용할 수 없다.
+
+
+
+
+
+// // [3-36] Functions Calling Other Functions
+// // 함수 안에 또 함수를 불러오는 방법
+// function cutFruitPieces(fruit) {
+//     return fruit * 4;
+// }
+
+// function fruitProcessor(apples, oranges) {
+//     const applePieces = cutFruitPieces(apples);
+//     const oragePieces = cutFruitPieces(oranges);
+
+//     const juice = `Juice with ${applePieces} piece of apple and ${oragePieces} piece of orange.`;
+//     return juice;
+// }
+// console.log(fruitProcessor(2, 3));
+
+
+
+
+
+
+// [3-37] Reviewing Functions
+
+const calcAge = function (birthYear) {
+    return 2022 - birthYear;
+}
+
+const yearsUntilRetirement = function (birthYear, firstName) {
+    const age = calcAge(birthYear);
     const retirement = 65 - age;
-    return retirement;
+
+    if (retirement > 0) {
+        console.log(`${firstName} retires in ${retirement} years`);
+        return retirement;
+    } else {
+        console.log(`${firstName} has already retired`);
+        return -1;
+    }
 }
-
-// 여러 개의 parameter를 필요로 하는 경우 : parameter를 적는 부분에 ()를 넣고, 여러 개의 parameters를 적는다.
-const yearsUntilRetirement2 = (birthYear, firstName) => {
-    const age = 2037 - birthYear;
-    const retirement = 65 - age;
-    // return retirement;
-    return `${firstName} retires in ${retirement} years`;
-}
-console.log(yearsUntilRetirement2(2000, 'joseph'));
-
-
-// arrow function이 간단하고 좋긴 하지만, 그렇다고 arrow function만 쓸 수 있는 건 아니다. 대표적으로 'this'키워드를 사용할 수 없다.
+yearsUntilRetirement(2000, 'Yosep');
 
 
 
-
-
-// [3-36] Functions Calling Other Functions
-// 함수 안에 또 함수를 불러오는 방법
-function cutFruitPieces(fruit) {
-    return fruit * 4;
-}
-
-function fruitProcessor(apples, oranges) {
-    const applePieces = cutFruitPieces(apples);
-    const oragePieces = cutFruitPieces(oranges);
-
-    const juice = `Juice with ${applePieces} piece of apple and ${oragePieces} piece of orange.`;
-    return juice;
-}
-console.log(fruitProcessor(2, 3));
