@@ -341,95 +341,170 @@ if (friends.includes('Steven')) {
 
 
 
-////////////////////////////////////////////////////////
-/*
-[3-41] Coding Challenge #2
-Steven is still building his tip calculator, using the same rules as before: Tip 15% of
-the bill if the bill value is between 50 and 300, and if the value is different, the tip is
-20%.
-Your tasks:
-1. Write a function 'calcTip' that takes any bill value as an input and returns
-the corresponding tip, calculated based on the rules above (you can check out
-the code from first tip calculator challenge if you need to). Use the function
-type you like the most. Test the function using a bill value of 100
-2. And now let's use arrays! So create an array 'bills' containing the test data
-below
-3. Create an array 'tips' containing the tip value for each bill, calculated from
-the function you created before
-4. Bonus: Create an array 'total' containing the total values, so the bill + tip
-Test data: 125, 555 and 44
-Hint: Remember that an array needs a value in each position, and that value can
-actually be the returned value of a function! So you can just call a function as array
-values (so don't store the tip values in separate variables first, but right in the new
-array) �
-GOOD LUCK �
-*/
+// ////////////////////////////////////////////////////////
+// /*
+// [3-41] Coding Challenge #2
+// Steven is still building his tip calculator, using the same rules as before: Tip 15% of
+// the bill if the bill value is between 50 and 300, and if the value is different, the tip is
+// 20%.
+// Your tasks:
+// 1. Write a function 'calcTip' that takes any bill value as an input and returns
+// the corresponding tip, calculated based on the rules above (you can check out
+// the code from first tip calculator challenge if you need to). Use the function
+// type you like the most. Test the function using a bill value of 100
+// 2. And now let's use arrays! So create an array 'bills' containing the test data
+// below
+// 3. Create an array 'tips' containing the tip value for each bill, calculated from
+// the function you created before
+// 4. Bonus: Create an array 'total' containing the total values, so the bill + tip
+// Test data: 125, 555 and 44
+// Hint: Remember that an array needs a value in each position, and that value can
+// actually be the returned value of a function! So you can just call a function as array
+// values (so don't store the tip values in separate variables first, but right in the new
+// array) �
+// GOOD LUCK �
+// */
 
-function calcTip(bill) {
-    if (bill <= 300 && bill >= 50) {
-        return bill * 15 / 100;
-    } else {
-        return bill * 20 / 100;
-    }
-}
+// function calcTip(bill) {
+//     if (bill <= 300 && bill >= 50) {
+//         return bill * 15 / 100;
+//     } else {
+//         return bill * 20 / 100;
+//     }
+// }
 
-const bills = [125, 555, 44];
-const tips = [calcTip(bills[0]), calcTip(bills[1]), calcTip(bills[2])];
-const total = [bills[0] + tips[0], bills[1] + tips[1], bills[2] + tips[2]]
-
-
-
-////////////////////////////////////////////////////////
-
-// [3-42] Introduction to Objects
-
-const yosepArray = [
-    'yosep',
-    'park',
-    2022-2000,
-    'teacher',
-    ['Michael', 'Peter'],
-];
-// 위와 같은 Array는 각 요소에 이름을 붙일 수 없고, 오로지 index만 붙일 수 있다.
-// 각 요소에 이름을 붙이기 위해서 object를 사용한다.
+// const bills = [125, 555, 44];
+// const tips = [calcTip(bills[0]), calcTip(bills[1]), calcTip(bills[2])];
+// const total = [bills[0] + tips[0], bills[1] + tips[1], bills[2] + tips[2]]
 
 
-// object는 {}를 사용해서 선언하는 방식이 있다. (literal syntax)
-// object는 key-value로 이루어져있다. key: value
-// key는 property라고 부른다.
+
+// ////////////////////////////////////////////////////////
+
+// // [3-42] Introduction to Objects
+
+// const yosepArray = [
+//     'yosep',
+//     'park',
+//     2022-2000,
+//     'teacher',
+//     ['Michael', 'Peter'],
+// ];
+// // 위와 같은 Array는 각 요소에 이름을 붙일 수 없고, 오로지 index만 붙일 수 있다.
+// // 각 요소에 이름을 붙이기 위해서 object를 사용한다.
+
+
+// // object는 {}를 사용해서 선언하는 방식이 있다. (literal syntax)
+// // object는 key-value로 이루어져있다. key: value
+// // key는 property라고 부른다.
+// const yosep = {
+//     firstName: 'yosep',
+//     lastName: 'park',
+//     age: 2022 - 2000,
+//     job: 'teacher',
+//     friends: ['Michael', 'Peter'],
+// } // 5개의 property를 가진 object 
+
+
+// // property를 불러오려면 '.' 또는 []을 사용하면 된다.
+// // 둘의 차이점은, '.'은 property의 이름만을, []은 expression 모두를 입력할 수 있다는 것이다.
+// // 일치하는 게 없으면 undefined return
+// console.log(yosep.lastName); // 'park'
+// console.log(yosep['lastName']); // 'park'
+
+// const nameKey = 'Name';
+// console.log(yosep['first' + nameKey]); // yosep
+// console.log(yosep['last' + nameKey]); // park
+
+// const interestedIn = prompt('What do you want to know about yosep? Choose between firstName, lastName, age, job, and friends');
+// if (yosep[interestedIn]){
+//     console.log(yosep[interestedIn]);
+// } else {
+//     console.log(`Wrong request! Choose between firstName, lastName, age, job, and friends`);
+// } 
+
+// // object에 property 추가하는 법. dot notation과 [] 둘 다 사용 가능.
+// yosep.location = 'Korea';
+// yosep['twitter'] = '@yoseppark';
+// console.log(yosep)
+
+
+
+// // Challenge
+// // "yosep has 3 friends, and his best friend is called Michael"
+// console.log(`${yosep.firstName} has ${yosep.friends.length} friends, and his best friend is called ${yosep.friends[0]}`);
+
+
+
+
+
+
+// [4-44] Object Methods
+// object는 function(method)을 property로 가질 수 있다.
+
+// const yosep = {
+//     firstName: 'yosep',
+//     lastName: 'park',
+//     birthYear: 2000,
+//     job: 'teacher',
+//     friends: ['Michael', 'Peter'],
+//     hasDriverLicense: true,
+
+//     calcAge: function(birthYear) {
+//         return 2022 - birthYear;
+//     }
+// };
+
+// console.log(yosep.calcAge(2000)); // 22
+// console.log(yosep['calcAge'](2000)); // 22
+
+
+// object의 method가 property를 접근하려고 할 때는 'this' 키워드를 사용하면 된다.
+// this 키워드는 해당 object 전체를 의미한다.
+// this 키워드를 사용하는 이유는, 해당 object의 이름이 바뀔 경우 일일이 수정할 필요가 없기 때문이다. (사실 this 대신에 object 이름 그대로 사용해도 값은 출력된다. 하지만 하지 말자.)
+
+// const yosep = {
+//     firstName: 'yosep',
+//     lastName: 'park',
+//     birthYear: 2000,
+//     job: 'teacher',
+//     friends: ['Michael', 'Peter'],
+//     hasDriverLicense: true,
+
+//     calcAge: function() {
+//         console.log(this); // yosep object를 return
+//         return 2022 - this.birthYear;
+//     }
+// };
+
+// console.log(yosep.calcAge()) // 22
+
+
+
+// object의 내부 메서드를 이용해서 기존 property를 바꾸거나 새로 생성할 수 있다.
 const yosep = {
     firstName: 'yosep',
     lastName: 'park',
-    age: 2022 - 2000,
+    birthYear: 2000,
     job: 'teacher',
     friends: ['Michael', 'Peter'],
-} // 5개의 property를 가진 object 
+    hasDriverLicense: false,
+    gender: 'male',
+
+    calcAge: function() {
+        this.age = 2022 - this.birthYear;
+        return this.age;
+    },
+    
+    // Challenge
+    // "Yosep is a 22-year old teacher, and he has a/no driver's license"
+    getSummary: function() {
+        return `${yosep.firstName} is a ${yosep.age}-year old ${yosep.job}, and ${yosep.gender === 'male' ? 'he' : 'she'} has ${yosep.hasDriverLicense === true ? 'a' : 'no'} driver's license`;
+    }
+};
+
+console.log(yosep.age);
+console.log(yosep.getSummary());
 
 
-// property를 불러오려면 '.' 또는 []을 사용하면 된다.
-// 둘의 차이점은, '.'은 property의 이름만을, []은 expression 모두를 입력할 수 있다는 것이다.
-// 일치하는 게 없으면 undefined return
-console.log(yosep.lastName); // 'park'
-console.log(yosep['lastName']); // 'park'
-
-const nameKey = 'Name';
-console.log(yosep['first' + nameKey]); // yosep
-console.log(yosep['last' + nameKey]); // park
-
-const interestedIn = prompt('What do you want to know about yosep? Choose between firstName, lastName, age, job, and friends');
-if (yosep[interestedIn]){
-    console.log(yosep[interestedIn]);
-} else {
-    console.log(`Wrong request! Choose between firstName, lastName, age, job, and friends`);
-} 
-
-// object에 property 추가하는 법. dot notation과 [] 둘 다 사용 가능.
-yosep.location = 'Korea';
-yosep['twitter'] = '@yoseppark';
-console.log(yosep)
-
-
-
-// Challenge
-// "yosep has 3 friends, and his best friend is called Michael"
-console.log(`${yosep.firstName} has ${yosep.friends.length} friends, and his best friend is called ${yosep.friends[0]}`);
+// array도 내장함수(method) -push, shift, pop, unshift- 를 갖고 있으며, 이를 통해 element를 수정, 변경할 수 있기 때문에 array 또한 object라고 할 수 있다.
