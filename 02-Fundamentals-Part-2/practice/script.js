@@ -481,30 +481,86 @@ if (friends.includes('Steven')) {
 
 
 
-// object의 내부 메서드를 이용해서 기존 property를 바꾸거나 새로 생성할 수 있다.
-const yosep = {
-    firstName: 'yosep',
-    lastName: 'park',
-    birthYear: 2000,
-    job: 'teacher',
-    friends: ['Michael', 'Peter'],
-    hasDriverLicense: false,
-    gender: 'male',
+// // object의 내부 메서드를 이용해서 기존 property를 바꾸거나 새로 생성할 수 있다.
+// const yosep = {
+//     firstName: 'yosep',
+//     lastName: 'park',
+//     birthYear: 2000,
+//     job: 'teacher',
+//     friends: ['Michael', 'Peter'],
+//     hasDriverLicense: false,
+//     gender: 'male',
 
-    calcAge: function() {
-        this.age = 2022 - this.birthYear;
-        return this.age;
-    },
+//     calcAge: function() {
+//         this.age = 2022 - this.birthYear;
+//         return this.age;
+//     },
     
-    // Challenge
-    // "Yosep is a 22-year old teacher, and he has a/no driver's license"
-    getSummary: function() {
-        return `${yosep.firstName} is a ${yosep.age}-year old ${yosep.job}, and ${yosep.gender === 'male' ? 'he' : 'she'} has ${yosep.hasDriverLicense === true ? 'a' : 'no'} driver's license`;
+//     // Challenge
+//     // "Yosep is a 22-year old teacher, and he has a/no driver's license"
+//     getSummary: function() {
+//         return `${yosep.firstName} is a ${yosep.age}-year old ${yosep.job}, and ${yosep.gender === 'male' ? 'he' : 'she'} has ${yosep.hasDriverLicense === true ? 'a' : 'no'} driver's license`;
+//     }
+// };
+
+// console.log(yosep.age);
+// console.log(yosep.getSummary());
+
+
+// // array도 내장함수(method) -push, shift, pop, unshift- 를 갖고 있으며, 이를 통해 element를 수정, 변경할 수 있기 때문에 array 또한 object라고 할 수 있다.
+
+
+
+//////////////////////////////////////////
+/* [3-45] Coding Challenge #3
+Let's go back to Mark and John comparing their BMIs! This time, let's use objects to
+implement the calculations! Remember: BMI = mass / height ** 2 = mass
+/ (height * height) (mass in kg and height in meter)
+Your tasks:
+1. For each of them, create an object with properties for their full name, mass, and
+height (Mark Miller and John Smith)
+2. Create a 'calcBMI' method on each object to calculate the BMI (the same
+method on both objects). Store the BMI value to a property, and also return it
+from the method
+3. Log to the console who has the higher BMI, together with the full name and the
+respective BMI. Example: "John's BMI (28.3) is higher than Mark's (23.9)!"
+Test data: Marks weights 78 kg and is 1.69 m tall. John weights 92 kg and is 1.95 m
+tall.
+GOOD LUCK �
+*/
+
+
+const mark = {
+    firstName: 'Mark',
+    lastName: 'Miller',
+    mass: 78,
+    height: 1.69,
+
+    calcBMI: function() {
+        this.bmi = this.mass / (this.height ** 2);
+        return this.bmi;
     }
-};
+}
 
-console.log(yosep.age);
-console.log(yosep.getSummary());
+const john = {
+    firstName: 'John',
+    lastName: 'Smith',
+    mass: 92,
+    height: 1.95,
 
+    calcBMI: function() {
+        this.bmi = this.mass / (this.height ** 2);
+        return this.bmi;
+    }
+}
 
-// array도 내장함수(method) -push, shift, pop, unshift- 를 갖고 있으며, 이를 통해 element를 수정, 변경할 수 있기 때문에 array 또한 object라고 할 수 있다.
+mark.calcBMI();
+john.calcBMI();
+
+if (mark.bmi > john.bmi) {
+    console.log(`Mark's BMI(${mark.bmi}) is higher than John's BMI(${john.bmi})`)
+} else if (john.bmi > mark.bmi) {
+    console.log(`John's BMI(${john.bmi}) is higher than Mark's BMI(${mark.bmi})`)
+}
+
+//////////////////////////////////////////
