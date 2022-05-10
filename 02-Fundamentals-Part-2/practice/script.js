@@ -380,3 +380,56 @@ const total = [bills[0] + tips[0], bills[1] + tips[1], bills[2] + tips[2]]
 
 
 ////////////////////////////////////////////////////////
+
+// [3-42] Introduction to Objects
+
+const yosepArray = [
+    'yosep',
+    'park',
+    2022-2000,
+    'teacher',
+    ['Michael', 'Peter'],
+];
+// 위와 같은 Array는 각 요소에 이름을 붙일 수 없고, 오로지 index만 붙일 수 있다.
+// 각 요소에 이름을 붙이기 위해서 object를 사용한다.
+
+
+// object는 {}를 사용해서 선언하는 방식이 있다. (literal syntax)
+// object는 key-value로 이루어져있다. key: value
+// key는 property라고 부른다.
+const yosep = {
+    firstName: 'yosep',
+    lastName: 'park',
+    age: 2022 - 2000,
+    job: 'teacher',
+    friends: ['Michael', 'Peter'],
+} // 5개의 property를 가진 object 
+
+
+// property를 불러오려면 '.' 또는 []을 사용하면 된다.
+// 둘의 차이점은, '.'은 property의 이름만을, []은 expression 모두를 입력할 수 있다는 것이다.
+// 일치하는 게 없으면 undefined return
+console.log(yosep.lastName); // 'park'
+console.log(yosep['lastName']); // 'park'
+
+const nameKey = 'Name';
+console.log(yosep['first' + nameKey]); // yosep
+console.log(yosep['last' + nameKey]); // park
+
+const interestedIn = prompt('What do you want to know about yosep? Choose between firstName, lastName, age, job, and friends');
+if (yosep[interestedIn]){
+    console.log(yosep[interestedIn]);
+} else {
+    console.log(`Wrong request! Choose between firstName, lastName, age, job, and friends`);
+} 
+
+// object에 property 추가하는 법. dot notation과 [] 둘 다 사용 가능.
+yosep.location = 'Korea';
+yosep['twitter'] = '@yoseppark';
+console.log(yosep)
+
+
+
+// Challenge
+// "yosep has 3 friends, and his best friend is called Michael"
+console.log(`${yosep.firstName} has ${yosep.friends.length} friends, and his best friend is called ${yosep.friends[0]}`);
