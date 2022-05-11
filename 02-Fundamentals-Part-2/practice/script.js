@@ -645,22 +645,46 @@
 
 
 
-// [3-48] Looping Backwards and Loops in Loops
+// // [3-48] Looping Backwards and Loops in Loops
 
-// looping backward
-const yosep = ['yosep', 'park', 2022 - 2000, 'teacher', ['kim', 'lee', 'chae']];
+// // looping backward
+// const yosep = ['yosep', 'park', 2022 - 2000, 'teacher', ['kim', 'lee', 'chae']];
 
-for (let i = yosep.length - 1; i >= 0; i--) {
-    console.log(i, yosep[i]);
+// for (let i = yosep.length - 1; i >= 0; i--) {
+//     console.log(i, yosep[i]);
+// }
+
+
+
+// // loops in loops
+// for (let exercise = 1; exercise < 4; exercise++) {
+//     console.log(`---------------- Starting exercise ${exercise}`);
+
+//     for (let rep = 1; rep < 6; rep++) {
+//         console.log(`Exercise ${exercise} : Lifting weight repetition ${rep} 🏋️‍♀️`);
+//     }
+// }
+
+
+
+
+
+
+// [3-49] The while Loop
+// while loop문
+let rep = 1;
+while(rep <= 10) {
+    console.log(`Lifting weights repetition ${rep}`);
+    rep++;
 }
 
 
-
-// loops in loops
-for (let exercise = 1; exercise < 4; exercise++) {
-    console.log(`---------------- Starting exercise ${exercise}`);
-
-    for (let rep = 1; rep < 6; rep++) {
-        console.log(`Exercise ${exercise} : Lifting weight repetition ${rep} 🏋️‍♀️`);
-    }
+// '숫자가 6이 나올 때까지 주사위 던지기' 구현
+// Math.random() : 0 이상 1 미만 구간의 난수
+// Math.trunc() : 주어진 값의 소수부분을 제거하고 숫자의 정수부분을 반환한다.
+let dice = Math.trunc(Math.random() * 6) + 1; // +1을 하는 이유 : 0~5까지의 수가 나오기 때문이다.
+while (dice !== 6) {
+    console.log(`You rolled a ${dice}`);
+    dice = Math.trunc(Math.random() * 6) + 1;
+    if (dice === 6) console.log(`Loop is about to end..`);
 }
