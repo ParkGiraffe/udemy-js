@@ -287,51 +287,51 @@
 
 
 
-// [3-40] Basic Array Operations (Methods)
+// // [3-40] Basic Array Operations (Methods)
 
-// Add elements
-// arrayName.push() : push 함수는 ()안에 있는 argument를 array의 맨 뒤에 요소로 삽입시킨다.
-// push()함수 자체는 array에 push하고 난 후, 그 array의 length를 return 한다.
-const friends = ['Michael', 'Steven', 'Peter'];
-const newLength = friends.push('Jay');
-console.log(friends); // ['Michael', 'Steven', 'Peter', 'Jay'];
-console.log(newLength); // 4
+// // Add elements
+// // arrayName.push() : push 함수는 ()안에 있는 argument를 array의 맨 뒤에 요소로 삽입시킨다.
+// // push()함수 자체는 array에 push하고 난 후, 그 array의 length를 return 한다.
+// const friends = ['Michael', 'Steven', 'Peter'];
+// const newLength = friends.push('Jay');
+// console.log(friends); // ['Michael', 'Steven', 'Peter', 'Jay'];
+// console.log(newLength); // 4
 
-// arrayName.unshift() : unshift 함수는 ()안에 있는 argument를 array의 맨 앞에 요소로 삽입시킨다.
-friends.unshift('John'); // ['John', 'Michael', 'Steven', 'Peter', 'Jay']
-
-
-// Remove elements
-// arrayName.pop() : push의 반대로 맨 뒤의 요소를 제거 한다.
-// pop()함수는 pop한 값을 return 한다.
-friends.pop();
-const popped = friends.pop();
-console.log(popped); // Peter
-console.log(friends); // ['John', 'Michael', 'Steven']
-
-// arrayName.unshift() : shift의 반대
-// shift()함수도 제거한 값을 return 한다.
-friends.shift();
-console.log(friends); // ['Michael', 'Steven']
-
-// 요소의 index를 계산하는 방법
-// arrayName.indexOf()를 사용하면, ()안에 있는 argument와 동일한 arrayElement를 찾아서, 해당하는 arrayElement의 index값을 return 한다. (zero-based에 기반한다.)
-// 이때 비교는 strict 비교이다.
-console.log(friends.indexOf('Steven')); // 1
-console.log(friends.indexOf('Bob')); // -1
-// 해당하는 arrayElement가 없을 경우엔 -1을 return 한다.
+// // arrayName.unshift() : unshift 함수는 ()안에 있는 argument를 array의 맨 앞에 요소로 삽입시킨다.
+// friends.unshift('John'); // ['John', 'Michael', 'Steven', 'Peter', 'Jay']
 
 
-// 특정 값이 array 안에 있는 지 확인하는 방법
-// arrayName.includes() 함수를 사용하면, ()안에 있는 argument와 동일한 arrayElement를 찾아서, 여부에 따라 boolean 값을 return 한다.
-// 이때 비교는 strict 비교이다.
-console.log(friends.includes('Steven')); // true
-console.log(friends.includes('Bob')); // false
+// // Remove elements
+// // arrayName.pop() : push의 반대로 맨 뒤의 요소를 제거 한다.
+// // pop()함수는 pop한 값을 return 한다.
+// friends.pop();
+// const popped = friends.pop();
+// console.log(popped); // Peter
+// console.log(friends); // ['John', 'Michael', 'Steven']
 
-// exercise
-if (friends.includes('Steven')) {
-    console.log('You have a friend called Steven');
-}
+// // arrayName.unshift() : shift의 반대
+// // shift()함수도 제거한 값을 return 한다.
+// friends.shift();
+// console.log(friends); // ['Michael', 'Steven']
+
+// // 요소의 index를 계산하는 방법
+// // arrayName.indexOf()를 사용하면, ()안에 있는 argument와 동일한 arrayElement를 찾아서, 해당하는 arrayElement의 index값을 return 한다. (zero-based에 기반한다.)
+// // 이때 비교는 strict 비교이다.
+// console.log(friends.indexOf('Steven')); // 1
+// console.log(friends.indexOf('Bob')); // -1
+// // 해당하는 arrayElement가 없을 경우엔 -1을 return 한다.
+
+
+// // 특정 값이 array 안에 있는 지 확인하는 방법
+// // arrayName.includes() 함수를 사용하면, ()안에 있는 argument와 동일한 arrayElement를 찾아서, 여부에 따라 boolean 값을 return 한다.
+// // 이때 비교는 strict 비교이다.
+// console.log(friends.includes('Steven')); // true
+// console.log(friends.includes('Bob')); // false
+
+// // exercise
+// if (friends.includes('Steven')) {
+//     console.log('You have a friend called Steven');
+// }
 
 
 
@@ -569,10 +569,74 @@ if (friends.includes('Steven')) {
 
 
 
-// [3-46] Iteration: The for Loop
+// // [3-46] Iteration: The for Loop
 
-// for loop keeps running while condition is T
-// for (counter; logical condition; update the counter)
-for (let rep = 1; rep <= 10; rep++) {
-    console.log(`Lifting weights reptition ${rep} 🏋️‍♀️`);
+// // for loop keeps running while condition is T
+// // for (counter; logical condition; update the counter)
+// for (let rep = 1; rep <= 10; rep++) {
+//     console.log(`Lifting weights reptition ${rep} 🏋️‍♀️`);
+// }
+
+
+
+
+// [3-47] Looping Arrays, Breaking and Continuing
+// for문을 이용해서 array의 모든 요소에 쉽게 접근하는 방법
+const yosep = ['yosep', 'park', 2022 - 2000, 'teacher', ['kim', 'lee', 'chae']];
+const types1 = [];
+const types2 = [];
+for (let i = 0; i < yosep.length; i++) {
+    // Reading from yosep array
+    console.log(yosep[i], typeof yosep[i]);
+
+    // Filling types array
+    types1[i] = typeof yosep[i]; 
+    // or push 
+    types2.push(typeof yosep[i]);
+
+}
+// JS는 push없이 그냥 array[i]에 변수를 선언하면, 자동으로 그 인덱스에 해당 변수가 넣어진다.
+
+
+// 각 요소에 함수 적용한 값을 새로운 array에 담기
+const years = [1991, 2000, 2002, 2010];
+const ages = [];
+
+function calcAge(birthYear) {
+    return 2022 - birthYear;
+}
+
+for (let i = 0; i < years.length; i++) {
+    ages.push(calcAge(years[i]));
+}
+
+console.log(ages);
+
+
+
+
+// continue and break
+// continue는 스킵의 기능을 지닌다.
+let text = '';
+
+for (let i = 0; i < 10; i++) {
+  if (i === 3) { // 3일 경우 해당 반복문을 종료(스킵)하고 다시 처음으로 돌아가 그 다음 i를 실행한다.
+    continue;
+  }
+  text = text + i;
+}
+
+console.log(text);
+// expected output: "012456789"
+
+
+
+// break는 반복문의 종료를 의미한다. 순회하다가 break를 만나면 바로 반복문을 종료한다.
+// 무의미한 반복을 막기 위해서 사용한다.
+for (var i = 0; i < 10; i++) {
+    if (i == 5) { // i 가 5 와 같을 경우
+        break; // for 문 종료
+    }
+
+    console.log(i); // 0,1,2,3,4
 }
