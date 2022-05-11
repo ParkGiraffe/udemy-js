@@ -580,63 +580,87 @@
 
 
 
-// [3-47] Looping Arrays, Breaking and Continuing
-// for문을 이용해서 array의 모든 요소에 쉽게 접근하는 방법
+// // [3-47] Looping Arrays, Breaking and Continuing
+// // for문을 이용해서 array의 모든 요소에 쉽게 접근하는 방법
+// const yosep = ['yosep', 'park', 2022 - 2000, 'teacher', ['kim', 'lee', 'chae']];
+// const types1 = [];
+// const types2 = [];
+// for (let i = 0; i < yosep.length; i++) {
+//     // Reading from yosep array
+//     console.log(yosep[i], typeof yosep[i]);
+
+//     // Filling types array
+//     types1[i] = typeof yosep[i]; 
+//     // or push 
+//     types2.push(typeof yosep[i]);
+
+// }
+// // JS는 push없이 그냥 array[i]에 변수를 선언하면, 자동으로 그 인덱스에 해당 변수가 넣어진다.
+
+
+// // 각 요소에 함수 적용한 값을 새로운 array에 담기
+// const years = [1991, 2000, 2002, 2010];
+// const ages = [];
+
+// function calcAge(birthYear) {
+//     return 2022 - birthYear;
+// }
+
+// for (let i = 0; i < years.length; i++) {
+//     ages.push(calcAge(years[i]));
+// }
+
+// console.log(ages);
+
+
+
+
+// // continue and break
+// // continue는 스킵의 기능을 지닌다.
+// let text = '';
+
+// for (let i = 0; i < 10; i++) {
+//   if (i === 3) { // 3일 경우 해당 반복문을 종료(스킵)하고 다시 처음으로 돌아가 그 다음 i를 실행한다.
+//     continue;
+//   }
+//   text = text + i;
+// }
+
+// console.log(text);
+// // expected output: "012456789"
+
+
+
+// // break는 반복문의 종료를 의미한다. 순회하다가 break를 만나면 바로 반복문을 종료한다.
+// // 무의미한 반복을 막기 위해서 사용한다.
+// for (var i = 0; i < 10; i++) {
+//     if (i == 5) { // i 가 5 와 같을 경우
+//         break; // for 문 종료
+//     }
+
+//     console.log(i); // 0,1,2,3,4
+// }
+
+
+
+
+
+// [3-48] Looping Backwards and Loops in Loops
+
+// looping backward
 const yosep = ['yosep', 'park', 2022 - 2000, 'teacher', ['kim', 'lee', 'chae']];
-const types1 = [];
-const types2 = [];
-for (let i = 0; i < yosep.length; i++) {
-    // Reading from yosep array
-    console.log(yosep[i], typeof yosep[i]);
 
-    // Filling types array
-    types1[i] = typeof yosep[i]; 
-    // or push 
-    types2.push(typeof yosep[i]);
-
-}
-// JS는 push없이 그냥 array[i]에 변수를 선언하면, 자동으로 그 인덱스에 해당 변수가 넣어진다.
-
-
-// 각 요소에 함수 적용한 값을 새로운 array에 담기
-const years = [1991, 2000, 2002, 2010];
-const ages = [];
-
-function calcAge(birthYear) {
-    return 2022 - birthYear;
+for (let i = yosep.length - 1; i >= 0; i--) {
+    console.log(i, yosep[i]);
 }
 
-for (let i = 0; i < years.length; i++) {
-    ages.push(calcAge(years[i]));
-}
-
-console.log(ages);
 
 
+// loops in loops
+for (let exercise = 1; exercise < 4; exercise++) {
+    console.log(`---------------- Starting exercise ${exercise}`);
 
-
-// continue and break
-// continue는 스킵의 기능을 지닌다.
-let text = '';
-
-for (let i = 0; i < 10; i++) {
-  if (i === 3) { // 3일 경우 해당 반복문을 종료(스킵)하고 다시 처음으로 돌아가 그 다음 i를 실행한다.
-    continue;
-  }
-  text = text + i;
-}
-
-console.log(text);
-// expected output: "012456789"
-
-
-
-// break는 반복문의 종료를 의미한다. 순회하다가 break를 만나면 바로 반복문을 종료한다.
-// 무의미한 반복을 막기 위해서 사용한다.
-for (var i = 0; i < 10; i++) {
-    if (i == 5) { // i 가 5 와 같을 경우
-        break; // for 문 종료
+    for (let rep = 1; rep < 6; rep++) {
+        console.log(`Exercise ${exercise} : Lifting weight repetition ${rep} 🏋️‍♀️`);
     }
-
-    console.log(i); // 0,1,2,3,4
 }
