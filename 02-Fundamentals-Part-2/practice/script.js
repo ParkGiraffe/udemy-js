@@ -670,21 +670,80 @@
 
 
 
-// [3-49] The while Loop
-// while loop문
-let rep = 1;
-while(rep <= 10) {
-    console.log(`Lifting weights repetition ${rep}`);
-    rep++;
+// // [3-49] The while Loop
+// // while loop문
+// let rep = 1;
+// while(rep <= 10) {
+//     console.log(`Lifting weights repetition ${rep}`);
+//     rep++;
+// }
+
+
+// // '숫자가 6이 나올 때까지 주사위 던지기' 구현
+// // Math.random() : 0 이상 1 미만 구간의 난수
+// // Math.trunc() : 주어진 값의 소수부분을 제거하고 숫자의 정수부분을 반환한다.
+// let dice = Math.trunc(Math.random() * 6) + 1; // +1을 하는 이유 : 0~5까지의 수가 나오기 때문이다.
+// while (dice !== 6) {
+//     console.log(`You rolled a ${dice}`);
+//     dice = Math.trunc(Math.random() * 6) + 1;
+//     if (dice === 6) console.log(`Loop is about to end..`);
+// }
+
+
+
+////////////////////////////////////////////////////
+/* Coding Challenge #4
+Let's improve Steven's tip calculator even more, this time using loops!
+Your tasks:
+1. Create an array 'bills' containing all 10 test bill values
+2. Create empty arrays for the tips and the totals ('tips' and 'totals')
+3. Use the 'calcTip' function we wrote before (no need to repeat) to calculate
+tips and total values (bill + tip) for every bill value in the bills array. Use a for
+loop to perform the 10 calculations!
+Test data: 22, 295, 176, 440, 37, 105, 10, 1100, 86 and 52
+Hints: Call ‘calcTip ‘in the loop and use the push method to add values to the
+tips and totals arrays �
+Bonus:
+4. Bonus: Write a function 'calcAverage' which takes an array called 'arr' as
+an argument. This function calculates the average of all numbers in the given
+array. This is a difficult challenge (we haven't done this before)! Here is how to
+solve it:
+4.1. First, you will need to add up all values in the array. To do the addition,
+start by creating a variable 'sum' that starts at 0. Then loop over the
+array using a for loop. In each iteration, add the current value to the
+'sum' variable. This way, by the end of the loop, you have all values
+added together
+4.2. To calculate the average, divide the sum you calculated before by the
+length of the array (because that's the number of elements)
+4.3. Call the function with the 'totals' array
+GOOD LUCK �
+*/
+
+const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+const tips = [];
+const totals = [];
+
+function calcTip(bill) {
+    if (bill <= 300 && bill >= 50) {
+        return bill * 15 / 100;
+    } else {
+        return bill * 20 / 100;
+    }
+}
+
+for (let i = 0; i < bills.length; i++) {
+    tips.push(calcTip(bills[i]));
+    totals.push(bills[i] + tips[i]);
+}
+
+function calcAverage(arr) {
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+    }
+    return sum;
 }
 
 
-// '숫자가 6이 나올 때까지 주사위 던지기' 구현
-// Math.random() : 0 이상 1 미만 구간의 난수
-// Math.trunc() : 주어진 값의 소수부분을 제거하고 숫자의 정수부분을 반환한다.
-let dice = Math.trunc(Math.random() * 6) + 1; // +1을 하는 이유 : 0~5까지의 수가 나오기 때문이다.
-while (dice !== 6) {
-    console.log(`You rolled a ${dice}`);
-    dice = Math.trunc(Math.random() * 6) + 1;
-    if (dice === 6) console.log(`Loop is about to end..`);
-}
+
+////////////////////////////////////////////////////
