@@ -1,20 +1,19 @@
 // // [3-32] Activating Strict Mode
 
-// 'use strict' 
+// 'use strict'
 // // 이 코드를 맨 처음에 작성하면 JS가 알아서 strict 모드를 실행한다. 무조건 맨 첫 줄에 있어야 한다.
-// // 또한 Strict 모드를 only specific function or specific block에 적용할 수 있다. 
+// // 또한 Strict 모드를 only specific function or specific block에 적용할 수 있다.
 
 // // stict 모드는 안전한 코드를 위해 존재한다.
 // // 1. 특정 행동을 금지한다.
 // // 2. JS가 쉽게 지나칠 수 있는 오류를 발생하는 상황에서, 눈에 보이는 error를 우리에게 보여준다.
-
 
 // let hasDriversLicense = false;
 // const passTest = true;
 
 // if (passTest) hasDriverLicense = true; // Driver 뒤에 s가 빠짐. 하지만 error표시는 안 뜸. JS는 var이나 let 기호가 없어도 변수를 생성하기 때문이다.
 // if (hasDriversLicense) console.log('I can drive :D'); // 아무것도 Console에 표시되지 않음.
-// // 하지만 여기에 strict모드를 적용시키면, ReferenceError를 출력한다. 
+// // 하지만 여기에 strict모드를 적용시키면, ReferenceError를 출력한다.
 
 // // 또한 예약어의 종류를 늘려서 체크해준다.
 // // 나중에 업데이트된 기능의 이름은 기본 JS에선 예약어로 지정되어 있지 않는데, strict 모드가 그것을 예방해준다.
@@ -22,12 +21,6 @@
 // const private = 534; // SyntaxError: Unexpected strict mode reserved word
 
 // // 이 뿐만아니라 fuctions, objects, setting properties on primitive values and many more에도 strict 모드의 기능이 있지만, 다음 단계의 강의에서 차근차근 알아갈 예정이다.
-
-
-
-
-
-
 
 // // [3-33] Functions
 // // JS의 함수 키워드는 function 이다.
@@ -37,8 +30,6 @@
 //     console.log('My name is yosep');
 // }
 // logger();
-
-
 
 // function fruitProcessor(apples, oranges) {
 //     const juice = `Juice with ${apple} apples and ${oranges} oranges.`;
@@ -54,14 +45,7 @@
 // // console.log()는 JS의 built-in function이다.
 
 // const num = Number('23');
-// // Number()도 JS의 built-in function이다. 
-
-
-
-
-
-
-
+// // Number()도 JS의 built-in function이다.
 
 // // [3-34] Functions Declarations vs Expressions
 // // return에 반환하고자 하는 expression을 적는다.
@@ -74,17 +58,15 @@
 // const age1 = calcAge1(2000);
 // console.log(age1); // 22
 
-
 // // anonymous function.
 // // Function expression
 // const calcAge2 = function (birthYear) {
 //     return 2022 - birthYear;
 // }
 // const age2 = calcAge2(2000);
-// console.log(age1, age2); // 22 22 
+// console.log(age1, age2); // 22 22
 // // function이 expression이 되어서 calcAge2에 저장된다. 그리고 calcAge2는 함수가 된다.
 // // JS에서 function은 value가 된다. 물론 타입은 없다. string, number와 같은 타입은 없지만 value가 된다.
-
 
 // // Functions Declarations vs Expressions의 차이 : Expressions의 경우 무조건 함수가 먼저 선언된 후에 call 할 수 있다.
 
@@ -104,12 +86,6 @@
 // */
 
 // // JS 개발자들은 각각 선호에 따라 두 방법을 혼용해서 사용한다. 그래서 두 방법에 대해 잘 숙지하고 있어야만 한다.
-
-
-
-
-
-
 
 // // [2-35] Arrow Functions
 
@@ -135,12 +111,7 @@
 // }
 // console.log(yearsUntilRetirement2(2000, 'joseph'));
 
-
 // // arrow function이 간단하고 좋긴 하지만, 그렇다고 arrow function만 쓸 수 있는 건 아니다. 대표적으로 'this'키워드를 사용할 수 없다.
-
-
-
-
 
 // // [3-36] Functions Calling Other Functions
 // // 함수 안에 또 함수를 불러오는 방법
@@ -156,11 +127,6 @@
 //     return juice;
 // }
 // console.log(fruitProcessor(2, 3));
-
-
-
-
-
 
 // // [3-37] Reviewing Functions
 
@@ -181,11 +147,6 @@
 //     }
 // }
 // yearsUntilRetirement(2000, 'Yosep');
-
-
-
-
-
 
 // ////////////////////////////////////////////////////////
 // /* [3-38] Coding Challenge #1
@@ -237,12 +198,6 @@
 
 // ////////////////////////////////////////////////////////
 
-
-
-
-
-
-
 // // [3-39] Introduction to Arrays
 
 // // Array literal syntax
@@ -250,7 +205,6 @@
 
 // // Array function
 // const years = new Array(1991, 2004, 2000);
-
 
 // // Array 안의 요소 불러오기
 // console.log(friends[0]);
@@ -264,28 +218,19 @@
 // // '.length'를 객체의 property라고 부른다.
 // // 요소의 개수를 말하는 것이기 때문에 '끝 번 요소 + 1'의 값이 나온다.
 
-
-
 // // Array 요소 변경하기
 // friends[1] = 'jay';
 // console.log(friends);
-// // friends array를 const로 선언했지만, 그 안의 요소는 변경할 수 있다. 왜냐하면 const는 primitive value만 교체할 수 없게 하고, array는 primitive value가 아니기 때문이다. 
+// // friends array를 const로 선언했지만, 그 안의 요소는 변경할 수 있다. 왜냐하면 const는 primitive value만 교체할 수 없게 하고, array는 primitive value가 아니기 때문이다.
 
 // // 반대로 array 전체를 교체하는 것은 불가능하다.
 // friends = ['jay', 'yosep']; // TypeError: Assignment to constant variable.
-
-
 
 // // array 안에는 서로 다른 타입의 데이터도 함께 가질 수 있고, 다른 변수를 가져올 수도 있다.
 // // 심지어 array를 요소로 가져올 수 있다.
 // const firstName = 'yosep';
 // const yosep = [firstName, 'park', 2022 - 2000, 'teacher', friends];
 // console.log(yosep);
-
-
-
-
-
 
 // // [3-40] Basic Array Operations (Methods)
 
@@ -299,7 +244,6 @@
 
 // // arrayName.unshift() : unshift 함수는 ()안에 있는 argument를 array의 맨 앞에 요소로 삽입시킨다.
 // friends.unshift('John'); // ['John', 'Michael', 'Steven', 'Peter', 'Jay']
-
 
 // // Remove elements
 // // arrayName.pop() : push의 반대로 맨 뒤의 요소를 제거 한다.
@@ -321,7 +265,6 @@
 // console.log(friends.indexOf('Bob')); // -1
 // // 해당하는 arrayElement가 없을 경우엔 -1을 return 한다.
 
-
 // // 특정 값이 array 안에 있는 지 확인하는 방법
 // // arrayName.includes() 함수를 사용하면, ()안에 있는 argument와 동일한 arrayElement를 찾아서, 여부에 따라 boolean 값을 return 한다.
 // // 이때 비교는 strict 비교이다.
@@ -332,14 +275,6 @@
 // if (friends.includes('Steven')) {
 //     console.log('You have a friend called Steven');
 // }
-
-
-
-
-
-
-
-
 
 // ////////////////////////////////////////////////////////
 // /*
@@ -377,8 +312,6 @@
 // const tips = [calcTip(bills[0]), calcTip(bills[1]), calcTip(bills[2])];
 // const total = [bills[0] + tips[0], bills[1] + tips[1], bills[2] + tips[2]]
 
-
-
 // ////////////////////////////////////////////////////////
 
 // // [3-42] Introduction to Objects
@@ -393,7 +326,6 @@
 // // 위와 같은 Array는 각 요소에 이름을 붙일 수 없고, 오로지 index만 붙일 수 있다.
 // // 각 요소에 이름을 붙이기 위해서 object를 사용한다.
 
-
 // // object는 {}를 사용해서 선언하는 방식이 있다. (literal syntax)
 // // object는 key-value로 이루어져있다. key: value
 // // key는 property라고 부른다.
@@ -403,8 +335,7 @@
 //     age: 2022 - 2000,
 //     job: 'teacher',
 //     friends: ['Michael', 'Peter'],
-// } // 5개의 property를 가진 object 
-
+// } // 5개의 property를 가진 object
 
 // // property를 불러오려면 '.' 또는 []을 사용하면 된다.
 // // 둘의 차이점은, '.'은 property의 이름만을, []은 expression 모두를 입력할 수 있다는 것이다.
@@ -421,23 +352,16 @@
 //     console.log(yosep[interestedIn]);
 // } else {
 //     console.log(`Wrong request! Choose between firstName, lastName, age, job, and friends`);
-// } 
+// }
 
 // // object에 property 추가하는 법. dot notation과 [] 둘 다 사용 가능.
 // yosep.location = 'Korea';
 // yosep['twitter'] = '@yoseppark';
 // console.log(yosep)
 
-
-
 // // Challenge
 // // "yosep has 3 friends, and his best friend is called Michael"
 // console.log(`${yosep.firstName} has ${yosep.friends.length} friends, and his best friend is called ${yosep.friends[0]}`);
-
-
-
-
-
 
 // [4-44] Object Methods
 // object는 function(method)을 property로 가질 수 있다.
@@ -457,7 +381,6 @@
 
 // console.log(yosep.calcAge(2000)); // 22
 // console.log(yosep['calcAge'](2000)); // 22
-
 
 // object의 method가 property를 접근하려고 할 때는 'this' 키워드를 사용하면 된다.
 // this 키워드는 해당 object 전체를 의미한다.
@@ -479,8 +402,6 @@
 
 // console.log(yosep.calcAge()) // 22
 
-
-
 // // object의 내부 메서드를 이용해서 기존 property를 바꾸거나 새로 생성할 수 있다.
 // const yosep = {
 //     firstName: 'yosep',
@@ -495,7 +416,7 @@
 //         this.age = 2022 - this.birthYear;
 //         return this.age;
 //     },
-    
+
 //     // Challenge
 //     // "Yosep is a 22-year old teacher, and he has a/no driver's license"
 //     getSummary: function() {
@@ -506,10 +427,7 @@
 // console.log(yosep.age);
 // console.log(yosep.getSummary());
 
-
 // // array도 내장함수(method) -push, shift, pop, unshift- 를 갖고 있으며, 이를 통해 element를 수정, 변경할 수 있기 때문에 array 또한 object라고 할 수 있다.
-
-
 
 // //////////////////////////////////////////
 // /* [3-45] Coding Challenge #3
@@ -528,7 +446,6 @@
 // tall.
 // GOOD LUCK �
 // */
-
 
 // const mark = {
 //     firstName: 'Mark',
@@ -565,10 +482,6 @@
 
 // //////////////////////////////////////////
 
-
-
-
-
 // // [3-46] Iteration: The for Loop
 
 // // for loop keeps running while condition is T
@@ -576,9 +489,6 @@
 // for (let rep = 1; rep <= 10; rep++) {
 //     console.log(`Lifting weights reptition ${rep} 🏋️‍♀️`);
 // }
-
-
-
 
 // // [3-47] Looping Arrays, Breaking and Continuing
 // // for문을 이용해서 array의 모든 요소에 쉽게 접근하는 방법
@@ -590,13 +500,12 @@
 //     console.log(yosep[i], typeof yosep[i]);
 
 //     // Filling types array
-//     types1[i] = typeof yosep[i]; 
-//     // or push 
+//     types1[i] = typeof yosep[i];
+//     // or push
 //     types2.push(typeof yosep[i]);
 
 // }
 // // JS는 push없이 그냥 array[i]에 변수를 선언하면, 자동으로 그 인덱스에 해당 변수가 넣어진다.
-
 
 // // 각 요소에 함수 적용한 값을 새로운 array에 담기
 // const years = [1991, 2000, 2002, 2010];
@@ -612,9 +521,6 @@
 
 // console.log(ages);
 
-
-
-
 // // continue and break
 // // continue는 스킵의 기능을 지닌다.
 // let text = '';
@@ -629,8 +535,6 @@
 // console.log(text);
 // // expected output: "012456789"
 
-
-
 // // break는 반복문의 종료를 의미한다. 순회하다가 break를 만나면 바로 반복문을 종료한다.
 // // 무의미한 반복을 막기 위해서 사용한다.
 // for (var i = 0; i < 10; i++) {
@@ -641,10 +545,6 @@
 //     console.log(i); // 0,1,2,3,4
 // }
 
-
-
-
-
 // // [3-48] Looping Backwards and Loops in Loops
 
 // // looping backward
@@ -653,8 +553,6 @@
 // for (let i = yosep.length - 1; i >= 0; i--) {
 //     console.log(i, yosep[i]);
 // }
-
-
 
 // // loops in loops
 // for (let exercise = 1; exercise < 4; exercise++) {
@@ -665,11 +563,6 @@
 //     }
 // }
 
-
-
-
-
-
 // // [3-49] The while Loop
 // // while loop문
 // let rep = 1;
@@ -677,7 +570,6 @@
 //     console.log(`Lifting weights repetition ${rep}`);
 //     rep++;
 // }
-
 
 // // '숫자가 6이 나올 때까지 주사위 던지기' 구현
 // // Math.random() : 0 이상 1 미만 구간의 난수
@@ -688,8 +580,6 @@
 //     dice = Math.trunc(Math.random() * 6) + 1;
 //     if (dice === 6) console.log(`Loop is about to end..`);
 // }
-
-
 
 ////////////////////////////////////////////////////
 /* Coding Challenge #4
@@ -724,24 +614,23 @@ const tips = [];
 const totals = [];
 
 function calcTip(bill) {
-    if (bill <= 300 && bill >= 50) {
-        return bill * 15 / 100;
-    } else {
-        return bill * 20 / 100;
-    }
+  if (bill <= 300 && bill >= 50) {
+    return (bill * 15) / 100;
+  } else {
+    return (bill * 20) / 100;
+  }
 }
 
 for (let i = 0; i < bills.length; i++) {
-    tips.push(calcTip(bills[i]));
-    totals.push(bills[i] + tips[i]);
+  tips.push(calcTip(bills[i]));
+  totals.push(bills[i] + tips[i]);
 }
 
 function calcAverage(arr) {
-    let sum = 0;
-    for (let i = 0; i < arr.length; i++) {
-        sum += arr[i];
-    }
-    return sum;
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i];
+  }
+  return sum;
 }
-
 ////////////////////////////////////////////////////
