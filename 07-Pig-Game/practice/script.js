@@ -4,6 +4,8 @@
 // (querySelector()에 비해 아주 살짝 빠르다고 한다.)
 const score0El = document.querySelector('#score--0');
 const score1El = document.getElementById('score--1');
+const player0El = document.getElementById('player--0')
+const player1El = document.getElementById('player--1')
 const current0El = document.getElementById('current--0')
 const current1El = document.getElementById('current--1')
 const diceEl = document.querySelector('.dice');
@@ -17,7 +19,9 @@ score0El.textContent = 0;
 score1El.textContent = 0;
 diceEl.classList.add('hidden');
 
+const score = [0, 0];
 let currentScore = 0;
+let activePlayer = 0;
 
 btnRoll.addEventListener('click', function() {
     const dice = Math.trunc(Math.random() * 6) + 1;
@@ -27,9 +31,14 @@ btnRoll.addEventListener('click', function() {
     diceEl.src = `dice-${dice}.png`; // img의 src attribute 수정은 이렇게 하면 된다.
 
     if (dice !== 1) {
-        current0El += currentScore;
-        current0El.textContent = current0El;
+        currentScore += dice;
+        document.getElementById(`current--${activePlayer}`).textContent = currentScore;
     } else {
-        
+        document.getElementById(`current--${activePlayer}`).textContent = 0;
+        currentScore = 0;
+        activePlayer = activePlayer == 0 ? 1 : 0;
+        player0El.classList.toggle('player--active');
+        player1El.classList.toggle('player--active');
+        //toggle()은 없을 때는 add, 있을 대는 Remove 해주는 function이다.
     }
 });
