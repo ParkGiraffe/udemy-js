@@ -2,12 +2,13 @@
 
 // id의 경우 getElementById()로 불러올 수 있다. 이때는 #을 안 붙여도 된다.
 // (querySelector()에 비해 아주 살짝 빠르다고 한다.)
+const player0El = document.querySelector('.player--0');
+const player1El = document.querySelector('.player--1');
 const score0El = document.querySelector('#score--0');
 const score1El = document.getElementById('score--1');
-const player0El = document.getElementById('player--0')
-const player1El = document.getElementById('player--1')
-const current0El = document.getElementById('current--0')
-const current1El = document.getElementById('current--1')
+const current0El = document.getElementById('current--0');
+const current1El = document.getElementById('current--1');
+
 const diceEl = document.querySelector('.dice');
 const btnNew = document.querySelector('.btn--new');
 const btnRoll = document.querySelector('.btn--roll');
@@ -15,9 +16,24 @@ const btnHold = document.querySelector('.btn--hold');
 
 
 // Startinc Conditions
-score0El.textContent = 0;
-score1El.textContent = 0;
-diceEl.classList.add('hidden');
+const init = function () {
+    scores = [0, 0];
+    currentScore = 0;
+    activePlayer = 0;
+    playing = true;
+  
+    score0El.textContent = 0;
+    score1El.textContent = 0;
+    current0El.textContent = 0;
+    current1El.textContent = 0;
+  
+    diceEl.classList.add('hidden');
+    player0El.classList.remove('player--winner');
+    player1El.classList.remove('player--winner');
+    player0El.classList.add('player--active');
+    player1El.classList.remove('player--active');
+};
+init();
 
 const scores = [0, 0];
 let currentScore = 0;
@@ -57,7 +73,7 @@ btnHold.addEventListener('click', function() {
         scores[activePlayer] += currentScore;
         document.getElementById(`score--${activePlayer}`).textContent = scores[activePlayer];
     
-        if (scores[activePlayer] >= 100) {
+        if (scores[activePlayer] >= 20) {
             playing = false;
             diceEl.classList.add('hidden');
             document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
@@ -68,3 +84,6 @@ btnHold.addEventListener('click', function() {
     }
 });
 
+btnNew.addEventListener('click', function() {
+    init();
+});
