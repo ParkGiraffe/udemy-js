@@ -79,4 +79,5 @@ console.log(i, j, k); // 3, 5, 6
 // default value
 // array의 길이를 모르는 경우, 해당 값이 없을 경우를 대비해서 기본값을 미리 지정할 수 있다.
 const [p = 1, q = 1, r = 1] = [8, 9];
-console.log(p, q, r);
+console.log(p, q, r); 
+
