@@ -29,10 +29,76 @@ const restaurant = {
 
   order: function(starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+
+  orderDelivery: function(starterIndex = 1, mainIndex = 0, time = '20:00', address) {
+    console.log(
+      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
   }
 };
 
 
+
+
+
+
+
+// object의 분해는 이렇게 중괄호로 이루어진다.
+const { name, openingHours, categories } = restaurant;
+console.log(name, openingHours, categories);
+
+// 변수 이름을 다르게 해서 분해를 하고 싶다면 속성 이름 참조와 :(콜론)을 이용하면 된다.
+const { name: restaurantName, openingHours: hours, categories: tags } = restaurant;
+console.llog(restaurantName, hours, tags);
+
+
+// default value를 설정할 수 있다.
+const { menu = [], starterMenu: starters = []} = restaurant;
+console.log(menu, starters); // menu는 빈 array로 나옴.
+// default value 없이 아무 값도 없는 경우엔 undefined가 출력된다.
+// 외부에서 데이터를 가지고 오는 경우 (ex: 서버) 데이터가 어떻게 보이는 지 정확히 모를 수 있으므로 이처럼 기본값을 설정하는 것이 유용하다.
+
+
+// Mutating variables
+let a = 111;
+let b = 999;
+const obj = { a: 23, b: 7, c: 14};
+({ a, b } = obj); 
+console.log(a, b); // 23, 7
+// JS는 중괄호로 줄을 시작할 때 코드 블록을 예상한다. 그리고 코드 블록에는 아무것도 할당할 수 없기 때문에 등호'='를 하면 오류가 발생한다. 이를 해결하는 비결은 코드를 괄호'()'로 묶는 것이다.
+
+
+// Nested objects
+const {
+  fri: { open: o, close: c },
+} = openingHours;
+console.log(o, c); // 11, 23
+
+
+
+// JS의 함수는 객체를 받으면 즉시 구조 분해(destructuring)를 수행한 후 parameter와 일치한 값을 해당 위치에 전달한다.
+restaurant.orderDelivery({
+  time: '22:30',
+  address: 'Via del Sole, 21',
+  mainIndex: 2,
+  starterIndex: 2,
+});
+
+restaurant.orderDelivery({
+  address: 'Via del Sole, 21',
+  starterIndex: 1,
+});
+// 함수 인자에 default value를 설정할 수 있다. 
+// 함수의 매개변수가 많을 경우(복잡할 경우) 일일이 지정하기 어려울 수 있다. 이럴 때를 위해 기본값을 설정해두면 편하다.
+
+
+
+
+
+////////////////////////////////////////////////////////
+
+/* [9-103] Array Destructuring (구조분해 할당)
 // Destructuring은 ESX의 기능으로, 기본적으로 배열이나 객체에서 별도의 변수로 값을 푸는 방식을 말한다.
 
 // Array destructure
@@ -81,3 +147,5 @@ console.log(i, j, k); // 3, 5, 6
 const [p = 1, q = 1, r = 1] = [8, 9];
 console.log(p, q, r); 
 
+*/
+////////////////////////////////////////////////////////
