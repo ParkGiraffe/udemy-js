@@ -515,7 +515,7 @@ for (const [e, el] of menu.entries()) {
 // [9-112] Enhanced Object Literals
 
 
-
+/* 
 // [9-113] Optional Chaining (?.)
 
 // mon은 선언되지 않은 상황이다.
@@ -558,3 +558,52 @@ console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist');
 // optional chaining을 이용해서 해당 array 안에 element가 있는 지를 검사
 const users = [{name: 'Jonas', email: 'ewqrqwe@qwerqwer.com'}];
 console.log(users[0]?.name || 'User array empty.');
+*/
+
+
+
+
+
+
+// [9-114] Looping Objects: Object Keys, Values, and Entries
+// Object 예약어를 이용해서 object loop 만들기
+
+// Property NAMES = KEYS
+const properties = Object.keys(openingHours);
+console.log(properties); // ['thu', 'fri', 'sat'] 
+
+let openStr = `We are open on ${properties.length} days: `;
+for (const day of properties) {
+  openStr += `${day}, `;
+}
+console.log(openStr); 
+// Object.keys(objectName)는 해당 object의 키 값을 array로 return한다.
+
+
+// Property VALUES
+const values = Object.values(openingHours);
+console.log(values); 
+// [해당 값들을 array로 return]
+
+
+// Entire Object
+// entries는 이름과 값을 함께 가지는 것
+const entries = Object.entries(openingHours); // entries = openingHours.entries()
+
+for (const [key, {open, close}] of entries) {
+  console.log(`On ${key} we open at ${open} and close at ${close}`);
+}
+// [key, value]를 element로 가지는 array를 반환 -> 이중 array 반환
+
+
+
+
+
+
+
+
+
+
+
+
+
