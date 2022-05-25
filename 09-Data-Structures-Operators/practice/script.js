@@ -39,6 +39,12 @@ const restaurant = {
 
   orderPasta: function(ing1, ing2, ing3) {
     console.log(`Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}.`);
+  },
+
+  orderPizza: function(mainIngredient, ...otherIngredients) { // 첫 번째 이외에 사용하지 않은 모든 인자가 otherIngredients로 들어간다.
+    console.log(mainIngredient); // mushrooms
+    console.log(otherIngredients); // 나머지 요소들이 array로 출력
+    
   }
 };
 
@@ -157,6 +163,7 @@ restaurant.orderDelivery({
 */
 
 
+/* [9-105] The Spread Operator (...)
 
 // Spread Operator는 기본적으로 모든 Array 요소를 한 번에 푼다.
 const arr = [7, 8, 9];
@@ -218,3 +225,64 @@ const restaurantCopy = {...restaurant};
 restaurantCopy.name = 'Ristorante Roma';
 console.log(restaurantCopy.name); // Ristorante Roma
 console.log(restaurant.name); // Classico Italiano
+*/
+
+
+  
+
+
+// [9-106] Rest Pattern and Parameters
+// 스프레드 연산자처럼 '...'을 사용하지만, 실제로는 스프레드 연산자와 반대된다.
+// 스프레드 연산자는 배열을 개별요소로 확장한다면, Rest(나머지) 패턴은 요소를 수집해서 배열로 압축한다.
+
+
+// SPREAD, beacause on RIGHT side of =
+const arr = [1, 2, ...[3, 4]];
+
+
+
+// REST, beacause on LEFT side of =
+// 1) Destructuring
+const [a, b, ...others] = [1, 2, 3, 4, 5];
+console.log(a, b, others); // 1 2 [3, 4, 5]
+// REST(나머지) Pattern 배열의 나머지 요소를 새 배열에 넣는다.
+
+const [pizza, , risotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(pizza, risotto, otherFood); // Pizza, Risotto, [나머지 음식들] <- 스킵한 요소는 포함되지 않음.
+
+
+
+// Objects
+// 레스토랑에서 주말 말고 평일에만 일하고 싶기 때문에 토요일을 빼려고 할 경우
+const { sat, ...weekdays } = restaurant.openingHours;
+console.log(weekdays); // {fri: {}, thu: {}}
+
+
+
+// 2) Functions
+const add = function(...numbers) {
+  console.log(numbers); // 전달 받은 인자들이 array로 묶여있는 것을 확인할 수 있다.
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    sum += numbers[i];
+  }
+  console.log(sum);
+};
+add(2, 3);
+add(5, 3, 7, 2);
+// 임의의 양의 인수를 전달하는 경우에 REST Pattern
+
+
+// 만약에 array를 전달하고자 한다면?
+const x = [23, 5, 7];
+add(...x);
+// SPREAD로 풀어서 넣어주면 된다. REST와 SPREAD는 서로 반대됨을 기억하자!
+
+
+// 실제 응용
+restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
+restaurant.orderPizza('mushrooms') // 이럴 경우 REST PATTERN에 들어갈 요소가 없어서 빈 배열을 내보낸다.
+
