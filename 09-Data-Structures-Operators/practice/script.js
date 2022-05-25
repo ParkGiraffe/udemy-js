@@ -230,7 +230,7 @@ console.log(restaurant.name); // Classico Italiano
 
   
 
-
+/*
 // [9-106] Rest Pattern and Parameters
 // 스프레드 연산자처럼 '...'을 사용하지만, 실제로는 스프레드 연산자와 반대된다.
 // 스프레드 연산자는 배열을 개별요소로 확장한다면, Rest(나머지) 패턴은 요소를 수집해서 배열로 압축한다.
@@ -286,3 +286,57 @@ add(...x);
 restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
 restaurant.orderPizza('mushrooms') // 이럴 경우 REST PATTERN에 들어갈 요소가 없어서 빈 배열을 내보낸다.
 
+*/
+
+
+
+// [9-107] Short Circuiting (&& and II)
+
+// Use ANY Data Ttype, return ANY data type.
+// short-circuiting (단락)
+
+
+// OR 연산자
+// OR 연산자의 경우, 단락의 첫 번째 값이 true이면, 즉시 첫 번째 값을 반환한다.
+// JS는 OR 연산자 단락에서 하나만 참이면 전부 참이기 때문에, 참을 만나면 바로 evaluation 한다.
+console.log(3 || 'Jonas'); // 3
+console.log('' || 'Jonas'); // Jonas
+console.log(true || 0); // true
+console.log(undefined || null); // null
+console.log(undefined || 0 || '' || 'Hello' || 23 || null); // Hello
+
+
+//restaurant.numGuests는 존재하지 않는 property이다.
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10; // 존재하지 않을 경우를 대비해 10을
+console.log(guests1); // 10
+
+// 삼항 연산자를 OR 연산자로 대체
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2); // 10
+
+// 이 방식의 문제점! 만약 레스토랑의 실제 게스트멤버 수가 0일 경우에도 기본값 10을 출력한다는 문제가 있다.
+// 다음 강의에서 이 문제에 대해 해결책을 모색할 예정
+
+
+
+// AND 연산자
+// AND 연산자는 OR과 반대되는 방식으로 작동한다.
+
+console.log(0 && 'Jonas'); // 0
+console.log(7 && 'Jonas'); // Jonas
+// 첫 번째 값이 거짓이면 바로 그 거짓인 값을 return
+// 모두 참이면, 마지막 값을 return
+
+// OR은 참인 값이 보일 때까지, AND는 거짓인 값이 보일 때까지
+
+
+// 응용
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('mushrooms', 'spinach');
+}
+// 해당하는 property나 value가 존재하는 지를 미리 체크하기 위해 if문을 위처럼 사용한다.
+// 이럴 때 AND 연산자를 사용하면 좋다.
+
+restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
+
+// OR연산자로 기본값을 설정하고, AND연산자로 속성의 존재 여부를 검사하고 두 번째 단락에서 실행할 수 있다.
