@@ -5,6 +5,28 @@ const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
 // Data needed for first part of the section
+
+
+
+// property의 이름을 계산(compute)해서 설정할 수 있다. 
+// 계산을 위해서 []대괄호를 넣는다.
+
+const weekdays = ['mon','tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+const openingHours = {
+  [weekdays[3]]: {
+    open: 12,
+    close: 22,
+  },
+  [weekdays[4]]: {
+    open: 11,
+    close: 23,
+  },
+  sun: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
+
 const restaurant = {
   name: 'Classico Italiano',
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
@@ -12,36 +34,34 @@ const restaurant = {
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
 
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  },
+  // 기존의 방식
+  // openingHours: openingHours,
 
-  order: function(starterIndex, mainIndex) {
+  // ES6 enhanced object literals
+  openingHours, // object 변수를 그대로 집어넣어서 하위 property 생성
+
+
+  // 기존의 방식
+  // order: function(starterIndex, mainIndex) {
+  //   return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  // },
+
+  // ES6 enhanced object literals
+  order(starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
 
-  orderDelivery: function(starterIndex = 1, mainIndex = 0, time = '20:00', address) {
+  orderDelivery(starterIndex = 1, mainIndex = 0, time = '20:00', address) {
     console.log(
       `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
     );
   },
 
-  orderPasta: function(ing1, ing2, ing3) {
+  orderPasta(ing1, ing2, ing3) {
     console.log(`Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}.`);
   },
 
-  orderPizza: function(mainIngredient, ...otherIngredients) { // 첫 번째 이외에 사용하지 않은 모든 인자가 otherIngredients로 들어간다.
+  orderPizza(mainIngredient, ...otherIngredients) { // 첫 번째 이외에 사용하지 않은 모든 인자가 otherIngredients로 들어간다.
     console.log(mainIngredient); // mushrooms
     console.log(otherIngredients); // 나머지 요소들이 array로 출력
     
@@ -473,6 +493,7 @@ team1 > team2 && console.log('Team 2 is more likely to win')
 */
 
 
+/*
 // [9-111] Looping Arrays: The for-of Loop
 // for-of 구문은 배열의 각 요소에 대한 액세스를 제공한다. (python의 for-in과 비슷해보임)
 const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
@@ -488,3 +509,7 @@ for (const [e, el] of menu.entries()) {
   console.log(`${e + 1} : ${el}`);
 }
 // 해당 코드의 출력문
+*/
+
+
+// [9-112] Enhanced Object Literals
