@@ -598,7 +598,7 @@ for (const [key, {open, close}] of entries) {
 
 
 
-
+/*
 // [9-105] Coding Challenge #2
 
 const game = {
@@ -667,7 +667,7 @@ const scorers = {};
 for (player of game.scored) {
   scorers[player] ? scorers[player]++ : scorers[player] = 1;
 }
-
+*/
 
 
 
