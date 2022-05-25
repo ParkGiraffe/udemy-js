@@ -344,3 +344,19 @@ restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
 */
 
 
+
+/*
+// [9-108] The Nullish Coalescing Operator (??)
+// Nullish Coalescing Operator는 ES2020에 도입된 Operator이다.
+
+restaurant.numGuests = 0;
+const guests = restaurant.numGuests || 10;
+console.log(guests); // 10
+// 위와 같은 경우 10을 출력한다는 것이 OR 연산자의 문제였다.
+
+// Nullish: null and undefined (NOT 0 or '');
+// 0과 ''를 제외하고 Short Circuiting evaluation 실행
+const guestCorrect = restaurant.numGuests ?? 10;
+console.log(guestCorrect); // 0
+// OR 연산자를 대체한다.
+*/
