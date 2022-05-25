@@ -564,7 +564,7 @@ console.log(users[0]?.name || 'User array empty.');
 
 
 
-
+/*
 // [9-114] Looping Objects: Object Keys, Values, and Entries
 // Object 예약어를 이용해서 object loop 만들기
 
@@ -594,14 +594,79 @@ for (const [key, {open, close}] of entries) {
   console.log(`On ${key} we open at ${open} and close at ${close}`);
 }
 // [key, value]를 element로 가지는 array를 반환 -> 이중 array 반환
+*/
 
 
 
 
+// [9-105] Coding Challenge #2
+
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
 
 
+// 1.
+for(const [number, player] of game.scored.entries()) {
+  console.log(`Goal ${number + 1} : ${player}`);
+}
 
+// 2.
+let sum = 0;
+const odds = Object.values(game.odds);
+for(i of odds) {
+  sum += i;
+}
+const average = sum / odds.length;
 
+// 3.
+for ({team, ratio} of Object.entries(game.odds)) {
+  const teamStr = team === 'x' ? 'draw' : `victory ${game[team]}`;
+  console.log(`Odd of ${teamStr}: ${ratio}`);
+}
+
+// 4.
+const scorers = {};
+for (player of game.scored) {
+  scorers[player] ? scorers[player]++ : scorers[player] = 1;
+}
 
 
 
