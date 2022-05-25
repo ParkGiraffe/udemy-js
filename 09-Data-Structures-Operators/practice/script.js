@@ -290,6 +290,7 @@ restaurant.orderPizza('mushrooms') // 이럴 경우 REST PATTERN에 들어갈 �
 
 
 
+/*
 // [9-107] Short Circuiting (&& and II)
 
 // Use ANY Data Ttype, return ANY data type.
@@ -340,3 +341,6 @@ if (restaurant.orderPizza) {
 restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
 
 // OR연산자로 기본값을 설정하고, AND연산자로 속성의 존재 여부를 검사하고 두 번째 단락에서 실행할 수 있다.
+*/
+
+
