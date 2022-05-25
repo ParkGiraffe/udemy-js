@@ -401,7 +401,7 @@ restaurant2.owner &&= '<ANONYMOUS>';
 */
 
 
-
+/*
 // [9-110] Coding Challenge #1
 
 const game = {
@@ -470,3 +470,21 @@ printGoals(game.scored);
 // 7.
 team1 < team2 && console.log('Team 1 is more likely to win')
 team1 > team2 && console.log('Team 2 is more likely to win')
+*/
+
+
+// [9-111] Looping Arrays: The for-of Loop
+// for-of 구문은 배열의 각 요소에 대한 액세스를 제공한다. (python의 for-in과 비슷해보임)
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+for (const item of menu) console.log(item);
+
+for (const item of menu.entries()) {
+  console.log(item);
+}
+// entreis()의 출력문
+
+for (const [e, el] of menu.entries()) {
+  console.log(`${e + 1} : ${el}`);
+}
+// 해당 코드의 출력문
