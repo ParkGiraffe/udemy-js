@@ -360,3 +360,41 @@ const guestCorrect = restaurant.numGuests ?? 10;
 console.log(guestCorrect); // 0
 // OR 연산자를 대체한다.
 */
+
+
+// [9-109] Logical Assignment Operators
+// ES2021에 추가된 현대적인 논리 할당 연산자들
+
+
+const restaurant1 = {
+  name: 'Capri',
+  numGuests: 20,
+};
+
+const restaurant2 = {
+  name: 'La Pizza',
+  owner: 'Giovanni Rossi',
+};
+
+// OR assignment Operator
+restaurant1.numGuests = restaurant1.numGuests || 10;
+restaurant2.numGuests = restaurant2.numGuests || 10;
+
+// 위와 같은 코드를 좀 더 짧게 쓰게 해주는 연산자이다.
+restaurant1.numGuests ||= 10;
+restaurant2.numGuests ||= 10;
+
+
+// logical nullish assignment operator 또한 존재한다.
+const restaurant3 = {
+  name: 'Capri',
+  numGuests: 0,
+};
+
+restaurant3.numGuests ||= 10;
+
+
+// AND 연산자 역시 assignment operator가 있다.
+// AND연산자를 이용해서 레스토랑 주인의 이름을 익명화하기
+restaurant2.owner = restaurant2.owner && '<ANONYMOUS>';
+restaurant2.owner &&= '<ANONYMOUS>';
