@@ -513,3 +513,48 @@ for (const [e, el] of menu.entries()) {
 
 
 // [9-112] Enhanced Object Literals
+
+
+
+// [9-113] Optional Chaining (?.)
+
+// mon은 선언되지 않은 상황이다.
+console.log(restaurant.openingHours.mon.open); // TypeError: undefined
+// 웹 API로 데이터를 받아올 경우 위처럼 해당 데이터가 없거나 안 불러와지는 경우가 있다.
+
+// 그래서 대안으로 if문을 사용했었다.
+// 하지만 너무 길고 복잡하다.
+if (restaurant.openingHours && restaurant.openingHours.mon) console.log(restaurant.openingHours.mon.open);
+
+
+// ES2020은 이에 대한 솔루션을 제공한다.
+// 그것은 바로 optional chaining이다.
+// optional chaining은 certain property가 존재하지 않는 경우 undefined를 return한다.
+
+// WITH optional chaining
+console.log(restaurant.openingHours?.mon?.open);
+// optional chaining은 undefined와 null일 경우 작동을 중단한다.
+
+
+// Example
+const days = ['mon','tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+for (const day of dyas) {
+  console.log(day);
+  const open = restaurant.openingHours[day]?.open ?? 'closed'; // fundamental에서 배운 내용 -> expression을 이용해서 이름을 설정하려면 []대괄호 사용
+  console.log(`On ${day}, we open at ${open}`);
+}
+
+
+// Methods
+// optional chaining으로 method의 유무를 확인할 수 있다.
+// 그리고 nullish coalescing operator를 사용해서 해당 메소드가 없을 알려주면 좋다.
+console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
+console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist');
+
+
+
+// Arrays
+// optional chaining을 이용해서 해당 array 안에 element가 있는 지를 검사
+const users = [{name: 'Jonas', email: 'ewqrqwe@qwerqwer.com'}];
+console.log(users[0]?.name || 'User array empty.');
