@@ -361,7 +361,7 @@ console.log(guestCorrect); // 0
 // OR 연산자를 대체한다.
 */
 
-
+/*
 // [9-109] Logical Assignment Operators
 // ES2021에 추가된 현대적인 논리 할당 연산자들
 
@@ -398,3 +398,75 @@ restaurant3.numGuests ||= 10;
 // AND연산자를 이용해서 레스토랑 주인의 이름을 익명화하기
 restaurant2.owner = restaurant2.owner && '<ANONYMOUS>';
 restaurant2.owner &&= '<ANONYMOUS>';
+*/
+
+
+
+// [9-110] Coding Challenge #1
+
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
+
+// 1.
+const [players1, players2] = game.players;
+
+// 2.
+const [gk, ...fieldPlayers] = players1;
+
+// 3.
+const allPlayers = [...players1, ...players2];
+
+// 4.
+const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
+
+// 5.
+const {team1: team1, x: draw, team2: team2} = game.odds;
+
+// 6.
+const printGoals = function(...players) {
+    console.log(players);
+    console.log(`${players.length} goals were scored`);
+};
+printGoals(game.scored);
+
+// 7.
+team1 < team2 && console.log('Team 1 is more likely to win')
+team1 > team2 && console.log('Team 2 is more likely to win')
