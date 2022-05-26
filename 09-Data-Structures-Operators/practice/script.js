@@ -741,6 +741,62 @@ console.log(new Set('yosep'.size)); // 5
 
 
 
+// [9-117] Maps: Fundamentals
+// Map은 값을 키에 매핑하는 데 사용한다.
+// 그래서 객체처럼 '키-값'을 가진다. 객체와의 차이는 맵의 키는 모든 유형을 가질 수 있다는 것이다. (객체의 키는 항상 String)
 
+// Map을 채우기 위해서 set method를 사용
+// mapName.set(키, 값)
+// set 메서드는 map을 업데이트 할 뿐만 아니라, map을 return 한다.
+const rest = new Map();
+rest.set('name', 'Classico Italino');
+rest.set(1, 'Firenze, Italy');
+console.log(rest.set(2, 'Lisbon, Portugal'));
+
+
+// .set method를 한 번에 여러 번 불러올 수도 있다.
+rest
+  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are open :D')
+  .set(false, 'We are closed :(');
+
+
+// get method를 이용해서 key에 해당하는 value를 가져올 수 있다. (데이터 타입도 일치시켜야 한다!)
+console.log(rest.get('name'));
+console.log(rest.get(true));
+console.log(rest.get(1));
+
+
+
+
+// example (해당 방식으로 패턴을 남발하면 복잡하니까, 이해하는 용도로만 쓰자.)
+const time = 21;
+console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
+
+// has method - 해당 key의 유무에 따라 boolean값 return
+console.log(rest.has('categories')); // true
+
+// delete method - key값을 기반으로 요소 삭제
+rest.delete(2);
+
+// size property
+console.log(rest.size);
+
+// clear method - 내부 요소 전부 삭제
+rest.clear();
+
+
+// 배열과 객체를 Map key로
+rest.set([1, 2], 'Test');
+console.log(rest.get([1, 2])); // undefined
+// [1, 2]로 검색하면 값을 잘 불러올 거 같지만 undefined를 출력한다. JS의 object type에 따라 두 [1, 2]는 같은 요소를 가진 array지만 heap에서는 같은 객체가 아닌 것으로 인식되기 때문이다. 그래서 잘 작동하게 하려면, set()에 들어갈 key array를 변수에 저장해주어야 한다. 그러면 동일한 메모리 위치를 참조하기 때문이다.
+const arr = [1, 3];
+rest.set(arr, 'Test');
+console.log(rest.get(arr)); // undefined
+
+// 객체도 Map key
+rest.set(document.querySelector('h1'), 'Heading');
 
 
