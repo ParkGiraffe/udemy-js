@@ -671,4 +671,76 @@ for (player of game.scored) {
 
 
 
+/*
+// [9-116] Sets
+// ES6 배열과 객체 이외에 두 가지 데이터 구조가 추가되었다.
+// 바로 Sets와 Map이다.
+// Sets는 unique value의 collection이다.
+// new Set()안에는 iterable을 인수로 받는다.
+// 중복된 값이 있을 경우, 따로 저장하는 것이 아니라 하나로만 저장된다.
+const orderSet = new Set([
+  'Pasta',
+  'Pizza',
+  'Risotto',
+  'Pasta',
+  'Pizza',
+  'Risotto',
+]);
+console.log(orderSet); // {"Pasta", "Pizza", "Risotto"}
+// 키-값 쌍이 없고, 배열과 비슷해 보인다. 집합도 iterable이다. 
+// 하지만 배열과 매우 다르다. 
+// 1. 고유한 값을 가진다. (중복값이 없다.)
+// 2. 순서의 의미가 없다.
+
+
+// String도 iterable하기 때문에 set으로 분리할 수 있다.
+console.log('Yosep'); 
+
+
+// Set의 크기는 size property로 알 수 있다. NOT length
+console.log(orderSet.size); // 3
+
+
+// element 검색은 has method로 알 수 있다. array의 include mothod와 유사
+console.log(orderSet.has('Pizza')); // true
+console.log(orderSet.has('Bread')); // false
+
+
+// element 추가 - add method
+// 참고로 똑같은 걸 더 추가해도 set 내부 요소는 바뀌는 것이 없다.
+orderSet.add('Garlic Bread');
+
+
+// element 삭제 - delete method
+orderSet.delete('Risotto');
+
+
+// Set에는 인덱스가 없다.
+console.log(orderSet[0]); // undefined
+// Set의 의미를 이해해야 할 필요가 있다. set는 모든 값이 고유하기 때문에 순서가 의미가 없다. 그리고 해당 데이터를 set에서 가져올 필요가 없다. 그저 세트에 그 특정 값이 있는지에 대한 여부만 중요하다. 그래서 has method를 가지고 있는 것이다. element를 가져올 필요가 있다면 array를 쓰면 되는 것이다.
+
+
+// Set 안의 모든 요소 삭제 - clear method
+orderSet.clear(); // {}
+
+
+// iterable하기 때문에 for문도 사용 가능하다
+for (const order of orderSet) console.log(order);
+
+
+// 그리고 iterable의 특성을 이용해서 spread 연산자를 사용할 수 있다.
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+const staffUnique = [...new Set(staff)];
+console.log(staffUnique); // ["Waiter", "Chef", "Manager"]
+
+
+
+// Set과 size property를 이용해서 array나 String 중 고유한 요소의 개수를 찾기
+console.log(new Set('yosep'.size)); // 5
+*/
+
+
+
+
+
 
