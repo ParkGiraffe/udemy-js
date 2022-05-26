@@ -849,7 +849,7 @@ console.log([...question.values()]);
 */
 
 
-
+/*
 // [9-120] Coding Challenge #3
 const gameEvents = new Map([
   [17, '⚽️ GOAL'],
@@ -892,3 +892,61 @@ for ([key, value] of gameEvents) {
 //   const half = min <= 45 ? 'FIRST' : 'SECOND';
 //   console.log(`[${half} HALF] ${min}: ${event}`);
 // }
+*/
+
+
+
+// [9-121] Working With Strings - Part 1
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+
+console.log(plane[0]); // A
+console.log(plane[1]);
+console.log(plane[2]);
+console.log('B737'[0]); // B - String에 직접 붙일 수 있다.
+
+// length property
+console.log(airline.length); // 16
+console.log('B737'.length); // 4 
+
+// indexOf method
+console.log(airline.indexOf('r')); // 6 - 첫 번째로 등장하는 것 인덱스
+console.log(airline.lastIndexOf('r')); // 10 - 마지막으로 등장하는 것의 인덱스
+console.log(airline.indexOf('portugal')); // 8 - 문자열을 검색할 수도 있다.
+// 만약 찾고자 하는 것이 없으면 -1을 return
+
+// slice method - slice(시작, 끝(끝은 포함x))
+// slice로 자른다고 해서 기존 String은 바뀌지 않는다. primitive 타입이기 때문이다. 그래서 따로 저장해주어야 한다.
+console.log(airline.slice(4)); // Air Portugal 
+console.log(airline.slice(4, 7)); // Air - index 7의 char은 포함하지 않는다.
+
+// 응용
+console.log(airline.slice(0, airline.indexOf(' '))); // TAP
+console.log(airline.slice(airline.lastIndexOf(' ') + 1)); // Portugal
+
+// slice method에 음수를 인자로 넣으면, 끝에서부터 계산을 한다.
+// + 음수는 0을 포함하지 않으므로 -1부터 시작한다.
+console.log(airline.slice(-2)); // al
+console.log(airline.slice(1, -1)); // AP Air Portuga
+
+
+// example
+const checkMiddleSeat = function (seat) {
+  // B and E are middle seats
+  const s = seat.slice(-1);
+  if (s === 'B' || s === 'E') console.log('You got the middle seat 😬');
+  else console.log('You got lucky 😎');
+};
+
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('3E');
+
+
+// String은 primitive type인데 어떻게 object의 method를 쓸 수 있는 걸까?
+// JS가 자동으로 배후에서 String primitive type을 String object로 변환해주기 때문이다. 그런 다음에 method가 호출된다.  이러한 과정을 boxing이라고 부른다. 문자열을 상자에 넣고 object로 만들기 때문. 
+// 모든 operation이 끝나면 문자열은 다시 primitive로 돌아간다.
+
+console.log(new String('jonas'));
+console.log(typeof new String('jonas')); // object
+console.log(typeof new String('jonas').slice(1)); // string
