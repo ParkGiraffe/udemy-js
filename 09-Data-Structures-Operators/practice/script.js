@@ -804,7 +804,7 @@ rest.set(document.querySelector('h1'), 'Heading');
 
 
 
-
+/*
 // [9-118] Maps: Iteration
 // 2중 Array를 map으로
 const question = new Map([
@@ -846,3 +846,49 @@ console.log(question.get(answer === question.get('correct'))); // 선생님의 �
 console.log([...question]);
 console.log([...question.key()]);
 console.log([...question.values()]);
+*/
+
+
+
+// [9-120] Coding Challenge #3
+const gameEvents = new Map([
+  [17, '⚽️ GOAL'],
+  [36, '🔁 Substitution'],
+  [47, '⚽️ GOAL'],
+  [61, '🔁 Substitution'],
+  [64, '🔶 Yellow card'],
+  [69, '🔴 Red card'],
+  [70, '🔁 Substitution'],
+  [72, '🔁 Substitution'],
+  [76, '⚽️ GOAL'],
+  [80, '⚽️ GOAL'],
+  [92, '🔶 Yellow card'],
+]);
+
+
+// 1.
+const events = [...new Set(gameEvents.values)];
+
+// 2.
+gameEvents.delete(64);
+
+// 3.
+console.log(
+  `An event happened, on average, every ${90 / gameEvents.size} minutes`
+);
+const time = [...gameEvents.keys()].pop();
+console.log(time);
+console.log(
+  `An event happened, on average, every ${time / gameEvents.size} minutes`
+);
+
+
+// 4.
+for ([key, value] of gameEvents) {
+  console.log(`${key <= 45 ? '[First Half]' : '[Second Half]'} ${key}: ${value}`);
+}
+
+// for (const [min, event] of gameEvents) {
+//   const half = min <= 45 ? 'FIRST' : 'SECOND';
+//   console.log(`[${half} HALF] ${min}: ${event}`);
+// }
