@@ -740,7 +740,7 @@ console.log(new Set('yosep'.size)); // 5
 */
 
 
-
+/*
 // [9-117] Maps: Fundamentals
 // Map은 값을 키에 매핑하는 데 사용한다.
 // 그래서 객체처럼 '키-값'을 가진다. 객체와의 차이는 맵의 키는 모든 유형을 가질 수 있다는 것이다. (객체의 키는 항상 String)
@@ -798,5 +798,51 @@ console.log(rest.get(arr)); // undefined
 
 // 객체도 Map key
 rest.set(document.querySelector('h1'), 'Heading');
+*/
 
 
+
+
+
+
+// [9-118] Maps: Iteration
+// 2중 Array를 map으로
+const question = new Map([
+  ['question', 'What is the best programming language in the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct 🎉'],
+  [false, 'Try again!'],
+]);
+console.log(question);
+
+
+// Convert object to map
+// Object.entries()를 이용한 2중 array를 map으로
+console.log(Object.entries(openingHours));
+const hoursMap = new Map(Object.entries(openingHours));
+console.log(hoursMap);
+
+
+// map은 key값을 가지지만 그자체로 iterable하기 때문에 Object.entries()와 같은 과정 없이 바로 for문을 적용할 수 있다.
+// destructuring을 할 때 [] 대괄호 사용
+console.log(question.get('question'));
+for ([key, value] of question) {
+  if (typeof key === 'number') {
+    console.log(`Answer ${key}: ${value}`);
+  }
+}
+const answer = Number(prompt('Your answer'));
+console.log(answer);
+
+//answer === question.get('correct') ? console.log(question.get(true)) : console.log(question.get(false));
+console.log(question.get(answer === question.get('correct'))); // 선생님의 답
+
+
+
+// Convert map to array - 스프레드 연산자를 사용한 후 []로 감싸면 array로 다시 만들어진다.
+console.log([...question]);
+console.log([...question.key()]);
+console.log([...question.values()]);
