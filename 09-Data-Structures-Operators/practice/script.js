@@ -599,7 +599,7 @@ for (const [key, {open, close}] of entries) {
 
 
 /*
-// [9-105] Coding Challenge #2
+// [9-115] Coding Challenge #2
 
 const game = {
   team1: 'Bayern Munich',
