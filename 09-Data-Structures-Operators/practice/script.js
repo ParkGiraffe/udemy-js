@@ -895,7 +895,7 @@ for ([key, value] of gameEvents) {
 */
 
 
-
+/*
 // [9-121] Working With Strings - Part 1
 const airline = 'TAP Air Portugal';
 const plane = 'A320';
@@ -950,3 +950,82 @@ checkMiddleSeat('3E');
 console.log(new String('jonas'));
 console.log(typeof new String('jonas')); // object
 console.log(typeof new String('jonas').slice(1)); // string
+*/
+
+
+/*
+// [9-122] Working with Strings - Part 2
+
+// Fix capitalization in name
+const passenger = 'JOnAS';
+const passengerLower = passenger.toLowerCase(); // 모두 소문자로
+const passengerCorrect = passengerLower[0].toUpperCase() + passengerLower.slice(1); // 첫 글자만 대문자로
+console.log(passengerCorrect); // Jonas
+
+// Comparing emails
+// 입력받은 이메일을 자동으로 소문자로 만들고, 공백 지워주기
+// trim() 함수는 자동으로 시작과 끝 부분의 공백을 지워준다. '\n'도 공백으로 인식한다.
+const email = 'hello@jonas.io';
+const loginEmail = '   Hello@Jonas.Io\n'; 
+
+const lowerEmail = loginEmail.toLowerCase();
+const trimmedEmail = lowerEmail.trim();
+console.log(trimmedEmail) // hello@jonas.io
+
+
+// String의 메소드를 한 번에 여러 개 적용시킬 수 있다.
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail); // hello@jonas.io
+
+
+// replacing 
+// replace(찾는 글자, 어떤 글자로 바꿀 것인지)
+const priceGB = '288,97£';
+const priceUS = priceGB.replace('£', '$').replace(',', '.');
+console.log(priceUS);
+
+
+// 글자 여러 개 바꾸기
+// replace()는 맨 처음 나오는 동일한 글자 하나만 바꾼다.
+// 여러 개를 동시에 바꾸기 위해서 replaceAll()을 사용하거나, 정규식을 사용한다.
+const announcement =
+  'All passengers come to boarding door 23. Boarding door 23!';
+
+console.log(announcement.replace('door', 'gate')); // 하나만 바뀜
+console.log(announcement.replaceAll('door', 'gate'));
+console.log(announcement.replace(/door/g, 'gate'));
+
+
+
+// Booleans - includes(), startsWith(), endsWith()
+const plane = 'Airbus A320neo';
+console.log(plane.includes('A320'));
+console.log(plane.includes('Boeing'));
+console.log(plane.startsWith('Airb'));
+
+if (plane.startsWith('Airbus') && plane.endsWith('neo')) {
+  console.log('Part of the NEW ARirbus family');
+}
+
+
+
+// Practice exercise
+const checkBaggage = function (items) {
+  const baggage = items.toLowerCase();
+
+  if (baggage.includes('knife') || baggage.includes('gun')) {
+    console.log('You are NOT allowed on board');
+  } else {
+    console.log('Welcome aboard!');
+  }
+};
+
+checkBaggage('I have a laptop, some Food and a pocket Knife');
+checkBaggage('Socks and camera');
+checkBaggage('Got some snacks and a gun for protection');
+*/
+
+
+
+
+
