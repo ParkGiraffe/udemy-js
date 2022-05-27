@@ -1028,4 +1028,59 @@ checkBaggage('Got some snacks and a gun for protection');
 
 
 
+/*
+// [9-123] Working with Strings - Part 3 
 
+// Split and join
+// split('나누고자 하는 string') 해당 string을 기준으로 나눠진 string array를 return한다.
+// join('붙일 때 사이에 넣고자 하는 string') array를 붙이는 동시에 사이에 join의 인자를 집어 넣는다.
+console.log('a+very+nice+string'.split('+')); // [a, very, nice, string]
+console.log('Jonas Schmedtmann'.split(' '));
+
+const [firstName, lastName] = 'Jonas Schmedtmann'.split(' '); // destructuring으로 이름과 성을 집어넣기
+
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName); // Mr. Jonas SCHMEDTMANN
+
+const capitalizeName = function (name) {
+  const names = name.split(' ');
+  const namesUpper = [];
+
+  for (const n of names) {
+    // namesUpper.push(n[0].toUpperCase() + n.slice(1));
+    namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+  }
+  console.log(namesUpper.join(' '));
+};
+
+capitalizeName('jessica ann smith davis');
+capitalizeName('jonas schmedtmann');
+
+// Padding
+// 특정 문자 수가 될 때 까지 인자로 받은 string을 덧붙이는 것.
+const message = 'Go to gate 23!';
+console.log('Jonas'.padStart(25, '+')); // ++++++++++++++++++++Jonas <- 총 글자수 25개
+console.log(message.padStart(20, '+').padEnd(30, '+')); // padEnd에서 +는 10개가 더 추가된다.
+console.log('Jonas'.padStart(20, '+').padEnd(30, '+'));
+
+const maskCreditCard = function (number) {
+  const str = number + ''; // 빈 문자열을 추가하면 자동으로 String으로 바꾸는 trick
+  const last = str.slice(-4);
+  return last.padStart(str.length, '*');
+};
+
+console.log(maskCreditCard(64637836)); // ****7836
+console.log(maskCreditCard(43378463864647384));
+console.log(maskCreditCard('334859493847755774747'));
+
+// Repeat - repeat(n) n만큼 문자열을 반복한 값을 return
+const message2 = 'Bad waether... All Departues Delayed... ';
+console.log(message2.repeat(5));
+
+const planesInLine = function (n) {
+  console.log(`There are ${n} planes in line ${'🛩'.repeat(n)}`);
+};
+planesInLine(5);
+planesInLine(3);
+planesInLine(12);
+*/
