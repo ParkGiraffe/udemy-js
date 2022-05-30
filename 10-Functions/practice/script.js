@@ -118,7 +118,7 @@ checkIn(flight, passport); // Wrong passport
 
 
 
-
+/*
 // [10-132] Functions Returning Functions
 // 작동하는 순서는 closure의 순서와 같다.
 const greet = function(greeting) {
@@ -138,3 +138,68 @@ greet('Hello')('Yosep'); // Hello Yosep
 const greetArr = greeting => name => console.log(`${greeting} ${name}`);
 greetArr('Hi')('Yosep'); // Hi Yosep
 // 이렇게 쓰는 게 간단하기는 한데, 좀 더 혼란스럽게 보인다.
+*/
+
+
+/*
+// [10-133] The call and apply Methods
+// The call and apply Methods
+const lufthansa = {
+    airline: 'Lufthansa',
+    iataCode: 'LH',
+    bookings: [],
+    
+    book(flightNum, name) {
+        console.log(
+            `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+        );
+        this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+    },
+};
+lufthansa.book(239, 'Jonas Schmedtmann');
+lufthansa.book(635, 'John Smith');
+
+// Call method - 첫 번째 인수는 this가 가리킬 object를 목표로 해야 한다. 그리고 각 object 간의 property 이름이 동일해야 한다.
+
+const eurowings = {
+  airline: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
+};
+const book = lufthansa.book;
+
+// Does NOT work
+// Book()은 일반함수이기 때문에, 사용된 this키워드기 undefined를 가리켜서 error가 발생한다.
+// book(23, 'Sarah Williams'); // TypeError
+
+book.call(eurowings, 23, 'Sarah Williams');
+console.log(eurowings);
+
+book.call(lufthansa, 239, 'Mary Cooper');
+console.log(lufthansa);
+
+
+
+// Apply method - Array of arguments를 받아서 함수에 전달한다.
+const swiss = {
+    airline: 'Swiss Air Lines',
+    iataCode: 'LX',
+    bookings: [],
+};
+  
+book.call(swiss, 583, 'Mary Cooper');
+  
+const flightData = [583, 'George Cooper'];
+book.apply(swiss, flightData);
+console.log(swiss);
+  
+book.call(swiss, ...flightData); // Array를 스프레드 연산자로 풀어서 call() method에 전달하는 방법도 있다.
+  
+*/
+
+
+
+
+// [10-134] The bind Method
+// [10-135]
+// [10-136]
