@@ -301,4 +301,28 @@ document.querySelector('.poll').addEventListener('click', poll.registerNewAnswer
 
 
 
-// [10-136]
+// [10-136] Immediately Invoked Function Expressions (IIFE)
+const runOnce = function () {
+    console.log('This will never run again');
+};
+runOnce();
+
+// IIFE - 함수를 괄호로 묶어서 즉시 호출시킴.
+(function () {
+    console.log('This will never run again');
+    const isPrivate = 23;
+})();
+console.log(isPrivate); // Undefined
+
+
+// 화살표 함수에도 적용가능
+(() => console.log('This will ALSO never run again'))();
+
+// 구식 변수 선언 방식인 var은 변수의 scope 보호가 전혀 이뤄지지 않는다. 그래서 사용 비추천.
+{
+    const isPrivate = 23;
+    var notPrivate = 46;
+}
+console.log(isPrivate); // undefined
+console.log(notPrivate); // 46 
+  
