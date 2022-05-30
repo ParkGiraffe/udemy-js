@@ -120,3 +120,21 @@ checkIn(flight, passport); // Wrong passport
 
 
 // [10-132] Functions Returning Functions
+// 작동하는 순서는 closure의 순서와 같다.
+const greet = function(greeting) {
+    return function(name) {
+        console.log(`${greeting} ${name}`);
+    };
+}
+
+const greetHey = greet('Hey');
+greetHey('Jonas'); // Hey Jonas
+greetHey('Steven'); // Hey Steven
+
+greet('Hello')('Yosep'); // Hello Yosep
+
+
+// Challenge - arrow function으로 써보기
+const greetArr = greeting => name => console.log(`${greeting} ${name}`);
+greetArr('Hi')('Yosep'); // Hi Yosep
+// 이렇게 쓰는 게 간단하기는 한데, 좀 더 혼란스럽게 보인다.
