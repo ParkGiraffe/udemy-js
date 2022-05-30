@@ -141,7 +141,7 @@ greetArr('Hi')('Yosep'); // Hi Yosep
 */
 
 
-/*
+
 // [10-133] The call and apply Methods
 // The call and apply Methods
 const lufthansa = {
@@ -195,11 +195,110 @@ console.log(swiss);
   
 book.call(swiss, ...flightData); // Array를 스프레드 연산자로 풀어서 call() method에 전달하는 방법도 있다.
   
-*/
+
 
 
 
 
 // [10-134] The bind Method
-// [10-135]
+// Bind method - 함수를 호출하진 않고, this 키워드가 있는 위치를 담은 새 함수를 반환한다. 
+
+const bookEW = book.bind(eurowings);
+const bookLH = book.bind(lufthansa);
+const bookLX = book.bind(swiss);
+bookEW(23, 'Steven Willians');
+
+/*
+book(flightNum, name) {
+    console.log(
+        `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+},
+*/
+// bind()는 기존 함수 인자의 일부를 미리 지정한 상태에서 남은 인자만 받으면 되는 함수를 return할 수 있다.
+const bookEW23 = book.bind(eurowings, 23);
+bookEW23('yosepPark');
+
+
+// With Event Listners
+lufthansa.planes = 300;
+lufthansa.buyPlane = function() {
+    console.log(this);
+
+    this.planes++;
+    console.log(this.planes);
+};
+
+document.querySelector('.buy').addEventListener('click', lufthansa.buyPlane);
+// document는 항상 해당 Selector가 연결된 element에 연결이 된다. 그래서 this가 어디에 연결되어 있는 지 체크해보면 html element가 연결된 걸로 나온다. 그래서 오류가 발생한다.
+
+
+document.querySelector('.buy').addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+// 그래서 bind메서드로 this를 lufthansa로 지정해야 한다. 
+
+
+
+// Partial application
+// 매개변수를 미리 설정하기
+// this키워드를 연결할 필요가 없을 경우 null로 지정한다.
+const addTax = (rate, value) => value + value * rate;
+const addVAT = addTax.bind(null, 0.23);
+// addVAT = value => value + value * 0.23;
+console.log(addVAT(100)); // 123
+ 
+
+// Challenge
+const addTaxRate = function(rate) {
+    return function(value) {
+        return value + value * rate;
+    };
+};
+const addVAT2 = addTaxRate(0.23);
+console.log(addVAT2(100));
+
+
+
+
+// [10-135] Coding Challenge #1
+
+
+const poll = {
+    answers: new Array(4).fill(0),
+
+
+    registerNewAnswer() {
+        const selected = Number(prompt(```
+            What is your favourite programming language?
+            0: JavaScript
+            1: Python
+            2: Rust
+            3: C++
+            (Write option number)
+        ```
+        ));
+        if (typeof selected === 'number' && selected >= 0 && selected <= this.answers.length) {
+            this.answers[selected]++;
+        }
+
+        this.displayResults();
+        this.displayResults('string');
+    },
+
+    displayResults(type = 'array') {
+        if (type === 'array') {
+          console.log(this.answers);
+        } else if (type === 'string') {
+          // Poll results are 13, 2, 4, 1
+          console.log(`Poll results are ${this.answers.join(', ')}`);
+        }
+    },
+};
+
+
+document.querySelector('.poll').addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+
+
+
 // [10-136]
