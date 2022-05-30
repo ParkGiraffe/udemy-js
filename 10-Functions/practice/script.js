@@ -29,8 +29,39 @@ createBooking('LH123', undefined, 800);
 
 
 
-
+/*
 // [10-129] How Passing Arguments Works: Value VS. Reference 
+// 함수에 인자를 전달할 때 전달한 데이터의 타입이 reference type이면, 함수 내에서 변경된 사항이 전역에서도 적용된다.
+const flight = 'LH234';
+const yosep = {
+    name: 'park yosep',
+    passport: 1243242351,
+}
+
+const checkIn = function(flightNum, passenger) {
+    flightNum = 'LH999'; // primitve type이므로 단순 복사가 일어남
+    passenger.name = 'Mr. ' + passenger.name; // object이므로 reference type이기에 참조 주소로 이어짐.
+
+    if(passenger.passport === 1243242351) {
+        alert('Checked In');
+    } else {
+        alert('Wrong Passport');
+    }
+}
+
+checkIn(flight, yosep);
+console.log(flight); // LH234 <- primitive type
+console.log(yosep); // Mr. park yosep <- reference type
+
+
+const newPassport = function(person) {
+    person.passport = Math.trunc(Math.random() * 10000000000000);
+};
+
+newPassport(yosep);
+checkIn(flight, passport); // Wrong passport
+*/
+
 
 
 
@@ -38,5 +69,12 @@ createBooking('LH123', undefined, 800);
 
 
 // [10-130] First-Class and Higher-Order Functions
+
+
+
+
+
+
+
 // [10-131] Functions Accepting Callback Functions 
 // [10-132] Functions Returning Functions
