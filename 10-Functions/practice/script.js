@@ -75,6 +75,48 @@ checkIn(flight, passport); // Wrong passport
 
 
 
-
+/*
 // [10-131] Functions Accepting Callback Functions 
+// JS에서 callback함수를 자주 사용하는 이유.
+// 1. 분할하고, 재사용 가능하기 때문
+// 2. Higher order function이 추상화(abstraction)에 유용. 너무 디테일하게 구현부터 하는 게 아니라, 대략적인 구상을 하는 데에 큰 도움을 준다.
+  const oneWord = function (str) {
+    return str.replace(/ /g, '').toLowerCase();
+  };
+  
+  const upperFirstWord = function (str) {
+    const [first, ...others] = str.split(' ');
+    return [first.toUpperCase(), ...others].join(' ');
+  };
+  
+  // Higher-order function
+  // + 함수도 object type 답게 property를 가지는데, name property는 함수의 이름을 return 한다.
+  const transformer = function (str, fn) {
+    console.log(`Original string: ${str}`);
+    console.log(`Transformed string: ${fn(str)}`);
+  
+    console.log(`Transformed by: ${fn.name}`);
+  };
+  
+  transformer('JavaScript is the best!', upperFirstWord);
+  transformer('JavaScript is the best!', oneWord);
+  
+  // JS uses callbacks all the time
+  const high5 = function () {
+    console.log('👋');
+  };
+  document.body.addEventListener('click', high5); // high 5 - callBack function, addEventListener - higher order function
+  ['Jonas', 'Martha', 'Adam'].forEach(high5); // forEach()의 콜백함수로 사용됨.
+  
+  */
+
+
+
+
+
+
+
+
+
+
 // [10-132] Functions Returning Functions
