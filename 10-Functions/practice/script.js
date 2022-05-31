@@ -326,3 +326,65 @@ console.log(isPrivate); // Undefined
 console.log(isPrivate); // undefined
 console.log(notPrivate); // 46 
   
+
+
+
+// [10-137] Closure
+// closure는 함수가 만들어진 곳의 연결을 항상 잃지 않도록 함으로써, 함수에 내장된 변수에 접근 가능하도록 해준다.
+const secureBooking = function() {
+    let passengerCount = 0;
+
+    return function() {
+        passengerCount++;
+        console.log(`${passengerCount} Passengers`);
+    };
+};
+
+const booker = secureBooking();
+
+booker(); // 1
+booker(); // 2
+booker(); // 3  
+
+
+// [10-138] More Closure Example
+// Example 1
+let f;
+
+const g = function() {
+    const a = 23;
+    f = function() {
+        console.log(a * 2);
+    };
+};
+
+const h = function() {
+    const b = 777;
+    f = function() {
+        console.log(b * 2);
+    };
+}
+
+g();
+f(); // 46 
+
+// Re-assigning f function
+h(); 
+f(); // 1554
+
+// Example 2
+const boardPassengers = function(n, wait) {
+    const perGroup = n / 3;
+
+    setTimeout(function(){
+        console.log(`We are now boarding all ${n} passengers`);
+        console.log(`There are 3 groups, each with ${perGroup} passengers`);
+    }, wait * 1000); // n밀리 초 기다린 후에 실행
+
+    console.log(`Will start boarding in ${wait} seconds`);
+};
+
+
+boardPassengers(180, 3);
+
+// 코드의 순서가 setTimeout부터이지만,' console.log(`Will start boarding in ${wait} seconds`);' 가 먼저 실행되었다. boardPassengers()가 끝났음에도 setTimeout의 콜백함수 안의 변수 속에서 클로저가 작동하고 있음을 알 수 있다.
