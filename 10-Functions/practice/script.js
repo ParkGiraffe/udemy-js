@@ -388,3 +388,15 @@ const boardPassengers = function(n, wait) {
 boardPassengers(180, 3);
 
 // 코드의 순서가 setTimeout부터이지만,' console.log(`Will start boarding in ${wait} seconds`);' 가 먼저 실행되었다. boardPassengers()가 끝났음에도 setTimeout의 콜백함수 안의 변수 속에서 클로저가 작동하고 있음을 알 수 있다.
+
+
+
+// [10-139] Coding Challenge #2
+(function() {
+    const header = document.querySelector('h1');
+    header.style.color = 'red';
+
+    document.querySelector('body').addEventListener('click', function () {
+        header.style.color = 'blue';
+    });
+})();
