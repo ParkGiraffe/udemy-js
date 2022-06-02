@@ -66,6 +66,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 const displayMovements = function(movements) {
   containerMovements.innerHTML = ``; // 기존에 있던 template 요소들을 모두 초기화
+  
   movements.forEach(function(mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
