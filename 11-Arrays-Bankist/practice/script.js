@@ -61,17 +61,41 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+// [Bankist]
+
+
+const displayMovements = function(movements) {
+  containerMovements.innerHTML = ``; // 기존에 있던 template 요소들을 모두 초기화
+  movements.forEach(function(mov, i) {
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
+    const html = `
+      <div class="movements__row">
+        <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
+        <div class="movements__value">${mov}</div>
+      </div>
+    `;
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+displayMovements(account1.movements);
+
+
+
+
+
+
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
 
-// const currencies = new Map([
-//   ['USD', 'United States dollar'],
-//   ['EUR', 'Euro'],
-//   ['GBP', 'Pound sterling'],
-// ]);
+const currencies = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
@@ -134,7 +158,7 @@ console.log(arr.at(-2)); // 11
 console.log('jonas').at(0); // j
 */
 
-
+/*
 // [11-144] Looping Arrays: ForEach
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
@@ -191,7 +215,7 @@ movements.forEach(function (mov, i, arr) {
 // forEach문과 for문을 각각 언제 써야 할까? 
 // forEach문에서는 break, continue가 작동하지 않는다. 따라서 forEach는 항상 전체 배열을 반복한다. 따라서 루프에서 꼭 벗어나야 하는 경우 for 문을 사용해야 한다.
 // 그 외에는 개인 취향에 달렸다.
-
+*/
 
 /*
 // [11-145] ForEach with Maps and Sets
