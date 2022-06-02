@@ -77,7 +77,7 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 
 
-
+/*
 // [11-142] Simple Array Methods
 let arr = ['a', 'b', 'c', 'd', 'e'];
 
@@ -111,5 +111,27 @@ console.log([...arr, ...arr2]); // a b c d e f g h i j
 
 // join() - 요소들을 결합하여 String으로 만듦.
 console.log(letters.join(' - '))
+*/
+
+/*
+// [11-143] The New at Method
+// at은 대괄호 표기법과 유사해보인다.
+const arr = [23, 11, 64];
+console.log(arr[0]); // 23
+console.log(arr.at(0)); // 23
+
+
+// 배열의 길이를 모른다고 가정할 때, 맨 마지막 요소에 접근하는 방법.
+console.log(arr[arr.length - 1]); // 64
+console.log(arr.slice(-1)[0]); // 64
+
+console.log(arr.at(-1)); // 64
+console.log(arr.at(-2)); // 11
+// 또, at 메소드는 'method chaining'에도 적합하다.
+
+
+// at 메소드는 String에서도 작동한다.
+console.log('jonas').at(0); // j
+*/
 
 
