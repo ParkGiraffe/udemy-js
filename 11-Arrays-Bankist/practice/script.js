@@ -71,7 +71,7 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
@@ -133,5 +133,63 @@ console.log(arr.at(-2)); // 11
 // at 메소드는 String에서도 작동한다.
 console.log('jonas').at(0); // j
 */
+
+
+// [11-144] Looping Arrays: ForEach
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+for (const movement of movements) {
+  if (movement > 0) {
+    console.log(`You deposited ${movement}`);
+  } else {
+    console.log(`You withdrew ${movement}`);
+  }
+}
+
+
+// forEach()는 High level function으로 콜백 함수가 필요하다.
+// 콜백 함수는 가 배열의 요소가 반복될 때 실행된다.
+// 배열의 요소는 콜백 함수의 인자로 전달된다. 
+movements.forEach(function(movement) {
+  if (movement > 0) {
+    console.log(`You deposited ${movement}`);
+  } else {
+    console.log(`You withdrew ${movement}`);
+  }
+});
+// 0: function(200)
+// 1: function(450)
+// 2: function(-400)
+// ...
+
+
+
+// forEach를 통해 인덱스 정보를 가져오는 건 기존의 entries() 방식보다 더 편하다.
+// forEach는 콜백함수의 매개변수 목록에 현재 element, index, 전체 배열을 전달한다. (순서 중요!)
+// entries()는 인덱스, 현재 요소 순으로 forEach()와 순서가 반대된다. 
+for (const [i, movement] of movements.entries()) {
+  if (movement > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
+  }
+}
+
+movements.forEach(function (mov, i, arr) {
+  if (mov > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${mov}`);
+  } else {
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(mov)}`);
+  }
+});
+// 0: function(200)
+// 1: function(450)
+// 2: function(400)
+// ...
+
+
+// forEach문과 for문을 각각 언제 써야 할까? 
+// forEach문에서는 break, continue가 작동하지 않는다. 따라서 forEach는 항상 전체 배열을 반복한다. 따라서 루프에서 꼭 벗어나야 하는 경우 for 문을 사용해야 한다.
+// 그 외에는 개인 취향에 달렸다.
 
 
