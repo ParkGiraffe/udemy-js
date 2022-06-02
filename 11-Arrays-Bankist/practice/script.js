@@ -65,11 +65,11 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // LECTURES
 
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
 
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
@@ -193,3 +193,26 @@ movements.forEach(function (mov, i, arr) {
 // 그 외에는 개인 취향에 달렸다.
 
 
+/*
+// [11-145] ForEach with Maps and Sets
+// map의 forEach()의 콜백함수도 세 개의 인자를 받는다. 첫 번째는 배열의 현재 요소, 두 번째는 인덱스, 세 번째는 전체 맵이다.
+const currencies = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+currencies.forEach(function(value, key, map){
+  console.log(`${key}: ${value}`);
+});
+
+
+// Set - Set은 키, 인덱스의 개념이 없다. 하지만 forEach의 콜백함수 매개변수 종류가 데이터 타입마다 달라지면 혼동이 올 수 있다고 판단하여, 두 번째 파라미터를 그대로 유지시킨 후 첫 번째 것(value)과 같은 값이 들어가도록 설정했다.
+const currenciesUnique = newSet(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
+currenciesUnique.forEach(function(value, key, map) {
+  console.log(`${key}: ${value}`); // USD: USD // GBP: GBP // EUR: EUR
+});
+currenciesUnique.forEach(function(value, _, map) {
+  console.log(`${value}: ${value}`); // USD: USD // GBP: GBP // EUR: EUR
+});
+*/
