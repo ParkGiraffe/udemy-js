@@ -91,6 +91,29 @@ const createUsernames = function(accs) {
 
 
 
+// [11-152] The filter Method
+// filter()는 특정 조건을 만족하는 요소들로 이루어진 배열을 리턴한다. 콜백함수를 인자로 받는다. 그리고 콜백함수가 true를 리턴하는 경우 새 array에 추가된다.
+const deposits = movements.filter(function (mov, i, arr) {
+  return mov > 0;
+});
+console.log(movements);
+console.log(deposits);
+
+const withdrawals = movements.filter(mov => mov < 0);
+console.log(withdrawals);
+
+// for문으로 만든다면?
+const depositsFor = [];
+for (const mov of movements) if (mov > 0) depositsFor.push(mov);
+console.log(depositsFor);
+
+
+ 
+// [11-153] The reduce Method
+// Reduce()는 모든 배열 요소를 하나의 단일 값으로 만든다.
+
+
+
 
 
 
