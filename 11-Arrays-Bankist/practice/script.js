@@ -63,10 +63,9 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 // [Bankist]
 
-
 const displayMovements = function(movements) {
   containerMovements.innerHTML = ``; // 기존에 있던 template 요소들을 모두 초기화
-  
+
   movements.forEach(function(mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
@@ -80,6 +79,15 @@ const displayMovements = function(movements) {
 };
 displayMovements(account1.movements);
 
+
+// 각 account에 username(이름의 이니셜) property를 추가해주는 함수
+// map을 이용해 기존 어레이에 영향을 주지 않으면서 새로운 어레이를 반환함.
+// forEach통해 기존 어레이에 변동사항을 바로 적용시킴.
+const createUsernames = function(accs) {
+  accs.forEach(function(acc) {
+    acc.username = acc.owner.toLowerCase().split(' ').map(name => name[0]).join('');
+  });
+};
 
 
 
@@ -241,3 +249,64 @@ currenciesUnique.forEach(function(value, _, map) {
   console.log(`${value}: ${value}`); // USD: USD // GBP: GBP // EUR: EUR
 });
 */
+
+
+/*
+// [11-148] Coding Challenge #1
+
+const checkDogs = function (dogsJulia, dogsKate) {
+  const dogsJuliaCorrected = dogsJulia.slice();
+  dogsJuliaCorrected.splice(0, 1);
+  dogsJuliaCorrected.splice(-2);
+  // dogsJulia.slice(1, 3);
+  const dogs = dogsJuliaCorrected.concat(dogsKate);
+  console.log(dogs);
+
+  dogs.forEach(function (dog, i) {
+    if (dog >= 3) {
+      console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
+    } else {
+      console.log(`Dog number ${i + 1} is still a puppy 🐶`);
+    }
+  });
+};
+// checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
+checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
+
+*/
+
+/*
+// [11-150] The Map method
+// map()함수는 콜백함수를 인자로 받고, 모든 요소가 반복을 돌면서 콜백함수가 실행되게 끔 한다.
+// 그리고 새 어레이를 리턴한다. (기존 어레이에 영향을 주진 않는다.)
+
+const eurToUsd = 1.1;
+
+// const movementsUSD = movements.map(function (mov) {
+//   return mov * eurToUsd;
+// });
+const movementsUSD = movements.map(mov => mov * eurToUsd);
+
+console.log(movements);
+console.log(movementsUSD);
+
+const movementsUSDfor = [];
+for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
+console.log(movementsUSDfor);
+
+
+// map()도 forEach()처럼 콜백함수에 (mov, i ,arr)을 전달한다.
+const movementsDescriptions = movements.map(
+  (mov, i) =>
+    `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(
+      mov
+    )}`
+);
+console.log(movementsDescriptions);
+// forEach와 map의 차이 : forEach 메서드는 단순히 반복문을 대체하기 위한 함수이고, (forEach의 반환값은 언제다 undefined) map 메서드는 요소값을 다른 값으로 mapping한 새로운 배열을 생성하기 위한 고차함수다. (그래서 map은 return이 꼭 필요) 
+// 도움이 되는 링크 : https://d-cron.tistory.com/11
+*/
+
+
+
+// [11-151] Computing Usernames
