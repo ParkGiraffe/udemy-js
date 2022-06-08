@@ -400,3 +400,14 @@ const calcAverageHumanAge= function(ages) {
   return average;
 };
 */
+
+
+// [11-156] Coding Challenge #3
+
+const calcAverageHumanAge = (ages) => {
+  const average = ages.map((age => (age <= 2 ? 2 * age: 16 + age * 4)))
+    .filter(age => age >= 18)
+    .reduce((acc, mov, i, arr) => acc + mov / arr.length, 0);
+
+  return average;
+};
