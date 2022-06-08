@@ -98,54 +98,6 @@ calcDisplayBalance(movements);
 
 
 
-/*
-// [11-152] The filter Method
-// filter()는 특정 조건을 만족하는 요소들로 이루어진 배열을 리턴한다. 콜백함수를 인자로 받는다. 그리고 콜백함수가 true를 리턴하는 경우 새 array에 추가된다.
-const deposits = movements.filter(function (mov, i, arr) {
-  return mov > 0;
-});
-console.log(movements);
-console.log(deposits);
-
-const withdrawals = movements.filter(mov => mov < 0);
-console.log(withdrawals);
-
-// for문으로 만든다면?
-const depositsFor = [];
-for (const mov of movements) if (mov > 0) depositsFor.push(mov);
-console.log(depositsFor);
-*/
-
- 
-// [11-153] The reduce Method
-// Reduce()는 모든 배열 요소를 하나의 단일 값으로 만든다.
-
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-// reduce함수의 파라미터: 콜백함수, 콜백함수에 들어갈 accumulator의 초기 값.
-// reduce의 콜백함수 파라미터: accumulator, 현재 요소, 현재 인덱스, 전체 배열
-// accumulator: 리턴하고자 하는 하나의 값으로 눈덩이와 같이 하나씩 축전되어 가는 값이다.
-const balance = movements.reduce(function(acc, cur, i, arr) {
-  console.log(`Iteration ${i}: ${acc}`);
-  return acc + cur;
-}, 0);
-console.log(balance); // 3840 
-
-// for 문으로 본다면,
-let balance2 = 0;
-for(const mov of movements) balance2 += mov;
-console.log(balance2);
-
-
-// Maximum value
-const max = movements.reduce((acc, mov) => {
-  if (acc > mov) return acc;
-  else return mov;
-}, movements[0]);
-console.log(max); // 3000
-
-
-
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -363,3 +315,64 @@ console.log(movementsDescriptions);
 
 
 // [11-151] Computing Usernames
+
+
+
+/*
+// [11-152] The filter Method
+// filter()는 특정 조건을 만족하는 요소들로 이루어진 배열을 리턴한다. 콜백함수를 인자로 받는다. 그리고 콜백함수가 true를 리턴하는 경우 새 array에 추가된다.
+const deposits = movements.filter(function (mov, i, arr) {
+  return mov > 0;
+});
+console.log(movements);
+console.log(deposits);
+
+const withdrawals = movements.filter(mov => mov < 0);
+console.log(withdrawals);
+
+// for문으로 만든다면?
+const depositsFor = [];
+for (const mov of movements) if (mov > 0) depositsFor.push(mov);
+console.log(depositsFor);
+*/
+
+/*
+// [11-153] The reduce Method
+// Reduce()는 모든 배열 요소를 하나의 단일 값으로 만든다.
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// reduce함수의 파라미터: 콜백함수, 콜백함수에 들어갈 accumulator의 초기 값.
+// reduce의 콜백함수 파라미터: accumulator, 현재 요소, 현재 인덱스, 전체 배열
+// accumulator: 리턴하고자 하는 하나의 값으로 눈덩이와 같이 하나씩 축전되어 가는 값이다.
+const balance = movements.reduce(function(acc, cur, i, arr) {
+  console.log(`Iteration ${i}: ${acc}`);
+  return acc + cur;
+}, 0);
+console.log(balance); // 3840 
+
+// for 문으로 본다면,
+let balance2 = 0;
+for(const mov of movements) balance2 += mov;
+console.log(balance2);
+
+
+// Maximum value
+const max = movements.reduce((acc, mov) => {
+  if (acc > mov) return acc;
+  else return mov;
+}, movements[0]);
+console.log(max); // 3000
+*/
+
+
+// [11-154] Coding Challenge #2
+const calcAverageHumanAge= function(ages) {
+  const humanAges = ages.map((age => (age <= 2 ? 2 * age: 16 + age * 4)));
+  const adults = humanAges.filter(age => age >= 18);
+  // const average = adults.reduce((acc, mov) => acc + mov, 0) / adults.length;
+  const average = adults.reduce((acc, mov, i, arr) => acc + mov / arr.length);
+  
+  return average;
+};
+
