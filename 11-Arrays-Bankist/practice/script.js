@@ -77,7 +77,7 @@ const displayMovements = function(movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-displayMovements(account1.movements);
+// displayMovements(account1.movements);
 
 
 // 각 account에 username(이름의 이니셜) property를 추가해주는 함수
@@ -94,22 +94,57 @@ const calcDisplayBalance = function(movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${balance} EUR`;
 };
-calcDisplayBalance(account1.movements);
+// calcDisplayBalance(account1.movements);
 
-const calcDisplaySummary = function(movements) {
+const calcDisplaySummary = function(acc) {
+  const movements = acc.movements
   const incomes = movements.filter(mov => mov > 0).reduce((acc, mov) => acc + mov, 0);
   labelSumIn.textContent = `${incomes}€`;
 
   const out = movements.filter(mov => mov < 0).reduce((acc, mov) => acc + mov, 0);
   labelSumOut.textContent = `${out}€`;
 
-  const interest = movements.filter(mov => mov > 0).map(mov => (mov * 1.2) / 100).filter((int, i, arr) => {
+  const interest = movements.filter(mov => mov > 0).map(mov => (mov * acc.interestRate) / 100).filter((int, i, arr) => {
     console.log(arr);
     return int >= 1;
   }). reduce((acc, int) => acc + int, 0);
   labelSumInterest.textContent = `${interest}€`;
 }
-calcDisplaySummary(account1.movements);
+// calcDisplaySummary(account1.movements);
+
+
+// Event Handler
+let currentAccount;
+
+// 콜백함수에 preventDefault() 메소드를 부르면, 기본값으로 콜백함수가 작동하지 않도록 방지해준다.
+btnLogin.addEventListener('click', function(e) {
+  e.preventDefault(); // Prevent form from submitting
+
+  currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value);
+  console.log(currentAccount);
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // console.log('LOGIN')
+    // Display UI and message
+    labelWelcome.textContent = `Welcome, ${currentAccount.owner.split(' ')[0]}`;
+    containerApp.style.opacity = 100;
+    // Clear input field
+    inputLoginPin.value = inputLoginUsername.value = '';
+    inputLoginPin.blur(); // 아이디, 비밀번호 입력 칸에 키보드가 focus되어 있는 모습을 방지해준다.
+    // Display movements
+    displayMovements(currentAccount.movements);
+    // Display balance
+    calcDisplayBalance(currentAccount.movements);
+    // Display summary
+    calcDisplaySummary(currentAccount);
+  } else {
+    console.log('-----LOGIN FAILED-----');
+  }
+});
+
+
+
+
 
 
 /*
