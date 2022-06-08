@@ -94,10 +94,34 @@ const calcDisplayBalance = function(movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${balance} EUR`;
 };
-calcDisplayBalance(movements);
+calcDisplayBalance(account1.movements);
+
+const calcDisplaySummary = function(movements) {
+  const incomes = movements.filter(mov => mov > 0).reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes}€`;
+
+  const out = movements.filter(mov => mov < 0).reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${out}€`;
+
+  const interest = movements.filter(mov => mov > 0).map(mov => (mov * 1.2) / 100).filter((int, i, arr) => {
+    console.log(arr);
+    return int >= 1;
+  }). reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `${interest}€`;
+}
+calcDisplaySummary(account1.movements);
 
 
-
+/*
+const eurToUsd = 1.1;
+// PIPELINE
+// 이런 식으로 코딩했다가 중간에 문제가 발생한다면 고치기가 까다롭다.
+// 그래서 중간에 map()이 콜백함수에 전체 배열을 전달하는 것을 이용해서 검사할 수 있다.
+const totalDepositsUSD = movements.filter(mov => mov > 0).map((mov, i, arr) => {
+  console.log(totalDepositsUSD);
+  mov * eurToUsd;
+}).reduce((acc, mov) => acc + mov, 0); 
+*/
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -109,7 +133,7 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
@@ -365,14 +389,14 @@ const max = movements.reduce((acc, mov) => {
 console.log(max); // 3000
 */
 
-
+/*
 // [11-154] Coding Challenge #2
 const calcAverageHumanAge= function(ages) {
   const humanAges = ages.map((age => (age <= 2 ? 2 * age: 16 + age * 4)));
   const adults = humanAges.filter(age => age >= 18);
   // const average = adults.reduce((acc, mov) => acc + mov, 0) / adults.length;
   const average = adults.reduce((acc, mov, i, arr) => acc + mov / arr.length);
-  
+
   return average;
 };
-
+*/
