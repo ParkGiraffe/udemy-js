@@ -133,7 +133,7 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+//const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
@@ -401,7 +401,7 @@ const calcAverageHumanAge= function(ages) {
 };
 */
 
-
+/*
 // [11-156] Coding Challenge #3
 
 const calcAverageHumanAge = (ages) => {
@@ -411,3 +411,17 @@ const calcAverageHumanAge = (ages) => {
 
   return average;
 };
+*/
+
+/*
+// [11-157] The find Method
+// find()는 filter()처럼 bool을 반환하는 콜백함수를 인자로 받는다. 하지만 새 배열을 반환하지 않는다. 오로지 '첫 번째 요소'만을 반환한다.
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const firstWithdrawal = movements.find(mov => mov < 0);
+console.log(firstWithdrawal); // -400 
+
+// 실제 응용
+// 특정 property value를 가지고 있는 object를 찾을 때 정말 탁월하다.
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account);
+*/
