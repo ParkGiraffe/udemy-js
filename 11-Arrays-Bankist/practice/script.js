@@ -170,6 +170,24 @@ btnTransfer.addEventListener('click', function(e) {
   }
 });
 
+
+btnLoan.addEventListener('click', function() {
+  e.preventDefault();
+  const amount = Number(inputLoanAmount.value);
+
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    // Add Movement
+    currentAccount.movements.push(amount);
+
+    // update UI
+    updateUI(currentAccount);
+
+  }
+
+  inputLoanAmount = '';
+});
+
+
 btnClose.addEventListener('click', function() {
     e.preventDefault();
 
@@ -503,3 +521,26 @@ console.log(firstWithdrawal); // -400
 const account = accounts.find(acc => acc.owner === 'Jessica Davis');
 console.log(account);
 */
+
+
+// [11-161] some and every
+// some : 해당 조건을 만족하는 요소가 하나라도 있으면 true 반환
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// includes: Equality
+console.log(movements.includes(-130)); // true
+
+// some: Condition
+const anyDeposits = movements.some(mov => mov > 1500);
+console.log(anyDeposits); // true
+
+// every: 모든 요소가 참일 때 참 return
+console.log(movements.every(mov => mov > 0)); // false
+console.log(account4.movements.every(mov => mov > 0)); // account4는 오로지 입금만 있는 계정. true
+
+// Seperate callback
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+console.log(movements.every(deposit));
+console.log(movements.filter(deposit));
