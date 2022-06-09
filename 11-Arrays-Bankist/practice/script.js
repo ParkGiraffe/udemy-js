@@ -522,16 +522,14 @@ const account = accounts.find(acc => acc.owner === 'Jessica Davis');
 console.log(account);
 */
 
-
+/*
 // [11-161] some and every
-// some : 해당 조건을 만족하는 요소가 하나라도 있으면 true 반환
-
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // includes: Equality
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 console.log(movements.includes(-130)); // true
 
-// some: Condition
+// some: Condition - 해당 조건을 만족하는 요소가 하나라도 있으면 true 반환
 const anyDeposits = movements.some(mov => mov > 1500);
 console.log(anyDeposits); // true
 
@@ -539,8 +537,34 @@ console.log(anyDeposits); // true
 console.log(movements.every(mov => mov > 0)); // false
 console.log(account4.movements.every(mov => mov > 0)); // account4는 오로지 입금만 있는 계정. true
 
-// Seperate callback
+// Separate callback
 const deposit = mov => mov > 0;
 console.log(movements.some(deposit));
 console.log(movements.every(deposit));
 console.log(movements.filter(deposit));
+*/
+
+
+// [11-162] 
+// flat and flatMap
+// flat: nested array 제거. 배열을 1차로 평평하게.
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat()); // [1, 2, 3, 4, 5, 6, 7, 8]
+
+// 기본적으로는 1단계 깊이를 flat하는데, 인수를 줌으로써 n단계 깊이까지 flat할 수 있다.
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2)); // [1, 2, 3, 4, 5, 6, 7, 8]
+
+// flat
+const overalBalance = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance);
+
+// flatMap : flat과 map을 동시에 작업해주는 method이다. 
+// flatMap의 주의점! : 무조건 한 단계 깊이만을 flat하기 때문에 그 이상의 깊이는 기존의 flat method를 사용해야 한다.
+const overalBalance2 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance2);
