@@ -90,9 +90,9 @@ const createUsernames = function(accs) {
 };
 createUsernames(accounts);
 
-const calcDisplayBalance = function(movements) {
-  const balance = movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${balance} EUR`;
+const calcDisplayBalance = function(acc) {
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${acc.balance} EUR`;
 };
 // calcDisplayBalance(account1.movements);
 
@@ -131,20 +131,43 @@ btnLogin.addEventListener('click', function(e) {
     // Clear input field
     inputLoginPin.value = inputLoginUsername.value = '';
     inputLoginPin.blur(); // 아이디, 비밀번호 입력 칸에 키보드가 focus되어 있는 모습을 방지해준다.
-    // Display movements
-    displayMovements(currentAccount.movements);
-    // Display balance
-    calcDisplayBalance(currentAccount.movements);
-    // Display summary
-    calcDisplaySummary(currentAccount);
+    // Update UI
+    updateUI(currentAccount);
   } else {
     console.log('-----LOGIN FAILED-----');
   }
 });
 
 
+function updateUI(acc) {
+  // Display movements
+  displayMovements(acc.movements);
+  // Display balance
+  calcDisplayBalance(acc);
+  // Display summary
+  calcDisplaySummary(acc);
+};
 
 
+btnTransfer.addEventListener('click', function(e) {
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(acc => acc.username === inputTransferTo.value);
+  inputTransferAmount.value = inputTransferTo.value = '';
+  if (
+    amount > 0 &&
+    currentAccount.balance >= amount &&
+    receiverAcc?.username !== currentAccount.username
+  ) {
+    // Doing the Transfer
+      currentAccount.movements.push(-amount);
+      receiverAcc.movements.push(amount);
+    // Update UI
+    updateUI(currentAccount);
+  } else {
+    console.log('Transfer failed');
+  }
+});
 
 
 /*
@@ -167,6 +190,8 @@ const currencies = new Map([
   ['EUR', 'Euro'],
   ['GBP', 'Pound sterling'],
 ]);
+
+
 
 //const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
