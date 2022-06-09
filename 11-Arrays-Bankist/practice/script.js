@@ -112,6 +112,15 @@ const calcDisplaySummary = function(acc) {
 }
 // calcDisplaySummary(account1.movements);
 
+function updateUI(acc) {
+  // Display movements
+  displayMovements(acc.movements);
+  // Display balance
+  calcDisplayBalance(acc);
+  // Display summary
+  calcDisplaySummary(acc);
+};
+
 
 // Event Handler
 let currentAccount;
@@ -139,14 +148,6 @@ btnLogin.addEventListener('click', function(e) {
 });
 
 
-function updateUI(acc) {
-  // Display movements
-  displayMovements(acc.movements);
-  // Display balance
-  calcDisplayBalance(acc);
-  // Display summary
-  calcDisplaySummary(acc);
-};
 
 
 btnTransfer.addEventListener('click', function(e) {
@@ -167,6 +168,23 @@ btnTransfer.addEventListener('click', function(e) {
   } else {
     console.log('Transfer failed');
   }
+});
+
+btnClose.addEventListener('click', function() {
+    e.preventDefault();
+
+    if (inputCloseUsername.value === currentAccount.username && Number(inputClosePin.value) === currentAccount.pin) {
+      const index = accounts.findIndex(acc => acc.username === currentAccount.username);
+      console.log(index);
+
+      // Delete Account
+      accounts.splice(index, 1);
+
+      // Hide UI
+      containerApp.style.opacity = 0;
+    }
+
+    inputClosePin = inputCloseUsername = '';
 });
 
 
