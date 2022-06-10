@@ -63,10 +63,12 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 // [Bankist]
 
-const displayMovements = function(movements) {
+const displayMovements = function(movements, sort = false) {
   containerMovements.innerHTML = ``; // 기존에 있던 template 요소들을 모두 초기화
 
-  movements.forEach(function(mov, i) {
+  const movs = sort? movements.slice().sort((a, b) => a - b) : movements; // sort()는 기존 배열에 영향을 주기 때문에, slice()를 이용해서 복사한 후 복사본을 수정
+
+  movs.forEach(function(mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
       <div class="movements__row">
@@ -202,6 +204,16 @@ btnClose.addEventListener('click', function(e) {
     }
 
     inputClosePin = inputCloseUsername = '';
+});
+
+
+
+
+let sorted = false;
+btnSort.addEventListener('click', function(e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
 
 
@@ -567,4 +579,43 @@ const overalBalance2 = accounts
   .reduce((acc, mov) => acc + mov, 0);
 console.log(overalBalance2);
 
+*/
+
+/*
+// [11-163] sorting Arrays
+// sort는 array를 정렬해준다.
+// sort()의 특징 - 원본 배열에도 영향을 준다.
+const owners = ['j', 'z', 'a', 'm'];
+owners.sort();
+console.log(owners) // [a, j ,m ,z] <- 원본도 변형된 모습.
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+console.log(movements.sort()); // [-130, - 400, -650, -1300, 200, 3000, 450, 70] <-우리가 기대하는 방식으로 정렬되어 있지 않다.
+
+// Js의 sort() 디폴트는 모든 요소를 String으로 바꾼 다음에 정렬을 수행하기 때문에 이런 문제가 발생한다.
+// 이런 현상을 막기 위해선 sort()에 콜백 함수(bool 값을 return)를 전달해야 한다.
+
+// return < 0, A, B (keep order)
+// return > 0, B, A (switch order)
+// Ascending
+movements.sort((a, b) => {
+  if (a > b)
+    return 1;
+  if (b > a)
+    return -1; 
+}); 
+// 위의 표현식을 수학으로 표현
+movements.sort((a, b) => a - b); 
+// 음수가 나올 경우 -1로 반환된다.
+
+// Descending
+movements.sort((a, b) => {
+  if (a > b)
+    return -1;
+  if (b > a)
+    return 1; 
+});
+movements.sort((a, b) => b - a); 
+
+// sort()를 string과 number가 혼합된 배열에서는 사용할 수 없다.
 */
