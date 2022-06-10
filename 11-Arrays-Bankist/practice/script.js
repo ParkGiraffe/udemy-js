@@ -544,8 +544,7 @@ console.log(movements.filter(deposit));
 */
 
 /*
-// [11-162] 
-// flat and flatMap
+// [11-162] flat and flatMap
 // flat: nested array 제거. 배열을 1차로 평평하게.
 const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
 console.log(arr.flat()); // [1, 2, 3, 4, 5, 6, 7, 8]
@@ -567,4 +566,5 @@ const overalBalance2 = accounts
   .flatMap(acc => acc.movements)
   .reduce((acc, mov) => acc + mov, 0);
 console.log(overalBalance2);
+
 */
