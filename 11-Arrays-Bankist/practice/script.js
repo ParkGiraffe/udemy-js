@@ -619,3 +619,31 @@ movements.sort((a, b) => b - a);
 
 // sort()를 string과 number가 혼합된 배열에서는 사용할 수 없다.
 */
+
+// [11-164] More ways of creating and filling arrays
+// Array()를 이용해 새로운 배열을 만들 경우, 인자를 number로 주면, 그 number의 수만큼 빈 요소를 가진 새 배열을 만든다.
+const x = new Array(7);
+console.log(x); // [empty x 7]
+// [7]이 아니다.
+
+// fill(채우고자 하는 숫자, 채우기 시작할 index, 최종 index(포함x)) 
+// 기존에 있던 요소도 덮어서 채운다.
+x.fill(1); // [1,1,1,1,1,1,1]
+x.fill(1, 3, 5);
+arr.fill(23, 2, 6)
+
+
+// Array.from() - Array constructor에 from 메소드를 사용
+const y = Array.from({length: 7}, () => 1); // [1,1,1,1,1,1,1]
+
+// 콜백함수의 첫 번째 인자: 현재 요소, 두 번째 인자: 현재 인덱스
+const z = Array.from({length: 7}, (_, i) => i + 1); // [1, 2, 3, 4, 5, 6, 7] <- map()의 기능
+
+// Array.from()을 이용해서 배열에 넣을 요소를 가져온 후 바로 매핑해주기.
+labelBalance.addEventListener('click', function() {
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', ''))
+  );
+  console.log(movementsUI);
+}); 
