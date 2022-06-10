@@ -620,6 +620,7 @@ movements.sort((a, b) => b - a);
 // sort()를 string과 number가 혼합된 배열에서는 사용할 수 없다.
 */
 
+/*
 // [11-164] More ways of creating and filling arrays
 // Array()를 이용해 새로운 배열을 만들 경우, 인자를 number로 주면, 그 number의 수만큼 빈 요소를 가진 새 배열을 만든다.
 const x = new Array(7);
@@ -647,3 +648,50 @@ labelBalance.addEventListener('click', function() {
   );
   console.log(movementsUI);
 }); 
+*/
+
+
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] }
+];
+
+dogs.forEach(function(dog) {
+  dog.recFood = Math.trunc(dog.weight ** 0.75 * 28);
+});
+// dogs.forEach(dog => (dog.recFood = Math.trunc(dog.weight ** 0.75 * 28)));
+
+
+const dogSarah = dogs.find(dog => dog.owners.includes('Sarah'));
+console.log(
+  `Sarah's dog is eating too ${
+    dogSarah.curFood > dogSarah.recFood ? 'much' : 'little'
+  } `
+);
+
+
+const ownersEatTooMuch = dogs.filter(function(dog) {
+  return dog.curFood > dog.recFood;
+}).flatMap(dog => dog.owners);
+console.log(ownersEatTooMuch);
+
+const ownersEatTooLittle = dogs.filter(function(dog) {
+  return dog.curFood < dog.recFood;
+}).flatMap(dog => dog.owners);
+console.log(ownersEatTooLittle);
+
+console.log(`${ownersEatTooMuch.join(' and ')}'s dogs eat too much!`);
+console.log(`${ownersEatTooLittle.join(' and ')}'s dogs eat too little!`);
+
+console.log(dogs.some(dog => dog.curFood === dog.recFood));
+
+const checkEatingOkay = dog => dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1;
+console.log(dogs.some(checkEatingOkay));
+
+console.log(dogs.filter(checkEatingOkay));
+
+const dogsCopy = dogs.slice(); 
+dogsCopy.sort((a,b) => a.recFood - b.recFood);
+console.log(dogsCopy);
