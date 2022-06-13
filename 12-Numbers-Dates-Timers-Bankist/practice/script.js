@@ -251,3 +251,49 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+/*
+// [12-170] Converting and Checking Numbers
+// JS에서 Number은 부동 소수점 숫자로, 정수와 소수 모두 포함한다.
+console.log(23 === 23.0); // true
+
+// JS는 컴퓨터 용어답게 2진법을 사용하는데, 이는 분수 표현에 취약하다는 문제가 있다.
+console.log(0.1 + 0.2); // 0.30000000000000004 <- 무한 소수
+console.log(0.1 + 0.2 === 0.3) //false
+// 10진법에서  3/10 = 3.3333333 인 것처럼 2진법일 때 무한 소수일 경우가 발생한다.
+
+
+// Conversion
+console.log(Number('23')); // 23
+console.log(+'23'); // 23 <- Number
+// +기호가 뒤에 오는 String 23을 타입 변환시킨다.
+
+// Parsing
+console.log(Number.parseInt('30px')); // 30 <- 숫자로 시작하는 문자열에서 숫자를 추출해낸다. (Number로 반환)
+console.log(Number.parseInt('e23')); // NaN <- 숫자로 시작하지 않아서 NaN이 return
+// 불필요한 기호를 제거하고 쉽게 숫자만 추출하기에 유용.
+
+console.log(Number.parseFloat('2.5rem')); // 2.5
+console.log(Number.parseInt('2.5rem')); // 2
+
+
+// isNaN: 해당 변수가 NaN인 여부에 따라 boolean값을 return - Check if value is NaN
+console.log(Number.isNaN(20)); // false
+console.log(Nubmer.isNaN('20')); // false
+
+console.log(Number.isNaN(+'20px')); // true
+console.log(Number.isNaN(23 / 0)); // false <- infinity도 NaN은 아니다.
+console.log(23 / 0); // infinity 
+
+// isFinite: 무한대가 아닌 Number인지 검사. - Check if value is Number
+console.log(Number.isFinite(20)); // true
+console.log(Number.isFinite('20')); // false <- Stirng도 Number가 아니기 때문에 false를 반환
+console.log(Number.isFinite(+'20X')); // false <- NaN은 당연히 false
+console.log(Number.isFinite(23 / 0)); // false 
+
+console.log(Number.isInteger(23));
+console.log(Number.isInteger(23.0));
+console.log(Number.isInteger(23 / 0));
+*/
+
+
+// [12-171] Math and Rounding
