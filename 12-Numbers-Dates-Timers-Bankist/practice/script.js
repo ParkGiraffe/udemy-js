@@ -94,7 +94,7 @@ const displayMovements = function (movements, sort = false) {
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-        <div class="movements__value">${mov}€</div>
+        <div class="movements__value">${mov.toFixed(2)}€</div>
       </div>
     `;
 
@@ -104,19 +104,19 @@ const displayMovements = function (movements, sort = false) {
 
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance}€`;
+  labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
 };
 
 const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${incomes}€`;
+  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
 
   const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(out)}€`;
+  labelSumOut.textContent = `${Math.abs(out).toFixed(2)}€`;
 
   const interest = acc.movements
     .filter(mov => mov > 0)
@@ -126,7 +126,7 @@ const calcDisplaySummary = function (acc) {
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interest}€`;
+  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
 };
 
 const createUsernames = function (accs) {
@@ -206,7 +206,7 @@ btnTransfer.addEventListener('click', function (e) {
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = Number(inputLoanAmount.value);
+  const amount = Math.floor(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
@@ -295,5 +295,56 @@ console.log(Number.isInteger(23.0));
 console.log(Number.isInteger(23 / 0));
 */
 
-
+/*
 // [12-171] Math and Rounding
+// Math.sqrt(): 제곱근 
+console.log(Math.sqrt(25));
+console.log(25 ** (1 / 2));
+console.log(8 ** (1 / 3));
+
+// Math.max(): 최대값
+console.log(Math.max(5, 18, 23, 11, 2)); // 23
+console.log(Math.max(5, 18, '23', 11, 2)); // 23 <- type coercion
+console.log(Math.max(5, 18, '23px', 11, 2)); // NaN
+
+// Math.min(): 최소값
+console.log(Math.min(5, 18, 23, 11, 2)); // 2
+
+// Math.PI: 3.141592~
+console.log(Math.PI * Number.parseFloat('10px') ** 2);
+
+// Math.random(): 0 부터 1 사이의 값 임의로 생성
+// Math.trunc(): 소수 부분 제거
+console.log(Math.trunc(Math.random() * 6) + 1);
+
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min) + 1) + min;
+// 0...1 -> 0...(max - min) -> min...max
+console.log(randomInt(10, 20)); 
+
+// Rounding integers
+// Math.round(): 반올림 
+console.log(Math.round(23.3)); // 23
+console.log(Math.round(23.9)); // 24
+
+// Math.ceil(): 올림
+console.log(Math.ceil(23.3)); // 24
+console.log(Math.ceil(23.9)); // 24
+
+// Math.floor(): 내림 
+console.log(Math.floor(23.3)); // 23
+console.log(Math.floor('23.9')); // 23 <- type coercion
+
+console.log(Math.trunc(23.3)); // 23
+// trunc()와 floor()은 양수일 때는 똑같은 값을 return 한다. 하지만 음수일 때는 다르다.
+console.log(Math.trunc(-23.3)); // -23
+console.log(Math.floor(-23.3)); // -24
+
+// Rounding decimals
+// toFixed()는 해당 소수점 자리수를 유지하도록 반올림하고, String을 반환한다.
+console.log((2.7).toFixed(0)); // 3
+console.log((2.7).toFixed(3)); // 2.700
+console.log((2.345).toFixed(2)); // 2.35
+console.log(+(2.345).toFixed(2)); // 2.35 <- Number
+
+*/
