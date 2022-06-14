@@ -371,3 +371,32 @@ labelBalance.addEventListener('click', function() {
   });
 });
 */
+
+/*
+// [12-173] Numeric Separators
+// ES2021에 추가됨.
+
+// 일상에서 우리는 숫자를 쉼표를 이용해서 천 단위의 구분 기호를 사용한다. JS에서도 이를 구현할 수 있다. '_'를 이용하면 된다.
+// 287,460,000,000
+const diameter = 287_460_000_000;
+console.log(diameter); // 287460000000
+// 다만 JS엔진은 underscore를 무시한 채 콘솔에 숫자를 찍는다.
+// 반대로 생각해보면 원하는 모든 위치에 숫자 구분 기호를 사용할 수 있다.
+
+const price = 345_99; 
+console.log(price); // 34599
+
+const transferFee1 = 15_00; // 15달러 0센트
+const transferFee2 = 1_500; // 1500달러
+// 위의 두 Number는 JS에서 똑같은 수로 읽힌다. 하지만 개발자들 사이에는 각 숫자에 특별한 의미를 부여할 수 있다.
+
+// 밑줄을 쓰기 위해선 무조건 숫자 사이여야 한다. 소수점이 있는 부분에서는 사용하면 SyntaxError가 발생한다. 숫자의 시작과 끝에도 사용할 수 없다.
+const PI = 3.1415;
+//const PI2 = 3._14;
+console.log(PI);
+
+// 문자열에서 Number로 변환할 때 underscore가 있으면 제대로 변환하지 못하고 NaN을 return한다.
+console.log(Number('230_000')); // NaN
+console.log(parseInt('230_000')); // NaN
+
+*/
