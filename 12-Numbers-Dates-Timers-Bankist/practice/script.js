@@ -348,3 +348,26 @@ console.log((2.345).toFixed(2)); // 2.35
 console.log(+(2.345).toFixed(2)); // 2.35 <- Number
 
 */
+
+/*
+// [12-172] The Remainder(나누기에서 나머지 부분) operator
+console.log(5 % 2); // 1
+console.log(5 / 2); // 2.5
+
+console.log(8 % 3) // 2
+
+// Remainder를 이용해 짝수와 홀수 구하기.
+console.log(6 % 2); // 0 <- 짝수
+console.log(7 % 2); // 1 <- 홀수
+
+const isEven = n => n % 2 === 0;
+console.log(isEven(8)); // true
+console.log(isEven(23)); // false
+
+labelBalance.addEventListener('click', function() {
+  [...document.querySelectorAll('.movements_row')].forEach(function(row, i) {
+    if (i % 2 === 0) row.style.backgroundColor = 'orangered';
+    if (i % 3 === 0) row.style.backgroundColor = 'blue';
+  });
+});
+*/
