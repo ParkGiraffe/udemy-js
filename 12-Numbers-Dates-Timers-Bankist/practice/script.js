@@ -400,3 +400,92 @@ console.log(Number('230_000')); // NaN
 console.log(parseInt('230_000')); // NaN
 
 */
+
+/*
+// [12-174] Working with Bigint
+// ES2020에 도입
+// Working with BigInt
+// 900719925470991가 JS가 나타낼 수있는 최대 Number
+console.log(2 ** 53 - 1); // 900719925470991
+console.log(Number.MAX_SAFE_INTEGER); // 900719925470991
+console.log(2 ** 53 + 1); // 900719925470992 <- console 에는 올바르게 출력되지만, unsafe한 Number이다.
+console.log(2 ** 53 + 2);
+console.log(2 ** 53 + 3);
+console.log(2 ** 53 + 4);
+
+// BigInt는 아무리 큰 수더라도 모두 받아들일 수 있다.
+// 뒤에 n을 붙이면 된다.
+console.log(4838430248342043823408394839483204n);
+console.log(BigInt(48384302));
+
+// Operations
+console.log(10000n + 10000n); // 20000n
+console.log(36286372637263726376237263726372632n * 10000000n); // 곱셈도 가능
+// console.log(Math.sqrt(16n)); <- Bigint에서는 Math 연산자가 작동하지 않는다.
+// Bigint에서는 Math 연산자가 작동하지 않는다.
+
+const huge = 20289830237283728378237n;
+const num = 23;
+// console.log(huge * num) <- Error
+console.log(huge * BigInt(num));
+// BigInt와 Number를 같이 계산하면 에러가 발생한다. 
+
+// Exceptions
+console.log(20n > 15); // true - type coercion
+console.log(20n === 20); // false - 등호가 세 개면 type coercion이 안 일어난다.
+console.log(typeof 20n); // bigint
+console.log(20n == '20'); // true - 등호가 두 개면 type coercion이 작동한다.
+
+console.log(huge + ' is REALLY big!!!'); // bigint도 자동으로 string으로 변환된다.
+
+// Divisions
+// bigint에서 나누기를 하면, 소수점 이하 자릿수를 잘라내고 반환한다.
+console.log(10n / 3n); // 3n
+console.log(11n / 3n); // 3n
+console.log(10 / 3);
+
+*/
+
+/*
+// [12-175] Creating Dates
+// Create a date
+
+const now = new Date();
+console.log(now); // 현재 날짜를 출력
+
+// Date생성자의 구문분석을 통해 Date 생성
+console.log(new Date('Aug 02 2020 18:05:41'));
+console.log(new Date('December 24, 2015'));
+console.log(new Date(account1.movementsDates[0]));
+
+// Date 생성자에 Number 넣기 (년도, 월(0부터 시작해서, 실제값은 +1이 된다.), 일, 시간, 분, 초)
+console.log(new Date(2037, 10, 19, 15, 23, 5));
+console.log(new Date(2037, 10, 31)); // 12월 1일
+// 11월에는 31일이 없다. 그럴 경우 자동으로 JS가 계산해서 12월 1일로 바꿔준다.
+
+// Date 생성자에 밀리초를 넣을 수 있다. 기준 시간은 Unix시간이 생성된 1970년 1월 1일 새벽 1시
+// + n일 차를 밀리초로 계산한 식 n * 24 * 60 * 60 * 1000
+console.log(new Date(0));
+console.log(new Date(3 * 24 * 60 * 60 * 1000)); // 3일 뒤를 밀리초로 계산한 식 
+
+
+// Working with dates
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future);
+console.log(future.getFullYear()); // 2037 <- getYear()도 있지만 절대 사용하지마라.
+console.log(future.getMonth()); // 10 <- JS에서 month는 0기반이다. 따라서 현실에서는 11이다.
+console.log(future.getDate()); // 19
+console.log(future.getDay()); // 4 <- 요일을 나타내는 것으로 0은 일요일이고 4는 목요일이다.
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+console.log(future.toISOString()); // 국제 표준 ISO에 따르는 날씨표기를 String으로 반환
+console.log(future.getTime()); // 2142256980000 <- 1970년 1월 1일 이후로 얼마나 지나갔는지 타임스탬프
+
+console.log(new Date(2142256980000));
+
+console.log(Date.now()); // 현재 타임스탬프
+
+future.setFullYear(2040); // 날짜를 수정. setFullYear는 년도 수정
+console.log(future);
+*/
