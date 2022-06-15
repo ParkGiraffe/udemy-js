@@ -632,3 +632,25 @@ console.log(
 );
 
 */
+
+/*
+// [12-180] Timers: setTimeout and setInterval
+
+// setTimeout(콜백함수, 밀리초, ...콜백함수에 들어올 인수들): 특정 시간이 지나면 콜백함수를 불러온다. (한 번만 불러옴)
+const ingredients = ['olives', 'spinach'];
+const pizzaTimer = setTimeout(
+  (ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2} 🍕`),
+  3000,
+  ...ingredients
+);
+console.log('Waiting...');
+
+if (ingredients.includes('spinach')) clearTimeout(pizzaTimer);
+// clearTimeout(): setTimeout()의 두 번째 인수가 정한 시간이 지나가기 전에 취소해버릴 수 있다. -> 따라서 피자 콘솔이 찍히지 않는다.
+
+// setInterval(콜백함수, 밀리초) : n초마다 반복해서 콜백함수를 불러온다.
+setInterval(function () {
+  const now = new Date();
+  console.log(now);
+}, 1000);
+*/
