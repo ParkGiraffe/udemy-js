@@ -179,14 +179,44 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
+
+const startLogOutTimer = function() {
+  const tick = function() {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+
+    // In each call, print the remaining time to UI
+    labelTimer.textContent= `${min}:${sec}`;
+
+    // When 0 seconds, stop the timer and log out user
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = `Log in to get started`;
+      containerApp.style.opacity = 0;
+    };
+
+    // Decrease is
+    time --;
+  };
+  // Set time to 5 minutes
+  let time = 300;
+
+  // Call the timer every second
+  tick(); // setInterval()안에서는 1초 후부터 실행이 되기 때문에, 1초가 지나기 전까지 이전의 시간 데이터가 남아있다. 이를 방지하기 위해 먼저 한 번 함수를 호출해준다.
+  const timer = setInterval(tick, 1000);
+
+  return timer; // 타이머를 반환하여서, 사용자가 로그아웃을 했을 경우 타이머가 멈출 수 있도록 한다. (만약 이를 방지하지 않는다면, 다른 유저가 로그인 했을 때 두 타이머가 겹치는 문제를 볼 수 있다.)
+};
+
+
 ///////////////////////////////////////
 // Event handlers
-let currentAccount;
+let currentAccount, timer; // 전역변수 설정
 
 // FAKE ALWAYS LOGGED IN
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 100;
+// currentAccount = account1;
+// updateUI(currentAccount);
+// containerApp.style.opacity = 100;
 
 
 
@@ -236,12 +266,14 @@ btnLogin.addEventListener('click', function (e) {
       options
     ).format(now);
 
-    
-
 
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
+
+    // Timer
+    if (timer) clearInterval(timer); // 기존에 타이머가 작동하고 있는 지 확인하고, 맞다면 초기화.
+    timer = startLogOutTimer();
 
     // Update UI
     updateUI(currentAccount);
@@ -272,6 +304,10 @@ btnTransfer.addEventListener('click', function (e) {
  
     // Update UI
     updateUI(currentAccount);
+
+    // Reset timer <- 작업을 실행하면 로그아웃되지 않고 계속 작업을 할 수 있도록 타이머 재설정.
+    clearInterval(timer);
+    timer = startLogOutTimer();
   }
 });
 
@@ -281,14 +317,20 @@ btnLoan.addEventListener('click', function (e) {
   const amount = Math.floor(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
-    // Add movement
-    currentAccount.movements.push(amount);
-
-    // Add loan  date
-    currentAccount.movementsDates.push(new Date().toISOString);
-
-    // Update UI
-    updateUI(currentAccount);
+    setTimeout(function() {
+      // Add movement
+      currentAccount.movements.push(amount);
+  
+      // Add loan  date
+      currentAccount.movementsDates.push(new Date().toISOString);
+  
+      // Update UI
+      updateUI(currentAccount);
+  
+      // Reset timer <- 작업을 실행하면 로그아웃되지 않고 계속 작업을 할 수 있도록 타이머 재설정.
+      clearInterval(timer);
+      timer = startLogOutTimer();
+    }, 2500);
   }
   inputLoanAmount.value = '';
 });
@@ -654,3 +696,8 @@ setInterval(function () {
   console.log(now);
 }, 1000);
 */
+
+
+
+// [12-181] Implementing a Countdown Timer
+
