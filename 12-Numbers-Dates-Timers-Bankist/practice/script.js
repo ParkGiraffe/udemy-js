@@ -105,7 +105,7 @@ const formatCur = function(value, locale, currency) {
   }).format(value);
 };
 
-const displayMovements = function (acc, sort = false) {
+const displayMovements = function (acc, sort = true) {
   containerMovements.innerHTML = '';
 
   const movs = sort ? acc.movements.slice().sort((a, b) => a - b) : acc.movements;
@@ -121,7 +121,7 @@ const displayMovements = function (acc, sort = false) {
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-        <div class="movements__date">${displayDate}}</div>
+        <div class="movements__date">${displayDate}</div>
         <div class="movements__value">${formattedMov}</div>
       </div>
     `;
