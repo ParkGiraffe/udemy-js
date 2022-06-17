@@ -34,11 +34,10 @@ document.addEventListener('keydown', function (e) {
 });
 
 
-
 ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////
 
-
+/*
 // [13-186] Selecting, Creating, and Deleting Elements
 // Selecting elements
 console.log(document.documentElement); // <- 전체 HTML 호출
@@ -81,9 +80,9 @@ document.querySelector('.btn--close--cookie').addEventListener('click', function
   message.remove();
   message.parentElement.removeChild(message); // DOM 순회를 이용해서 부모노드를 이용하여 자식노드인 해당 노드를 제거.
 });
+*/
 
-
-
+/*
 // [13-187] Styles, Attributes and Classes
 
 // Styles
@@ -109,7 +108,7 @@ console.log(logo.className); // .nav__logo
 logo.alt = 'Beautiful minimalist logo'; // Attribute 수정
 
 // Non-standard
-console.log(logo,designer); // undefined <- 이런 방식은 html 태그의 표준 속성만 가능하고, 임의로 만든 속성일 경우 위의 방식으로 불러오지 못한다.
+console.log(logo.designer); // undefined <- 이런 방식은 html 태그의 표준 속성만 가능하고, 임의로 만든 속성일 경우 위의 방식으로 불러오지 못한다.
 // 굳이 가져오고 싶다면? getAttribute()메소드를 이용한다.
 console.log(logo.getAttribute('designer'));
 logo.setAttribute('company', 'Bankist'); // 새로운 Attribute 생성
@@ -132,4 +131,40 @@ logo.classList.contains('c'); // not includes
 
 // Don't use
 logo.className = 'jonas'; // <- 이럴 경우 기존의 모든 클래스를 초기화하고, 해당 클래스 하나만으로 재정의해버린다.
+
+*/
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function(e) {
+  const s1coords = section1.getBoundingClientRect(); // section1의 위치 <- 이 위치는 현재 윈도우 viewport에 따라 상대적이다.
+  console.log(s1coords); 
+
+  console.log(e.target.getBoundingClientRect()); // 버튼의 상대적 위치
+
+  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset); // 브라우저 현재 윈도우의 위치
+
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth // scorllbar는 고려하지 않음.
+  ); // 브라우저 현재 윈도우의 크기 (윈도우 보기 상자 크기);
+
+  // Scrolling
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset 
+  // );
+
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+
+  // 현대적인 방식으로 부드러운 스크롤 구현. (최신 브라우저에서만 작동)
+  section1.scrollIntoView({ behavior: 'smooth' });
+
+});
 
