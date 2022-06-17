@@ -96,6 +96,40 @@ console.log(message.style.height); // empty <- JS, CSS에서 지정한 style값�
 console.log(getComputedStyle(message).color);
 console.log(getComputedStyle(message).height); // 43.x
 
-message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 40 + 'px'
+message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 40 + 'px';
 
-document.documentElement.style.setProperty('--color-primary', 'oranged ')
+document.documentElement.style.setProperty('--color-primary', 'oranged'); // 해당 CSS 속성의 색상 값을 oranged로 변경.
+
+// Attributes
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt); // 해당클래스의 속성을 property로 받아옴. 
+console.log(logo.src);
+console.log(logo.className); // .nav__logo
+
+logo.alt = 'Beautiful minimalist logo'; // Attribute 수정
+
+// Non-standard
+console.log(logo,designer); // undefined <- 이런 방식은 html 태그의 표준 속성만 가능하고, 임의로 만든 속성일 경우 위의 방식으로 불러오지 못한다.
+// 굳이 가져오고 싶다면? getAttribute()메소드를 이용한다.
+console.log(logo.getAttribute('designer'));
+logo.setAttribute('company', 'Bankist'); // 새로운 Attribute 생성
+
+console.log(logo.src); // http:// ~~ img/logo.png <- 로고 이미지의 절대주소
+console.log(logo.getAttribute('src')); // img/logo.png<- 로고 이미지의 상대주소
+
+const link = document.querySelector('.nav__link--btn');
+console.log(link.href); // http:// ~~ #
+console.log(link.getAttribute('href')); // #
+
+// Data attributes
+console.log(logo.dataset.versionNumber); // 해당 html 요쇼의 속성 중 data-로 시작하는 속성의 값을 가져옴. html: data-version-number 인데 여기선 camelCase로 가져와야 함.
+
+// Classes
+logo.classList.add('c', 'j');
+logo.classList.remove('c', 'j');
+logo.classList.toggle('c');
+logo.classList.contains('c'); // not includes
+
+// Don't use
+logo.className = 'jonas'; // <- 이럴 경우 기존의 모든 클래스를 초기화하고, 해당 클래스 하나만으로 재정의해버린다.
+
