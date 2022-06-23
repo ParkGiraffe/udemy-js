@@ -186,3 +186,34 @@ setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 // };
 
 */
+// [13-190] Event Propagation : Bubbling and Capture
+// [13-191] Event Propagation in Practice
+
+const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+const randomColor = () => `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('LINK', e.target, e.currentTarget);
+  console.log(e.currentTarget === this); // true
+
+  // Stop propagation
+  // e.stopPropagation(); // 해당 요소만 색깔이 바뀌고, 부모 요소로 이벤트 전파가 일어나지 않는다.
+});
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('CONTAINER', e.target, e.currentTarget);
+});
+
+document.querySelector('.nav').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('NAV', e.target, e.currentTarget);
+});
+
+
+
+
+
+
+
