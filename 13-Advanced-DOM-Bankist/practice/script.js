@@ -1,12 +1,14 @@
 'use strict';
 
-///////////////////////////////////////
-// Modal window
-
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+///////////////////////////////////////
+// Modal window
 
 const openModal = function (e) {
   e.preventDefault(); // href, a와 같은 하이퍼링크 태그는 디폴트 값으로 클릭 시  사이트 맨  위로 스크롤 한다는 문제가 있다. e.preventDefault()는 이를 방지해준다.
@@ -32,6 +34,79 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+///////////////////////////////////////
+// Button scrolling
+btnScrollTo.addEventListener('click', function(e) {
+  const s1coords = section1.getBoundingClientRect(); // section1의 위치 <- 이 위치는 현재 윈도우 viewport에 따라 상대적이다.
+  console.log(s1coords); 
+
+  console.log(e.target.getBoundingClientRect()); // 버튼의 상대적 위치
+
+  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset); // 브라우저 현재 윈도우의 위치
+
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth // scorllbar는 고려하지 않음.
+  ); // 브라우저 현재 윈도우의 크기 (윈도우 보기 상자 크기);
+
+  // Scrolling
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset 
+  // );
+
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+
+  // 현대적인 방식으로 부드러운 스크롤 구현. (최신 브라우저에서만 작동)
+  section1.scrollIntoView({ behavior: 'smooth' });
+
+});
+
+
+///////////////////////////////////////
+// Page Navigation
+
+/*
+// 기존의 forEach를 이용해서 NavBar 구현
+document.querySelectorAll('.nav__link').forEach(function(el) {
+  el.addEventListener('click', function(e) {
+    e.preventDefault();
+    console.log('LINK'); 
+    // 해당 anchor HTML요소들에는 href attribtue가 설정되어 있어서, 클릭하면 href 링크(HTML 요소)로 이동한다.
+    const id = this.getAttribute('href'); // 해당 HTML 요소의 속성 값을 알아내는 법.
+    console.log(id);
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' }); 
+  });
+});
+*/
+/*
+// Event delegation 이용해서 NavBar 구현
+// 1. Add event listener to common parent element
+// 2. Determine what element originated the event
+document.querySelector('.nav_links').addEventListener('click', function(e) {
+  console.log(e.target);
+
+  // Matching strategy
+  if (e.target.classList.contains('nav__link')) {
+    console.log('LINK');
+    const id = e.target.getAttribute('href'); // 해당 HTML 요소의 속성 값을 알아내는 법.
+    console.log(id);
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' }); 
+  }
+});
+*/
+
+
+
+
+
+
 
 
 ////////////////////////////////////////////////////////
@@ -134,6 +209,7 @@ logo.className = 'jonas'; // <- 이럴 경우 기존의 모든 클래스를 초�
 
 */
 
+/*
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
 
@@ -167,7 +243,7 @@ btnScrollTo.addEventListener('click', function(e) {
   section1.scrollIntoView({ behavior: 'smooth' });
 
 });
-
+*/
 
 /*
 // [13-189] Types of Events and Event Handlers
@@ -186,6 +262,8 @@ setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 // };
 
 */
+
+/*
 // [13-190] Event Propagation : Bubbling and Capture
 // [13-191] Event Propagation in Practice
 
@@ -198,7 +276,7 @@ document.querySelector('.nav__link').addEventListener('click', function (e) {
   console.log(e.currentTarget === this); // true
 
   // Stop propagation
-  // e.stopPropagation(); // 해당 요소만 색깔이 바뀌고, 부모 요소로 이벤트 전파가 일어나지 않는다.
+  // e.stopPropagation(); // 해당 요소만 색깔이 바뀌고, 부모 요소로 이벤트 전파가(bubbling) 일어나지 않는다.
 });
 
 document.querySelector('.nav__links').addEventListener('click', function (e) {
@@ -210,10 +288,16 @@ document.querySelector('.nav').addEventListener('click', function (e) {
   this.style.backgroundColor = randomColor();
   console.log('NAV', e.target, e.currentTarget);
 });
+*/
 
 
 
 
 
 
+
+
+
+
+// [13-192] Event Delegation: Implementing Page Navigation
 
