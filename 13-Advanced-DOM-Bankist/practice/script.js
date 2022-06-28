@@ -84,12 +84,13 @@ document.querySelectorAll('.nav__link').forEach(function(el) {
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' }); 
   });
 });
-*/
-/*
+*/ 
+//이런 방식으로 구현할 경우, 해당 요소가 수백개일 때 그만큼의 복사본을 가져야해서 프로그램이 매우 느려진다.
+
 // Event delegation 이용해서 NavBar 구현
 // 1. Add event listener to common parent element
 // 2. Determine what element originated the event
-document.querySelector('.nav_links').addEventListener('click', function(e) {
+document.querySelector('.nav__links').addEventListener('click', function(e) {
   console.log(e.target);
 
   // Matching strategy
@@ -100,9 +101,39 @@ document.querySelector('.nav_links').addEventListener('click', function(e) {
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' }); 
   }
 });
-*/
 
 
+
+// [13-194] Building a Tabbed Component
+// Tabbed component
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+// tabs.forEach(t => t.addEventListener('click', function() {
+//   console.log('TAB')
+// }));
+
+tabsContainer.addEventListener('click', function(e) {
+  const clicked = e.target.closest('.operations__tab'); // closet() - 상위 요소(부모 element) 중에 해당 클래스가 있는지 찾고, 있으면 그것을 반환. 없으면 null을 반환.
+  console.log(clicked);
+
+  // Guard clause
+  // Container의 빈 구간을 클릭 시에 함수가 작동하는 것을 방지하기 위함.
+  if(!clicked) return;
+
+  // Remove active classes
+  // 기존에 활성화된 다른 탭들을 비활성화 시킴.
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  tabsContent.forEach(t => t.classList.remove('operations__content--active'));
+  
+  // Activate tab (위에 타원 3개)
+  clicked.classList.add('operations__tab--active');
+
+  // Active content area (타원 3개 밑의 컨텐츠 박스)
+  console.log(clicked.dataset.tab);
+  document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
+});
 
 
 
