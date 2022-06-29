@@ -135,9 +135,60 @@ tabsContainer.addEventListener('click', function(e) {
   document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
 });
 
+// [13-195] Passing Arguments to Event Handlers
+// Menu fade animation
+const nav = document.querySelector('.nav');
+
+// const handleHover = function(e, opacity) {
+//   if(e.target.classList.contains('nav__links')) {
+//     const link = e.target;
+//     const siblings = link.closest('.nav').querySelector('.nav__link');
+//     const logo = link.closest('.nav').querySelector('img');
+
+//     siblings.forEach(el => {
+//       if(el !== link) el.style.opacity = opacity;
+//     })
+//     logo.style.opacity = opacity;
+//   }
+// };
+
+// nav.addEventListener('mouseover', handleHover); <- 이럴 경우 핸들러에 인자를 전달할 수가 없다.
+// nav.addEventListener('mouseover', handleHover(e, 0.5)); 역시나 <- 작동하지 않는다.
+
+// mouseover와 mouseenter은 유사하나, 큰 차이가 있다면 mouseenter는 bubble이 일어나지 않고, mouseover은 boubble이 일어난다는 것이 있다. 그래서 위처럼 bubbling이 필요하다면 mouseover을 사용하자.
+// mouseenter <-> mouseleave || mouseover <-> mouseout
 
 
+// nav.addEventListener('mouseover', function(e) {
+//   handleHover(e, 0.5);
+// }); // -> 이렇게 함수 안에 함수를 넣으면 된다.
+// nav.addEventListener('mouseout', function(e) {
+//   handleHover(e, 1);
+// });
 
+// 더 좋은 방안: bind()를 사용한다.
+
+
+const handleHover = function(e) {
+  if(e.target.classList.contains('nav__links')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelector('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(el => {
+      if(el !== link) el.style.opacity = this;
+    })
+    logo.style.opacity = this;
+  }
+};
+
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+nav.addEventListener('mouseout', handleHover.bind(0.1));
+// bind()는 함수의 복사본을 만든다. 그리고 함수 호출에 this 키워드를 설정한다.
+// 복사본을 만들어서 새로운 함수를 리턴하는 개념이기 때문에 Listner의 콜백함수이면서 인자를 받을 수 있게 됐다.
+// 기본적으로 핸들러의 함수는 하나의 매개변수 만을 가질 수 있다. 다만 bind()에는 하나의 파라미터만 받도록 해야 하지만, this 키워드를 이용해서 여러 인자를 받을 수는 있다.
+
+ 
 
 
 ////////////////////////////////////////////////////////
