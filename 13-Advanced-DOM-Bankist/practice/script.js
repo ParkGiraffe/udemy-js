@@ -140,9 +140,9 @@ tabsContainer.addEventListener('click', function(e) {
 const nav = document.querySelector('.nav');
 
 // const handleHover = function(e, opacity) {
-//   if(e.target.classList.contains('nav__links')) {
+//   if(e.target.classList.contains('nav__link')) {
 //     const link = e.target;
-//     const siblings = link.closest('.nav').querySelector('.nav__link');
+//     const siblings = link.closest('.nav').querySelectorAll('.nav__link');
 //     const logo = link.closest('.nav').querySelector('img');
 
 //     siblings.forEach(el => {
@@ -170,20 +170,20 @@ const nav = document.querySelector('.nav');
 
 
 const handleHover = function(e) {
-  if(e.target.classList.contains('nav__links')) {
+  if(e.target.classList.contains('nav__link')) {
     const link = e.target;
-    const siblings = link.closest('.nav').querySelector('.nav__link');
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
     const logo = link.closest('.nav').querySelector('img');
 
     siblings.forEach(el => {
-      if(el !== link) el.style.opacity = this;
-    })
+      if (el !== link) el.style.opacity = this;
+    });
     logo.style.opacity = this;
   }
 };
 
 nav.addEventListener('mouseover', handleHover.bind(0.5));
-nav.addEventListener('mouseout', handleHover.bind(0.1));
+nav.addEventListener('mouseout', handleHover.bind(1));
 // bind()는 함수의 복사본을 만든다. 그리고 함수 호출에 this 키워드를 설정한다.
 // 복사본을 만들어서 새로운 함수를 리턴하는 개념이기 때문에 Listner의 콜백함수이면서 인자를 받을 수 있게 됐다.
 // 기본적으로 핸들러의 함수는 하나의 매개변수 만을 가질 수 있다. 다만 bind()에는 하나의 파라미터만 받도록 해야 하지만, this 키워드를 이용해서 여러 인자를 받을 수는 있다.
