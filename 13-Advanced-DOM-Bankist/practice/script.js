@@ -189,6 +189,18 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 // 기본적으로 핸들러의 함수는 하나의 매개변수 만을 가질 수 있다. 다만 bind()에는 하나의 파라미터만 받도록 해야 하지만, this 키워드를 이용해서 여러 인자를 받을 수는 있다.
 
  
+// [13-196] Implementing a Sticky Navigation: The Scroll Event (좋지는 않은 방식으로 일단 구현해보기)
+// Sticky navigation
+const initialCoords = section1.getBoundingClientRect()
+
+window.addEventListener('scroll', function(e) {
+  console.log(window.scrollY);
+
+  if(this.window.screenY > initialCoords.top) nav.classList.add('sticky');
+  else nav.classList.remove('sticky'); 
+});
+// 이와 같이 스크롤 이벤트를 사용하는 방식은 성능이 매우 좋지 않다. 아주 작은 스크롤 변경 사항이 있어도 계속 함수가 호출되기 때문이다.
+
 
 
 ////////////////////////////////////////////////////////
