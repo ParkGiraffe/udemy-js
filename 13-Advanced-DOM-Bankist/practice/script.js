@@ -203,8 +203,23 @@ window.addEventListener('scroll', function(e) {
 
 
 // [13-197] A Better Way: The Intersection Observer API
+// Sticky navigation: Intersection Observer API
+const obsCallback = function(entries, observer) {
+  entries.forEach(entry => {
+    console.log(entry);
+  })
+};
 
+const obsOptions = {
+  root: null,
+  threshold: 0.1,
+};
 
+// root: 대상이 교차하고 있는 element. 바로 여기가 타겟이 되는 요소이다. 
+// threshold: 임계값
+
+const observer = new IntersectionObserver(obsCallback, obsOptions);
+observer.observe(section1);
 
 
 
