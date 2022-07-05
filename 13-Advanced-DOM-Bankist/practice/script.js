@@ -188,7 +188,8 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 // 복사본을 만들어서 새로운 함수를 리턴하는 개념이기 때문에 Listner의 콜백함수이면서 인자를 받을 수 있게 됐다.
 // 기본적으로 핸들러의 함수는 하나의 매개변수 만을 가질 수 있다. 다만 bind()에는 하나의 파라미터만 받도록 해야 하지만, this 키워드를 이용해서 여러 인자를 받을 수는 있다.
 
- 
+
+/*
 // [13-196] Implementing a Sticky Navigation: The Scroll Event (좋지는 않은 방식으로 일단 구현해보기)
 // Sticky navigation
 const initialCoords = section1.getBoundingClientRect()
@@ -200,10 +201,12 @@ window.addEventListener('scroll', function(e) {
   else nav.classList.remove('sticky'); 
 });
 // 이와 같이 스크롤 이벤트를 사용하는 방식은 성능이 매우 좋지 않다. 아주 작은 스크롤 변경 사항이 있어도 계속 함수가 호출되기 때문이다.
-
+*/
 
 // [13-197] A Better Way: The Intersection Observer API
 // Sticky navigation: Intersection Observer API
+
+/*
 const obsCallback = function(entries, observer) {
   entries.forEach(entry => {
     console.log(entry);
@@ -215,12 +218,34 @@ const obsOptions = {
   threshold: 0.1,
 };
 
-// root: 대상이 교차하고 있는 element. 바로 여기가 타겟이 되는 요소이다. 
-// threshold: 임계값
+// root: 대상 객체의 가시성을 확인할 대 사용되는 뷰포트 요소. 이는 대상 객체의 조상요소이어야 한다. 기본값은 브라우저 뷰포트이며, root값이 Null이거나 지정되지 않을 대 기본값으로 설정된다. 이 속성의 값은 CSS의 margin 속성과 유사합니다. e.g. "10px 20px 30px 40px" (top, right, bottom, left). 이 값은 퍼센티지가 될 수 있습니다. 이것은 root 요소의 각 측면의 bounding box를 수축시키거나 증가시키며, 교차성을 계산하기 전에 적용됩니다. 기본값은 0입니다.
+// rootMargin: root가 가진 여백입니다. (px)
+// threshold: 임계값. 대상 요소가 root에 지정된 요소 내에서 n% (0.1로 표기 ==> 10%) 보여질 때 콜백이 호출될 것을 의미한다.
+// threshold에 대한 긴 설명 - observer의 콜백이 실행될 대상 요소의 가시성 퍼센티지를 나타내는 단일 숫자 혹은 숫자 배열입니다. 만일 50%만큼 요소가 보여졌을 때를 탐지하고 싶다면, 값을 0.5로 설정하면 됩니다. 혹은 25% 단위로 요소의 가시성이 변경될 때마다 콜백이 실행되게 하고 싶다면 [0, 0.25, 0.5, 0.75, 1] 과 같은 배열을 설정하세요. 기본값은 0이며(이는 요소가 1픽셀이라도 보이자 마자 콜백이 실행됨을 의미합니다). 1.0은 요소의 모든 픽셀이 화면에 노출되기 전에는 콜백을 실행시키지 않음을 의미합니다.
+
+
 
 const observer = new IntersectionObserver(obsCallback, obsOptions);
 observer.observe(section1);
+*/
 
+const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height; // 반응형 사이트일 경우 nav의 높이는 화면 크기에 따라 달라진다. 이에 맞춰서 값을 불러와줄 필요가 있다.
+
+const stickNav = function(entries) {
+  const [entry] = entries;
+  console.log(entry);
+
+  if(!entry.isIntersecting) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+};
+
+const headerObserver = new IntersectionObserver(stickNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
+});
+headerObserver.observe(header);
 
 
 ////////////////////////////////////////////////////////
