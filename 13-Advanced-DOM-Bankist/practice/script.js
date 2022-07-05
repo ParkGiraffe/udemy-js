@@ -230,7 +230,7 @@ observer.observe(section1);
 */
 
 const header = document.querySelector('.header');
-const navHeight = nav.getBoundingClientRect().height; // 반응형 사이트일 경우 nav의 높이는 화면 크기에 따라 달라진다. 이에 맞춰서 값을 불러와줄 필요가 있다.
+const navHeight = nav.getBoundingClientRect().height; // 반응형 사이트일 경우 nav의 높이는 화면 크기에 따라 달라진다. 이에 맞춰서 실제 표시되는 높이값을 불러와줄 필요가 있다. getBoundingClinedRect()를 사용하면 실제 사용자의 화면에 보여지는 크기에 대한 다양한 정보를 객체형으로 가져올 수 있다.
 
 const stickNav = function(entries) {
   const [entry] = entries;
