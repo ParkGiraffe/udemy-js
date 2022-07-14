@@ -696,3 +696,27 @@ console.log(h1.parentElement.children);
   if (el !== h1) el.style.transform = 'scale(0.5)';
 });
 */
+
+
+/*
+// [13-202] Lifecycle Dom Events
+
+// HTML 구문분석 및 DOM tree가 구축되었을 때 실행.
+document.addEventListener('DOMContentLoaded', function(e) {
+  console.log('HTML parsed and DOM tree built!', e);
+});
+
+
+// HTML파싱 뿐만 아니라, CSS같은 모든 이미지와 외부 리소스가 로드되었을 때 실행.
+window.addEventListener('load', function(e) {
+  console.log('Page fully loaded', e);
+});
+
+// 유저가 페이지를 떠나려고 할 때 실행
+// 다만 이 기능은 사용자 경험에 매우 악영향을 끼치기에, 정말 필요한 경우 아니면 남용하지 말자. ex)블로그 글 작성 중간에 나가려는 거.
+// window.addEventListener('beforeunload', function(e) {
+//   e.preventDefault(); // 이 작업을 할 때는 기본값 방지가 필수이다. 크롬에서는 아니긴 한데 다른 브라우저에서는 필요.
+//   console.log(e);
+//   e.returnValue = ''; // 사이트 창을 닫으려고 할 때 경고창 띄우는 역할인 듯?
+// });
+*/
