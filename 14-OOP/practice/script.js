@@ -1,6 +1,6 @@
 'use strict';
 
-/*
+
 // [14-208] Constructor Functions and The New Operator
 // convention으로 생성자 함수는 항상 대문자로 시작.
 // arrow function은 this 키워드가 없기 때문에, function 표현식을 사용한다.
@@ -39,4 +39,27 @@ console.log(jonas instanceof Person); // true
 const jay = 'Jay';
 console.log(jay instanceof Person); // false
 
-*/
+
+
+// [14-209] Prototypes
+
+Person.prototype.calcAge = function () {
+    console.log(2037 - this.birthYear);
+};
+console.log(Person.prototype); // constructor(Person 원형의 property가 담김)와 calcAge가 들어있음.
+
+jonas.calcAge();
+matilda.calcAge();
+
+console.log(jonas.__proto__); //calcAge가 들어있음
+console.log(jonas.__proto__ === Person.prototype); // true
+
+console.log(Person.prototype.isPrototypeOf(jonas)); // true
+console.log(Person.prototype.isPrototypeOf(matilda)); // true
+console.log(Person.prototype.isPrototypeOf(Person)); // false
+
+Person.prototype.species = 'Homo Sapiens';
+console.log(jonas.species, matilda.species); // Homo Sapiens Homo Sapiens
+
+console.log(jonas.hasOwnProperty('firstName')); // true
+console.log(jonas.hasOwnProperty('species')); // false
