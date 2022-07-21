@@ -17,6 +17,7 @@ const Person = function(firstName, birthYear) {
     // this.calcAge = function() {
     //     console.log(2022 - this.birthYear);
     // };
+    
 };
 
 const jonas = new Person('Jonas', 1991); // 인스턴스 생성 예시
@@ -115,3 +116,79 @@ Car.prototype.brake = function() {
 };
 
 const bmw = new Car('BMW', 120);
+
+/*
+// [14-213] ES6 Classes
+// 기존의 JS 프로토타입 방식을 사용하지만, 다른 언어의 Class와 유사하게 코드를 작성할 수 있는 방법이 업데이트 됐다.
+
+// class를 선언하는 데에는 class exression과 class declaration 두 가지 방법이 있다. jonas는 declaration을 선호.
+// class expression - 함수와 비슷하게 설정. 다만 인수는 없는 형식으로.
+// const PersonCl = class {};
+
+// class declaration
+class PersonCl {
+    constructor(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    } // this 키워드를 생성해주는 생성자.
+
+    // Methods will be added to .prototype property
+    calcAge() {
+        console.log(2037 - this.birthYear );
+    }
+    // class declaration 방식에서 선언하는 메소드들은 모두 constructor 외부에서 PersonCl.prototype(__proto__)에서 선언된다. (자동으로 분리해서 추가해준다) 객체 내부에서 선언되는 것이 아니다. 
+
+    greet() {
+        console.log(`Hey ${this.firstName}`);
+    }
+};
+
+const jessica = new PersonCl('jessica', 1996)
+console.log(jessica);
+jessica.calcAge();
+
+console.log(jessica.__proto__ === PersonCl.prototype); // true
+
+// PersonCl.prototype.greet = function() {
+//     console.log(`Hey ${this.firstName}`);
+// }
+jessica.greet();
+
+// Class에 대해 명심해야 할 사항.
+// 1. Classes ar NOT hoisted. Class declaration일 경우에도 마찬가지이다.
+// hoisted의 의미: 코드가 선언되기 전에 그 코드를 사용할 수 있는 지에 대한 여부. 즉, 클래스가 선언되기 전의 코드는 작동하지 않음.
+// 2. Class are first-class citizen. -> 함수에 전달할 수도, 함수에서 반환할 수도 있다. JS에서는 클래스도 사실 뒤에서 일종의 함수로 작동한다. 함수에 함수를 전달할 수 있는 것과 같다.
+// 3. Classes are executed in strict mode. 전체 코드에 'use strict'를 하지 않았더라도, class 내부 코드는 자동으로 strict mode가 실행된다.
+
+
+
+
+
+
+////
+// [14-214] Setters and Getters
+// JS의 모든 객체는 setter와 getter를 가질 수 있으며, 이를 assessor properties라고 부른다.
+
+const account = {
+    owner: 'Jonas',
+    movements: [200, 530, 120, 300],
+
+    get latest() {
+        return this.movements.slice(-1).pop();
+    },
+
+    set latest(mov) {
+        this.movements.push(mov);  
+    },
+};
+
+// console.log(account.latest());
+console.log(account.latest);
+// getter는 몇 가지 계산을 필요로 하는 값을 속성처럼 읽고 싶을 때 사용한다.
+
+
+// account.latest(50);
+account.latest = 50;
+// setter 메소드는 정확히 하나의 매개변수가 있어야 한다.
+// setter 메소드는 다른 속성을 설정하는 것처럼 간단히 값을 설정할 수 있다.
+*/
