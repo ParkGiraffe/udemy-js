@@ -6,9 +6,9 @@
 // arrow function은 this 키워드가 없기 때문에, function 표현식을 사용한다.
 // 생성자 함수와 일반함수의 가장큰 차이점은, 생성자 함수는 new 키워드를 사용해서 생성자를 호출한다는 것이다.
 
-const Person = function(firstName, birthYear) {
+const Person = function(fullName, birthYear) {
     // Instance properties
-    this.firstName = firstName;
+    this.fullName = fullName;
     this.birthYear = birthYear;
 
     // Never to this - 생성자 함수 내부에 메서드를 만들지 마라!
@@ -62,7 +62,7 @@ console.log(Person.prototype.isPrototypeOf(Person)); // false
 Person.prototype.species = 'Homo Sapiens';
 console.log(jonas.species, matilda.species); // Homo Sapiens Homo Sapiens
 
-console.log(jonas.hasOwnProperty('firstName')); // true
+console.log(jonas.hasOwnProperty('fullName')); // true
 console.log(jonas.hasOwnProperty('species')); // false
 
 
@@ -117,7 +117,7 @@ Car.prototype.brake = function() {
 
 const bmw = new Car('BMW', 120);
 
-/*
+
 // [14-213] ES6 Classes
 // 기존의 JS 프로토타입 방식을 사용하지만, 다른 언어의 Class와 유사하게 코드를 작성할 수 있는 방법이 업데이트 됐다.
 
@@ -127,8 +127,8 @@ const bmw = new Car('BMW', 120);
 
 // class declaration
 class PersonCl {
-    constructor(firstName, birthYear) {
-        this.firstName = firstName;
+    constructor(fullName, birthYear) {
+        this.fullName = fullName;
         this.birthYear = birthYear;
     } // this 키워드를 생성해주는 생성자.
 
@@ -139,7 +139,23 @@ class PersonCl {
     // class declaration 방식에서 선언하는 메소드들은 모두 constructor 외부에서 PersonCl.prototype(__proto__)에서 선언된다. (자동으로 분리해서 추가해준다) 객체 내부에서 선언되는 것이 아니다. 
 
     greet() {
-        console.log(`Hey ${this.firstName}`);
+        console.log(`Hey ${this.fullName}`);
+    }
+
+    get age() {
+        return 2037 - this.birthYear;
+    }
+
+
+    // 데이터 무결성을 위해 get과 set을 사용할 수 있다.
+    // Set a property that already exists. 기존의 proeprty에 get과 set을 이용해서 데이터 무결성을 진행하는 경우.
+    set fullName(name) {
+        if(name.includes(' ')) this._fullName = name;
+        else alert(`${name} is not a full name!`);
+    }
+
+    get fullName() {
+        return this._fullName;
     }
 };
 
@@ -150,7 +166,7 @@ jessica.calcAge();
 console.log(jessica.__proto__ === PersonCl.prototype); // true
 
 // PersonCl.prototype.greet = function() {
-//     console.log(`Hey ${this.firstName}`);
+//     console.log(`Hey ${this.fullName}`);
 // }
 jessica.greet();
 
@@ -190,5 +206,18 @@ console.log(account.latest);
 // account.latest(50);
 account.latest = 50;
 // setter 메소드는 정확히 하나의 매개변수가 있어야 한다.
-// setter 메소드는 다른 속성을 설정하는 것처럼 간단히 값을 설정할 수 있다.
-*/
+// setter 메소드는 getter메소드를 통해 만들어진 가상 property에 'ex)account.latest=' 와 같이 새로운 값을 할당하고자 할 때 어떤 방식으로 처리할 것인지를 지정해주는 함수이다. 
+
+
+// 정리
+// get – 인수가 없는 함수로, 프로퍼티를 읽을 때 동작함
+// set – 인수가 하나인 함수로, 프로퍼티에 값을 쓸 때 호출됨
+// 하나만 단독으로 쓰이는 것도 가능하다.
+
+
+jessica.calcAge(); // 41
+console.log(jessica.age); //41
+// 계산된 getter property는 __proto__에 저장된다.
+
+
+// getter와 setter는 데이터 유효성 검사에 매우 유용하다.
