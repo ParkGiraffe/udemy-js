@@ -132,6 +132,7 @@ class PersonCl {
         this.birthYear = birthYear;
     } // this 키워드를 생성해주는 생성자.
 
+    // Instance Method
     // Methods will be added to .prototype property
     calcAge() {
         console.log(2037 - this.birthYear );
@@ -157,6 +158,18 @@ class PersonCl {
     get fullName() {
         return this._fullName;
     }
+
+    // Static method
+    static hey() {
+        console.log('Hey there');
+        console.log(this);
+    }
+};
+
+// [14-215] Static Methods
+Person.hey() = function() {
+    console.log('Hey there');
+    console.log(this);
 };
 
 const jessica = new PersonCl('jessica', 1996)
