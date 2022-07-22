@@ -98,7 +98,7 @@ console.dir(x => x + 1);
 // 함수도 객체형이다보니 prototype이 있다. 그래서 함수에서도 내장함수를 쓸 수 있는 것이다.
 
 
-
+/*
 // [14-212] Coding Challenge #1
 const Car = function(make, speed) {
     this.make = make;
@@ -116,7 +116,7 @@ Car.prototype.brake = function() {
 };
 
 const bmw = new Car('BMW', 120);
-
+*/
 
 // [14-213] ES6 Classes
 // 기존의 JS 프로토타입 방식을 사용하지만, 다른 언어의 Class와 유사하게 코드를 작성할 수 있는 방법이 업데이트 됐다.
@@ -262,3 +262,48 @@ sarah.init('Sarah', 1979);
 sarah.calcAge();
 
 // init()은 constructor()비슷하지만, 포로토타입이 아닌 객체 자체에 property를 생성해주는 것은 아니기에 전혀 다른 함수이다.
+
+
+
+// [14-217] Coding Challenge #2
+// const Car = function(make, speed) {
+//     this.make = make;
+//     this.speed = speed;
+// };
+
+// Car.prototype.accelerate = function() {
+//     this.speed += 10;
+//     console.log(`${this.make} is going at ${this.speed} km/h`);
+// };
+
+// Car.prototype.brake = function() {
+//     this.speed -= 5;
+//     console.log(`${this.make} is going at ${this.speed} km/h`);
+// };
+
+class Car {
+    constructor(make, speed) {
+        this.make = make;
+        this.speed = speed;
+    }
+
+    accelerate() {
+        this.speed += 10;
+        console.log(`${this.make} is going at ${this.speed} km/h`);
+    }
+
+    brake() {
+        this.speed -= 5;
+        console.log(`${this.make} is going at ${this.speed} km/h`);
+    }
+
+    get speedUS() {
+        return this.speed / 1.6
+    }
+
+    set speedUS(speed) {
+        this.speed = speed * 1.6
+    }
+}
+
+const ford = new Car('Ford', 120);
