@@ -234,3 +234,31 @@ console.log(jessica.age); //41
 
 
 // getter와 setter는 데이터 유효성 검사에 매우 유용하다.
+
+
+// [14-216] Object.create
+// Object.create는 프로토타입을 만들어서 바로 객체에 연결해준다. 그리고 생성자 함수를 필요로 하지 않는다.
+const PersonProto = {
+    calcAge() {
+        console.log(2022 - this.birthYear);
+    },
+
+    init(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    },
+};
+
+const steven = Object.create(PersonProto);
+console.log(steven); // __proto__에 PersonProto가 연결되어 있음.
+steven.name = 'Steven';
+steven.birthYear = 2002;
+steven.calcAge(); // 잘 작동함.
+
+console.log(steven.__proto__ === PersonProto); // true
+
+const sarah = Object.create(PersonProto);
+sarah.init('Sarah', 1979);
+sarah.calcAge();
+
+// init()은 constructor()비슷하지만, 포로토타입이 아닌 객체 자체에 property를 생성해주는 것은 아니기에 전혀 다른 함수이다.
