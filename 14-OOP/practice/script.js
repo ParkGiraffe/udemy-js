@@ -290,7 +290,6 @@ class Car {
 
 const ford = new Car('Ford', 120);
 
-
 // [14-218] Inheritance Between "Classes": Constructor Functions
 // Inheritance Between "Classes": Constructor Functions
 const Person = function (firstName, birthYear) {
@@ -311,7 +310,6 @@ Student.prototype = Object.create(Person.prototype);
 Student.prototype.introduce = function () {
   console.log(`My name is ${this.firstName} and I study ${this.course}`);
 };
-
 
 // Constructor Fuctions 방법일 때는, property는 ArrayName.call()을 사용해서 상속한다. 이때 'this'는 상속된 property의 위치를 정해준다.
 // property 상속은 Object.create를 이용해서 한다. 먼저 Student의 프로토타입에 Person 프로토타입을 덮어씌운 후, 그 이후에 Student prototype에만 추가할 메소드를 추가한다.
