@@ -5,6 +5,7 @@
 // arrow function은 this 키워드가 없기 때문에, function 표현식을 사용한다.
 // 생성자 함수와 일반함수의 가장큰 차이점은, 생성자 함수는 new 키워드를 사용해서 생성자를 호출한다는 것이다.
 
+/*
 const Person = function (fullName, birthYear) {
   // Instance properties
   this.fullName = fullName;
@@ -36,6 +37,7 @@ console.log(jonas instanceof Person); // true
 
 const jay = 'Jay';
 console.log(jay instanceof Person); // false
+*/
 
 // [14-209] Prototypes
 
@@ -287,3 +289,45 @@ class Car {
 }
 
 const ford = new Car('Ford', 120);
+
+
+// [14-218] Inheritance Between "Classes": Constructor Functions
+// Inheritance Between "Classes": Constructor Functions
+const Person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
+
+Person.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+};
+const Student = function (firstName, birthYear, course) {
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+};
+// Linking prototypes
+Student.prototype = Object.create(Person.prototype);
+
+Student.prototype.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
+
+
+// Constructor Fuctions 방법일 때는, property는 ArrayName.call()을 사용해서 상속한다. 이때 'this'는 상속된 property의 위치를 정해준다.
+// property 상속은 Object.create를 이용해서 한다. 먼저 Student의 프로토타입에 Person 프로토타입을 덮어씌운 후, 그 이후에 Student prototype에만 추가할 메소드를 추가한다.
+// 이 순서가 반대로 되면, Object.create()에 덮어씌워져서 초기화된다. 주의해야 한다!
+
+const mike = new Student('Mike', 2020, 'Computer Science');
+mike.introduce();
+mike.calcAge();
+
+console.log(mike.__proto__); // Student
+console.log(mike.__proto__.__proto__); // Person
+
+console.log(mike instanceof Student); // true
+console.log(mike instanceof Person); // true
+console.log(mike instanceof Object); // true
+
+// Student.prototype.constructor = Student;
+
+console.dir(Student.prototype.constructor); // Person()
