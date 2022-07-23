@@ -121,6 +121,7 @@ const bmw = new Car('BMW', 120);
 // const PersonCl = class {};
 
 // class declaration
+/*
 class PersonCl {
   constructor(fullName, birthYear) {
     this.fullName = fullName;
@@ -159,6 +160,7 @@ class PersonCl {
     console.log(this);
   }
 }
+*/
 
 // [14-215] Static Methods
 Person.hey = function () {
@@ -263,6 +265,7 @@ sarah.calcAge();
 //     console.log(`${this.make} is going at ${this.speed} km/h`);
 // };
 
+/*
 class Car {
   constructor(make, speed) {
     this.make = make;
@@ -290,6 +293,9 @@ class Car {
 
 const ford = new Car('Ford', 120);
 
+*/
+
+/*
 // [14-218] Inheritance Between "Classes": Constructor Functions
 // Inheritance Between "Classes": Constructor Functions
 const Person = function (firstName, birthYear) {
@@ -329,9 +335,9 @@ console.log(mike instanceof Object); // true
 // Student.prototype.constructor = Student;
 
 console.dir(Student.prototype.constructor); // Person()
+*/
 
-
-
+/*
 // [14-219] Coding Challenge #3
 const Car = function(make, speed) {
     this.make = make;
@@ -368,3 +374,66 @@ EV.prototype.accelerate = function() {
 const Tesla = new EV('Tesla', 120, 23);
 Tesla.chargeBattery(90);
 Tesla.accelerate();
+*/
+
+// [14-220] Inheritance Between "Classes": ES6 Classes
+class PersonCl {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  // Instance Method
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey ${this.fullName}`);
+  }
+
+  get age() {
+    return 2037 - this.birthYear;
+  }
+
+  set fullName(name) {
+    if (name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name!`);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+
+  // Static method
+  static hey() {
+    console.log('Hey there');
+    console.log(this);
+  }
+}
+
+class StudentCl extends PersonCl {
+  constructor(fullName, birthYear, course) {
+    // Always needs to happen first!
+    super(fullName, birthYear); // 부모 클래스의 생성자이다.
+    this.course = course;
+  }
+
+  introduce() {
+    console.log(`My name is ${this.fullName} and I study ${this.course}`);
+  }
+
+  // 부모 메소드 수정해보기. 원리는 prototype chain에서 child class의 메소드에서 같은 이름이 발견되면 더 이상 prototype chain을 안 거치기 때문이다.
+  calcAge() {
+    console.log(
+      `I'm ${
+        2022 - this.birthYear
+      } years old, but as a student I feel more like ${
+        2022 - this.birthYear + 10
+      }`
+    );
+  }
+}
+
+// super()는 부모 클래스의 생성자이다. 여기에 부모 클래스의 생성자에 대한 인수를 전달하면 된다.
+// super()가 항상 생성자 함수의 맨 처음에 나와야 한다. 그래야만 이후 하위 클래스의 this키워드에 접근이 가능하다. 이미 extends키워드를 통해 PersonCl의 생성자를 상속받은 상태이기에, 하위 클래스인 StudenCl은 생성자가 따로 없어도 괜찮다. 여기에 독자적인 property를 갖고자 한다면, 생성자 생성과 함께 super()를 넣어서 this키워드를 사용할 수 있게 해야 한다.
