@@ -470,3 +470,49 @@ const jay = Object.create(StudentProto);
 jay.init('Jay', 2010, 'Computer Science');
 jay.introduce();
 jay.calcAge();
+
+// [14-222] Another Class Example
+class Account {
+    constructor(owner, currency, pin) {
+        this.owner = owner;
+        this.currency = currency;
+        this.pin = pin;
+        this.movements = [];
+        this.locale = navigator.language;
+
+        console.log(`Thanks for opening an account ${owner}`);
+    }
+
+
+    // Public interface
+    deposit(val) {
+        this.movements.push(val);
+    }
+
+    withdraw(val) {
+        this.deposit(-val);
+    }
+
+    approveLoan(val) {
+        return true;
+    }
+
+    requestLoan(val) {
+        if(this.approveLoan(val)) {
+            this.deposit(val);
+            console.log('Loan approved');
+        }
+    }
+
+}
+
+const acc1 = new Account('Jonas', 'EUR', 1111);
+
+acc1.deposit(250);
+acc1.withdraw(140);
+acc1.requestLoan(1000);
+acc1.approveLoan(1000); // <- 유저가 접근하면 안 되는 데이터
+console.log(acc1);
+console.log(acc1.pin); // <- 유저가 접근하면 안 되는 데이터
+
+// 위와 같이 유저가 접근하면 안 되는 데이터가 존재한다. 이럴 경우, 데이터 캡슐화 및 데이터 개인 정보 보호가 정말로 필요하다. 다음 강의가 이에 대한 내용이다.
