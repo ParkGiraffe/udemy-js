@@ -222,6 +222,7 @@ console.log(jessica.age); //41
 
 // getter와 setter는 데이터 유효성 검사에 매우 유용하다.
 
+/*
 // [14-216] Object.create
 // Object.create는 프로토타입을 만들어서 바로 객체에 연결해준다. 그리고 생성자 함수를 필요로 하지 않는다.
 const PersonProto = {
@@ -248,6 +249,7 @@ sarah.init('Sarah', 1979);
 sarah.calcAge();
 
 // init()은 constructor()비슷하지만, 포로토타입이 아닌 객체 자체에 property를 생성해주는 것은 아니기에 전혀 다른 함수이다.
+*/
 
 // [14-217] Coding Challenge #2
 // const Car = function(make, speed) {
@@ -437,3 +439,34 @@ class StudentCl extends PersonCl {
 
 // super()는 부모 클래스의 생성자이다. 여기에 부모 클래스의 생성자에 대한 인수를 전달하면 된다.
 // super()가 항상 생성자 함수의 맨 처음에 나와야 한다. 그래야만 이후 하위 클래스의 this키워드에 접근이 가능하다. 이미 extends키워드를 통해 PersonCl의 생성자를 상속받은 상태이기에, 하위 클래스인 StudenCl은 생성자가 따로 없어도 괜찮다. 여기에 독자적인 property를 갖고자 한다면, 생성자 생성과 함께 super()를 넣어서 this키워드를 사용할 수 있게 해야 한다.
+
+
+// [14-221] Inheritance Between "Classes": Object.create()
+
+// Inheritance Between "Classes": Object.create
+const PersonProto = {
+    calcAge() {
+      console.log(2037 - this.birthYear);
+    },
+  
+    init(firstName, birthYear) {
+      this.firstName = firstName;
+      this.birthYear = birthYear;
+    },
+};
+  
+  
+const StudentProto = Object.create(PersonProto);
+StudentProto.init = function(firstName, birthYear, course) {
+    PersonProto.init.call(this, firstName, birthYear);
+    this.course = course;
+};
+
+StudentProto.introduce = function() {
+    console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
+
+const jay = Object.create(StudentProto);
+jay.init('Jay', 2010, 'Computer Science');
+jay.introduce();
+jay.calcAge();
