@@ -39,6 +39,7 @@ const jay = 'Jay';
 console.log(jay instanceof Person); // false
 */
 
+/*
 // [14-209] Prototypes
 
 Person.prototype.calcAge = function () {
@@ -92,6 +93,7 @@ console.dir(h1);
 
 console.dir(x => x + 1);
 // 함수도 객체형이다보니 prototype이 있다. 그래서 함수에서도 내장함수를 쓸 수 있는 것이다.
+*/
 
 /*
 // [14-212] Coding Challenge #1
@@ -162,6 +164,7 @@ class PersonCl {
 }
 */
 
+/*
 // [14-215] Static Methods
 Person.hey = function () {
   console.log('Hey there');
@@ -221,6 +224,7 @@ console.log(jessica.age); //41
 // 계산된 getter property는 __proto__에 저장된다.
 
 // getter와 setter는 데이터 유효성 검사에 매우 유용하다.
+*/
 
 /*
 // [14-216] Object.create
@@ -378,6 +382,7 @@ Tesla.chargeBattery(90);
 Tesla.accelerate();
 */
 
+/*
 // [14-220] Inheritance Between "Classes": ES6 Classes
 class PersonCl {
   constructor(fullName, birthYear) {
@@ -440,6 +445,7 @@ class StudentCl extends PersonCl {
 // super()는 부모 클래스의 생성자이다. 여기에 부모 클래스의 생성자에 대한 인수를 전달하면 된다.
 // super()가 항상 생성자 함수의 맨 처음에 나와야 한다. 그래야만 이후 하위 클래스의 this키워드에 접근이 가능하다. 이미 extends키워드를 통해 PersonCl의 생성자를 상속받은 상태이기에, 하위 클래스인 StudenCl은 생성자가 따로 없어도 괜찮다. 여기에 독자적인 property를 갖고자 한다면, 생성자 생성과 함께 super()를 넣어서 this키워드를 사용할 수 있게 해야 한다.
 
+*/
 
 /*
 // [14-221] Inheritance Between "Classes": Object.create()
@@ -522,6 +528,7 @@ console.log(acc1.pin); // <- 유저가 접근하면 안 되는 데이터
 */
 
 
+/*
 // [14-224] Encapsulation: Protected Properties and Methods
 
 // Public fields
@@ -619,3 +626,91 @@ class Account {
 // method에 'return this;'를 함으로써 아래의 chaining이 오류없이 작동되도록 설정.
 acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
 console.log(acc1.getMovements());
+
+
+*/
+
+
+// [14-226] Coding Challenge #4
+
+/*
+const Car = function(make, speed) {
+    this.make = make;
+    this.speed = speed;
+};
+
+Car.prototype.accelerate = function() {
+    this.speed += 10;
+    console.log(`${this.make} is going at ${this.speed} km/h`);
+};
+
+Car.prototype.brake = function() {
+    this.speed -= 5;
+    console.log(`${this.make} is going at ${this.speed} km/h`);
+};
+
+
+const EV = function(make, speed, charge) {
+  Car.call(this, make, speed);
+  this.charge = charge;
+};
+
+EV.prototype = Object.create(Car.prototype);
+EV.prototype.chargeBattery = function(chargeTo) {
+  this.charge = chargeTo;
+};
+
+EV.prototype.accelerate = function() {
+  this.speed += 20;
+  this.charge--;
+  console.log(`${this.make} is going at ${this.speed} km/h, with a charge of ${this.charge}%`);
+};
+
+const Tesla = new EV('Tesla', 120, 23);
+Tesla.chargeBattery(90);
+Tesla.accelerate();
+*/
+
+class CarCl {
+    constructor(make, speed) {
+        this.make = make;
+        this.speed = speed;
+    }
+
+    accelerate() {
+        this.speed += 10;
+        console.log(`${this.make} is going at ${this.speed} km/h`);
+        return this;
+    }
+    
+    brake () {
+        this.speed -= 5;
+        console.log(`${this.make} is going at ${this.speed} km/h`);
+        return this;
+    };
+}
+
+class EVCl extends CarCl {
+
+    #charge;
+
+    constructor(make, speed, charge) {
+        super(make, speed);
+        this.#charge = charge;
+    }
+
+    chargeBattery(chargeTo) {
+        this.#charge = chargeTo;
+        return this;
+    }
+      
+    accelerate() {
+        this.speed += 20;
+        this.charge--;
+        console.log(`${this.make} is going at ${this.speed} km/h, with a charge of ${this.#charge}%`);
+        return this;
+    }
+}
+
+const rivian = new EVCl('Rivian', 120, 23);
+rivian.chargeBattery(30).accelerate().brake();
