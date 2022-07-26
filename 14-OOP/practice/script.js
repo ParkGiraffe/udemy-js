@@ -441,6 +441,7 @@ class StudentCl extends PersonCl {
 // super()가 항상 생성자 함수의 맨 처음에 나와야 한다. 그래야만 이후 하위 클래스의 this키워드에 접근이 가능하다. 이미 extends키워드를 통해 PersonCl의 생성자를 상속받은 상태이기에, 하위 클래스인 StudenCl은 생성자가 따로 없어도 괜찮다. 여기에 독자적인 property를 갖고자 한다면, 생성자 생성과 함께 super()를 넣어서 this키워드를 사용할 수 있게 해야 한다.
 
 
+/*
 // [14-221] Inheritance Between "Classes": Object.create()
 
 // Inheritance Between "Classes": Object.create
@@ -470,7 +471,9 @@ const jay = Object.create(StudentProto);
 jay.init('Jay', 2010, 'Computer Science');
 jay.introduce();
 jay.calcAge();
+*/
 
+/*
 // [14-222] Another Class Example
 class Account {
     constructor(owner, currency, pin) {
@@ -516,3 +519,98 @@ console.log(acc1);
 console.log(acc1.pin); // <- 유저가 접근하면 안 되는 데이터
 
 // 위와 같이 유저가 접근하면 안 되는 데이터가 존재한다. 이럴 경우, 데이터 캡슐화 및 데이터 개인 정보 보호가 정말로 필요하다. 다음 강의가 이에 대한 내용이다.
+*/
+
+
+// [14-224] Encapsulation: Protected Properties and Methods
+
+// Public fields
+// Private fields
+// Public methods
+// Private methods
+
+// Encapsulation: Protected Properties and Methods
+// Encapsulation: Private Class Fields and Methods
+
+// 1) Public fields
+// 2) Private fields - #을 사용해서 private한 fields를 구현한다. fields를 선언할 때는 따로 const, let을 붙이지 않아도 된다.
+// Fields는 constructor의 property와 동일하게 instance 내부에 저장되기 때문에 prototype에 포함되지 않는다. (애초에 property를 field라고 부르기도 하고, 둘이 같은 의미)
+// 3) Public methods
+// 4) Private methods - private method의 이름 앞에 #을 붙이면, private class field 로 인식하고선 property가 아니라 instance 자체에 해당 메소드를 집어넣는다. 그래서 _(underscore convention)를 사용한다. 
+// (there is also the static version) -- static은 인스턴스가 아니라, 클래스 자체에서만 사용할 수 있는 것들이다. ex) Object.create()
+
+class Account {
+    // 1) Public fields (instances)
+    locale = navigator.language;
+  
+    // 2) Private fields (instances)
+    #movements = [];
+    #pin;
+    // pin은 생성자에 대한 입력값을 기반으로 하는데, private할 필요가 있다. 이럴 경우 #을 붙인 빈 변수를 만든 후, constructor에서 그 값을 재정의하도록 한다.
+  
+    constructor(owner, currency, pin) {
+      this.owner = owner;
+      this.currency = currency;
+      this.#pin = pin;
+  
+      // Protected property
+      // this._movements = [];
+      // this.locale = navigator.language;
+  
+      console.log(`Thanks for opening an account, ${owner}`);
+    }
+  
+    // 3) Public methods
+  
+    // Public interface
+    getMovements() {
+      return this.#movements;
+    }
+  
+    deposit(val) {
+      this.#movements.push(val);
+      return this;
+    }
+  
+    withdraw(val) {
+      this.deposit(-val);
+      return this;
+    }
+  
+    requestLoan(val) {
+      // if (this.#approveLoan(val)) {
+      if (this._approveLoan(val)) {
+        this.deposit(val);
+        console.log(`Loan approved`);
+        return this;
+      }
+    }
+  
+    static helper() {
+      console.log('Helper');
+    }
+  
+    // 4) Private methods
+    // #approveLoan(val) {
+    _approveLoan(val) {
+      return true;
+    }
+  }
+  
+  const acc1 = new Account('Jonas', 'EUR', 1111);
+  
+  // acc1._movements.push(250);
+  // acc1._movements.push(-140);
+  // acc1.approveLoan(1000);
+  
+  acc1.deposit(250);
+  acc1.withdraw(140);
+  acc1.requestLoan(1000);
+  console.log(acc1.getMovements());
+  console.log(acc1);
+  Account.helper(); // Static method
+  
+  // console.log(acc1.#movements); // SyntaxError
+  // console.log(acc1.#pin); // SyntaxError
+  // console.log(acc1.#approveLoan(100));
+  
