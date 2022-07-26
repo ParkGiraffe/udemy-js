@@ -530,11 +530,11 @@ console.log(acc1.pin); // <- 유저가 접근하면 안 되는 데이터
 // Private methods
 
 // Encapsulation: Protected Properties and Methods
-// Encapsulation: Private Class Fields and Methods
+// Encapsulation: Private Class  and Methods
 
 // 1) Public fields
 // 2) Private fields - #을 사용해서 private한 fields를 구현한다. fields를 선언할 때는 따로 const, let을 붙이지 않아도 된다.
-// Fields는 constructor의 property와 동일하게 instance 내부에 저장되기 때문에 prototype에 포함되지 않는다. (애초에 property를 field라고 부르기도 하고, 둘이 같은 의미)
+// 는 constructor의 property와 동일하게 instance 내부에 저장되기 때문에 prototype에 포함되지 않는다. (애초에 property를 field라고 부르기도 하고, 둘이 같은 의미)
 // 3) Public methods
 // 4) Private methods - private method의 이름 앞에 #을 붙이면, private class field 로 인식하고선 property가 아니라 instance 자체에 해당 메소드를 집어넣는다. 그래서 _(underscore convention)를 사용한다. 
 // (there is also the static version) -- static은 인스턴스가 아니라, 클래스 자체에서만 사용할 수 있는 것들이다. ex) Object.create()
@@ -614,3 +614,8 @@ class Account {
   // console.log(acc1.#pin); // SyntaxError
   // console.log(acc1.#approveLoan(100));
   
+
+// Chaining
+// method에 'return this;'를 함으로써 아래의 chaining이 오류없이 작동되도록 설정.
+acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
+console.log(acc1.getMovements());
