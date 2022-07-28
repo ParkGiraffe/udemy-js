@@ -22,7 +22,7 @@ if (navigator.geolocation)
             const { longitude } = position.coords;
             const coords = [latitude, longitude];
 
-            var map = L.map('map').setView(coords, 13);
+            const map = L.map('map').setView(coords, 13);
             // L은 Leaflet의 namespace.
             // map()은 인자로 받은 String을 id로 하는 div에 map 이미지를 불러와주는 메소드
             // setView()는 위도와 경도 배열, 지도 줌 정도를 인자로 받는다.
@@ -33,10 +33,26 @@ if (navigator.geolocation)
             }).addTo(map);
             // tileLayer()는 지도의 이미지를 타일 단위로 불러와주는데, openstreetmap 뿐만 아니라 구글맵과 같은 다양한 지도를 불러와준다.
 
-            L.marker(coords)
-                .addTo(map)
-                .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-                .openPopup();
+            map.on('click', function (mapEvent) {
+                console.log(mapEvent);
+                const { lat, lng } = mapEvent.latlng;
+
+                L.marker([lat, lng])
+                    .addTo(map)
+                    .bindPopup(L.popup({
+                        maxWidth: 250,
+                        minWidth: 100,
+                        autoClose: false,
+                        closeOnClick: false,
+                        className: 'running-popup',
+                    }))
+                    .setPopupContent('workout')
+                    .openPopup();
+
+            })
+
+
+
         },
         function () {
             alert('Could not get your postion');
