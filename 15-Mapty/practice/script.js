@@ -71,7 +71,13 @@ class App {
     #workouts = [];
 
     constructor() {
+        // Get user's position
         this._getPosition();
+
+        // Get data from local storage
+        this._getLocalStorage();
+
+        // Attach event handlers
         form.addEventListener('submit', this._newWorkout.bind(this));
         inputType.addEventListener('change', this._toggleElevationField);
         containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
@@ -108,6 +114,10 @@ class App {
 
         // Handling clicks on map
         this.#map.on('click', this._showForm.bind(this));
+
+        this.#workouts.forEach(work => {
+            this._renderWorkoutMarker(work);
+        });
     }
 
     _showForm(mapEvent) {
@@ -181,6 +191,9 @@ class App {
 
         // Hide form + clear input fields
         this._hideForm();
+
+        // Set local storage to all workouts
+        this._setLocalStorage();
     }
 
     _renderWorkout(workout) {
@@ -267,8 +280,38 @@ class App {
             },
         });
 
-        workout.click();
+        // workout.click();
     }
+
+    _setLocalStorage() {
+        localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+    };
+    // localStorage.setItem(저장할 내용의 이름, 저장할 내용 - JSON string 형식으로.)
+    // JSON.stringfy()는 저장할 내용을 자동으로 JSON형식의 string으로 변환해준다.
+
+    _getLocalStorage() {
+        const data = JSON.parse(localStorage.getItem('workouts'));
+
+        if(!data) return;
+
+        this.#workouts = data;
+
+        this.#workouts.forEach(work => {
+            this._renderWorkout(work);
+        });
+    };
+    // localStorage.getItem(저장한 내용의 이름)
+    // JSON.parse()는 불러온 JSON string을 자동으로 알맞은 데이터 형식으로 변환해준다.
+    // String 타입이었기 때문에, 처음 불러오면 프로토타입 체인을 모두 잃어버린다. 그래서 메소드 사용이 불가능하다.
+
+
+    reset() {
+        localStorage.removeItem('workouts');
+        location.reload();
+    }
+    // localStorage.removeItem(저장한 내용의 이름) - 해당 내용 제거
+    // location.reload() 페이지 리로딩
 }
 
 const app = new App();
+
