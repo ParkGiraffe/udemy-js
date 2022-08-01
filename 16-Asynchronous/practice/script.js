@@ -8,6 +8,7 @@ const countriesContainer = document.querySelector('.countries');
 // https://restcountries.com/v2/
 
 
+/*
 // 과거의 방식으로 AJAX 사용해보기. - XMLHttpRequest()
 // open(CRUD 명령어 유형, 데이터를 받아올 서버 url) - 서버에 요청할 내용 작성
 // send()- 서버에 요청 보내고 데이터를 받음. (비동기)
@@ -42,3 +43,57 @@ const getCountryData = function(country) {
 
 getCountryData('portugal');
 getCountryData('usa');
+*/
+
+/*
+
+// [15-250] Welcome to Callback Hell
+// 비동기과정에서 이처럼 콜백함수가 여러 개가 중첩이 되는 현상이 발생하는데, 보기 흉하고 버그를 야기하기 좋다. ES6이후로 생긴 promise를 통해 이 문제를 해결할 수 있다. (다음 강의로)
+const getCountryAndNeighbour = function (country) {
+    // AJAX call country 1
+    const request = new XMLHttpRequest();
+    request.open('GET', `https://restcountries.eu/rest/v2/name/${country}`);
+    request.send();
+  
+    request.addEventListener('load', function () {
+      const [data] = JSON.parse(this.responseText);
+      console.log(data);
+  
+      // Render country 1
+      renderCountry(data);
+  
+      // Get neighbour country (2)
+      const [neighbour] = data.borders;
+  
+      if (!neighbour) return;
+  
+      // AJAX call country 2
+      const request2 = new XMLHttpRequest();
+      request2.open('GET', `https://restcountries.eu/rest/v2/alpha/${neighbour}`);
+      request2.send();
+  
+      request2.addEventListener('load', function () {
+        const data2 = JSON.parse(this.responseText);
+        console.log(data2);
+  
+        renderCountry(data2, 'neighbour');
+      });
+    });
+  };
+  
+  // getCountryAndNeighbour('portugal');
+  getCountryAndNeighbour('usa');
+  
+  setTimeout(() => {
+    console.log('1 second passed');
+    setTimeout(() => {
+      console.log('2 seconds passed');
+      setTimeout(() => {
+        console.log('3 second passed');
+        setTimeout(() => {
+          console.log('4 second passed');
+        }, 1000);
+      }, 1000);
+    }, 1000);
+  }, 1000);
+  */
