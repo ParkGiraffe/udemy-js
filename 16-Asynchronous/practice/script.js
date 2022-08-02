@@ -224,35 +224,38 @@ btn.addEventListener('click', function() {
 
 */
 
+/*
 // [15-255] Throwing Errors Manually
 // 'throw new Error()'를 통해 미리 설정해놓은 에러상황에 맞추어 Error 객체를 던질 수 있다.
 // promisePrototype.ok는 데이터를 가져온 여부를 bool타입으로 갖는다. promisePrototype.status는 통신 결과 Http 숫자(200, 404)를 가진다.
-const getJSON = function(url, errorMsg = 'Something went wrong') {
+const getJSON = function (url, errorMsg = 'Something went wrong') {
   return fetch(url).then(response => {
-    if(!response.ok) throw new Error(`${errorMsg} (${response.status})`);
+    if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
 
     return response.json;
-  }
-  )
-}
+  });
+};
 
 const getCountryData = function (country) {
   getJSON(`https://restcountries.com/v2/name/${country}`, 'Country not found')
     .then(data => {
       renderCountry(data[0]);
       const neighbour = data[0].borders?.[0];
-      if(!neighbour) throw new Error('No neighbour found!');
-      return getJSON(`https://restcountries.com/v2/name/${neighbour}`, 'Country not found');
+      if (!neighbour) throw new Error('No neighbour found!');
+      return getJSON(
+        `https://restcountries.com/v2/name/${neighbour}`,
+        'Country not found'
+      );
     })
     .then(data => renderCountry(data, 'neighbour')) // alpha로 가져온 값은 array가 안 씌워져 있음.
     .catch(err => {
-      console.err(`ERROR: ${err}`);
+      console.error(`ERROR: ${err}`);
       renderError(`Something went wrong. ${err.message}. Try again!`);
     })
-    .finally(() => countriesContainer.style.opacity = 1);
+    .finally(() => (countriesContainer.style.opacity = 1));
 };
 
-const renderError = function(msg) {
+const renderError = function (msg) {
   countriesContainer.insertAdjacentText('beforeend', msg);
   // countriesContainer.style.opacity = 1;
 };
@@ -276,6 +279,58 @@ const renderCountry = function (data, className = '') {
   // countriesContainer.style.opacity = 1;
 };
 
-btn.addEventListener('click', function() {
+btn.addEventListener('click', function () {
   getCountryData('usa');
 });
+*/
+
+// [15-256] Coding Challenge #1
+
+const renderCountry = function (data, className = '') {
+  const html = `
+      <article class="country ${className}">
+      <img class="country__img" src="${data.flag}" />
+      <div class="country__data">
+      <h3 class="country__name">${data.name}</h3>
+      <h4 class="country__region">${data.region}</h4>
+      <p class="country__row"><span>👫</span>${(
+        +data.population / 1000000
+      ).toFixed(1)} people</p>
+      <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
+      <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
+      </div>
+      </article>
+      `;
+  countriesContainer.insertAdjacentHTML('beforeend', html);
+  // countriesContainer.style.opacity = 1;
+};
+
+const whereAmI = function (lat, lng) {
+  fetch(
+    `https://geocode.xyz/${lat},${lng}?geoit=json&auth=370004336917070805707x7354`
+  )
+    .then(res => {
+      if (!res.ok)
+        throw new Error(`Problem with geocoding (${res.status})`);
+      return res.json();
+    })
+    .then(data => {
+      console.log(`You are in ${data.region}, ${data.country}`);
+      return fetch(`https://restcountries.com/v2/name/${data.country}`);
+    })
+    .then(res => {
+      if (!res.ok) throw new Error(`Country not found (${res.status})`);
+      return res.json()
+    })
+    .then(data => {
+      renderCountry(data[0]);
+    })
+    .catch(err => {
+      console.error(`${err.message}`);
+    })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
+    });
+};
+
+whereAmI(52.508, 13.38);
