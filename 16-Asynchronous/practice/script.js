@@ -170,6 +170,7 @@ const renderCountry = function (data, className = '') {
 getCountryData('usa');
 */
 
+/*
 // [15-254] Handling Rejected Promises
 // catch() 메소드는 promises chain에서 종합적인 에러를 한 번에 잡아주는 역할을 해준다. 따라서 중간중간마다 복잡하게 error handling을 해주지 않아도 된다.
 // 이때 catch()가 반환하는 Error도 JavaScript 객체이다. 그래서 err.message로 메시지만 빼올 수 있다.
@@ -221,3 +222,60 @@ btn.addEventListener('click', function() {
   getCountryData('usa');
 });
 
+*/
+
+// [15-255] Throwing Errors Manually
+// 'throw new Error()'를 통해 미리 설정해놓은 에러상황에 맞추어 Error 객체를 던질 수 있다.
+// promisePrototype.ok는 데이터를 가져온 여부를 bool타입으로 갖는다. promisePrototype.status는 통신 결과 Http 숫자(200, 404)를 가진다.
+const getJSON = function(url, errorMsg = 'Something went wrong') {
+  return fetch(url).then(response => {
+    if(!response.ok) throw new Error(`${errorMsg} (${response.status})`);
+
+    return response.json;
+  }
+  )
+}
+
+const getCountryData = function (country) {
+  getJSON(`https://restcountries.com/v2/name/${country}`, 'Country not found')
+    .then(data => {
+      renderCountry(data[0]);
+      const neighbour = data[0].borders?.[0];
+      if(!neighbour) throw new Error('No neighbour found!');
+      return getJSON(`https://restcountries.com/v2/name/${neighbour}`, 'Country not found');
+    })
+    .then(data => renderCountry(data, 'neighbour')) // alpha로 가져온 값은 array가 안 씌워져 있음.
+    .catch(err => {
+      console.err(`ERROR: ${err}`);
+      renderError(`Something went wrong. ${err.message}. Try again!`);
+    })
+    .finally(() => countriesContainer.style.opacity = 1);
+};
+
+const renderError = function(msg) {
+  countriesContainer.insertAdjacentText('beforeend', msg);
+  // countriesContainer.style.opacity = 1;
+};
+
+const renderCountry = function (data, className = '') {
+  const html = `
+      <article class="country ${className}">
+      <img class="country__img" src="${data.flag}" />
+      <div class="country__data">
+      <h3 class="country__name">${data.name}</h3>
+      <h4 class="country__region">${data.region}</h4>
+      <p class="country__row"><span>👫</span>${(
+        +data.population / 1000000
+      ).toFixed(1)} people</p>
+      <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
+      <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
+      </div>
+      </article>
+      `;
+  countriesContainer.insertAdjacentHTML('beforeend', html);
+  // countriesContainer.style.opacity = 1;
+};
+
+btn.addEventListener('click', function() {
+  getCountryData('usa');
+});
