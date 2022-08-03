@@ -283,6 +283,7 @@ btn.addEventListener('click', function () {
   getCountryData('usa');
 });
 */
+/*
 
 // [15-256] Coding Challenge #1
 
@@ -333,4 +334,5 @@ const whereAmI = function (lat, lng) {
     });
 };
 
-whereAmI(52.508, 13.38);
+whereAmI(52.508, 13.38); // Berlin, Germany
+*/
