@@ -523,3 +523,29 @@ createImage('img/img-1.jpg')
   .catch(err => console.err(err));
 */
 
+
+// [15-262] Consuming Promises with Async/Await
+// 현대 자바스크립트는 async/await로 더 쉽게 promise consume을 할 수 있다.
+// fetch받은 promise를 json() 할 때도 await를 사용해야 한다.
+const getPosition = function () {
+  return new Promise(function (reslove, reject) {
+    // navigator.geolocation.getCurrentPosition(
+    //   position => resolve(position),
+    //   err => reject(err)
+    // );
+    navigator.geolocation.getCurrentPosition(reslove, reject);
+  });
+};
+
+const whereAmI = async function() {
+  const pos = await getPosition();
+  const { latitude: lat, longitude: lng } = pos.coords;
+
+  const geoRes = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json&auth=370004336917070805707x7354`);
+  const geoData = await geoRes.json();
+  const res = await fetch(`https://restcountries.com/v2/alpha/${geoData.state}`);
+  const data = await res.json();
+  renderCountry(data);
+}
+
+whereAmI();
