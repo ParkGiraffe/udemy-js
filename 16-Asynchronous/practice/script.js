@@ -336,3 +336,58 @@ const whereAmI = function (lat, lng) {
 
 whereAmI(52.508, 13.38); // Berlin, Germany
 */
+
+// [15-259] Building a Simple Promise
+// Promise를 직접 만들 때는 함수를 생성자에 전달한다. 이 함수는 두 개의 인자를 생성자로부터 받는데, reslove()와 reject()이다. resolve()는 promise의 요청이 fulfilled 됐을 때, reject()는 요청이 reject 됐을 때 각각 성공과 실패 값을 전달해주는 함수이다.
+
+// Building a Simple Promise
+const lotteryPromise = new Promise(function (resolve, reject) {
+  console.log('Lotter draw is happening 🔮'); // - microtasks queue
+  setTimeout(function () { // 비동기 지점 & callback queue
+    if (Math.random() >= 0.5) {
+      resolve('You WIN 💰');
+    } else {
+      reject(new Error('You lost your money 💩'));
+    }
+  }, 2000);
+});
+
+lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
+
+// Promisifying setTimeout
+const wait = function (seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000); // - callback queue
+  });
+};
+
+wait(1)
+  .then(() => {
+    console.log('1 second passed');
+    return wait(1);
+  })
+  .then(() => {
+    console.log('2 second passed');
+    return wait(1);
+  })
+  .then(() => {
+    console.log('3 second passed');
+    return wait(1);
+  })
+  .then(() => console.log('4 second passed'));
+
+// setTimeout(() => {
+//   console.log('1 second passed');
+//   setTimeout(() => {
+//     console.log('2 seconds passed');
+//     setTimeout(() => {
+//       console.log('3 second passed');
+//       setTimeout(() => {
+//         console.log('4 second passed');
+//       }, 1000);
+//     }, 1000);
+//   }, 1000);
+// }, 1000);
+
+Promise.resolve('abc').then(x => console.log(x)); // - microtasks queue
+Promise.reject(new Error('Problem!')).catch(x => console.error(x)); // - microtasks queue
