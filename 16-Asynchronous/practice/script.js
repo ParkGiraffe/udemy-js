@@ -425,6 +425,7 @@ Promise.resolve('abc').then(x => console.log(x)); // - microtasks queue
 Promise.reject(new Error('Problem!')).catch(x => console.error(x)); // - microtasks queue
 */
 
+/*
 // [15-260] Promisifying the Geolocation API
 // navigator.geolocation.getCurrentPosition()은 두 개의 함수를 인자로 받는데, 첫 번째는 위치를 불러오는 데 성공했을 경우, 두 번째는 실패했을 경우를 위한 함수이다.
 
@@ -472,3 +473,53 @@ const whereAmI = function () {
 };
 
 btn.addEventListener('click', whereAmI);
+
+*/
+
+/* [15-261] Coding Challenge #2
+const wait = function (sec) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, sec * 1000);
+  });
+};
+
+const createImage = function (imgPath) {
+  return new Promise(function (resolve, reject) {
+    const img = document.createElement('img');
+    img.src = imgPath;
+    const imgContainer = document.querySelector('.images');
+
+    img.addEventListener('load', function () {
+      imgContainer.append(img);
+      resolve(img);
+    });
+
+    img.addEventListener('error', function () {
+      reject(new Error('Image not found'));
+    });
+  });
+};
+
+let currentImg;
+
+createImage('img/img-1.jpg')
+  .then(img => {
+    currentImg = img;
+    console.log('Image 1 loaded');
+    return wait(2);
+  })
+  .then(() => {
+    currentImg.style.display = 'none';
+
+    return createImage('img/img-2.jpg');
+  })
+  .then(img => {
+    currentImg = img;
+    return wait(2)
+  })
+  .then(() => {
+    currentImg.style.display = 'none';
+  })
+  .catch(err => console.err(err));
+*/
+
