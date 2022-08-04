@@ -3,6 +3,37 @@
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
+const renderCountry = function (data, className = '') {
+  const html = `
+  <article class="country ${className}">
+    <img class="country__img" src="${data.flag}" />
+    <div class="country__data">
+      <h3 class="country__name">${data.name}</h3>
+      <h4 class="country__region">${data.region}</h4>
+      <p class="country__row"><span>👫</span>${(
+        +data.population / 1000000
+      ).toFixed(1)} people</p>
+      <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
+      <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
+    </div>
+  </article>
+  `;
+  countriesContainer.insertAdjacentHTML('beforeend', html);
+  countriesContainer.style.opacity = 1;
+};
+
+const renderError = function (msg) {
+  countriesContainer.insertAdjacentText('beforeend', msg);
+  countriesContainer.style.opacity = 1;
+};
+
+const getJSON = function (url, errorMsg = 'Something went wrong') {
+  return fetch(url).then(response => {
+    if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
+
+    return response.json();
+  });
+};
 ///////////////////////////////////////
 // new URL of the API
 // https://restcountries.com/v2/
@@ -337,6 +368,7 @@ const whereAmI = function (lat, lng) {
 whereAmI(52.508, 13.38); // Berlin, Germany
 */
 
+/*
 // [15-259] Building a Simple Promise
 // Promise를 직접 만들 때는 함수를 생성자에 전달한다. 이 함수는 두 개의 인자를 생성자로부터 받는데, reslove()와 reject()이다. resolve()는 promise의 요청이 fulfilled 됐을 때, reject()는 요청이 reject 됐을 때 각각 성공과 실패 값을 전달해주는 함수이다.
 
@@ -391,3 +423,52 @@ wait(1)
 
 Promise.resolve('abc').then(x => console.log(x)); // - microtasks queue
 Promise.reject(new Error('Problem!')).catch(x => console.error(x)); // - microtasks queue
+*/
+
+// [15-260] Promisifying the Geolocation API
+// navigator.geolocation.getCurrentPosition()은 두 개의 함수를 인자로 받는데, 첫 번째는 위치를 불러오는 데 성공했을 경우, 두 번째는 실패했을 경우를 위한 함수이다.
+
+const getPosition = function () {
+  return new Promise(function (reslove, reject) {
+    // navigator.geolocation.getCurrentPosition(
+    //   position => resolve(position),
+    //   err => reject(err)
+    // );
+    navigator.geolocation.getCurrentPosition(reslove, reject);
+  });
+};
+
+const whereAmI = function () {
+  getPosition()
+    .then(pos => {
+      const { latitude: lat, longitude: lng } = pos.coords;
+      return fetch(
+        `https://geocode.xyz/${lat},${lng}?geoit=json&auth=370004336917070805707x7354`
+      );
+    })
+    .then(res => {
+      if (!res.ok) throw new Error(`Problem with geocoding (${res.status})`);
+      return res.json();
+    })
+    .then(data => {
+      console.log(`You are in ${data.region}, ${data.country}`);
+      // console.log(data);
+      return fetch(`https://restcountries.com/v2/alpha/${data.state}`);
+    })
+    .then(res => {
+      if (!res.ok) throw new Error(`Country not found (${res.status})`);
+      return res.json();
+    })
+    .then(data => {
+      console.log(data);
+      renderCountry(data);
+    })
+    .catch(err => {
+      console.error(`${err.message}`);
+    })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
+    });
+};
+
+btn.addEventListener('click', whereAmI);
