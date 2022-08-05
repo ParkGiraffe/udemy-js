@@ -523,7 +523,7 @@ createImage('img/img-1.jpg')
   .catch(err => console.err(err));
 */
 
-
+/*
 // [15-262] Consuming Promises with Async/Await
 // 현대 자바스크립트는 async/await로 더 쉽게 promise consume을 할 수 있다.
 // fetch받은 promise를 json() 할 때도 await를 사용해야 한다.
@@ -547,5 +547,51 @@ const whereAmI = async function() {
   const data = await res.json();
   renderCountry(data);
 }
+*/
+
+
+/*
+// [15-263] Error Handling with Try...Catch
+// try-catch 구문은 async/await 나오기 전부터 있었다. 그래서 둘이 원래는 아무 관련이 없는데, 비동기 함수 오류를 잡는데에 탁월해서 같이 잘 쓰인다.
+
+
+// 간단한 예제
+try {
+  const x = 1;
+  x = 3; // 상수에 대입은 불가능.
+} catch (err) {
+  alert(err.message)
+};
+
+
+const getPosition = function () {
+  return new Promise(function (reslove, reject) {
+    navigator.geolocation.getCurrentPosition(reslove, reject);
+  });
+};
+
+const whereAmI = async function () {
+  try {
+    const pos = await getPosition();
+    const { latitude: lat, longitude: lng } = pos.coords;
+
+    const geoRes = await fetch(
+      `https://geocode.xyz/${lat},${lng}?geoit=json&auth=370004336917070805707x7354`
+    );
+    if (!geoRes.ok) throw new Error('Problem getting location data');
+    const geoData = await geoRes.json();
+    const res = await fetch(
+      `https://restcountries.com/v2/alpha/${geoData.state}`
+    );
+    if (!res.ok) throw new Error('Problem getting country');
+    const data = await res.json();
+    renderCountry(data);
+  } catch (err) {
+    console.err(`${err}`);
+    renderError(err);
+  }
+};
 
 whereAmI();
+// fetch()로 가져온 promise의 경우 403 또는 404 에러일 때는 reject()가 일어나지 않는다. 그래서 promise.prototype.ok를 이용해서 따로 오류를 던지는 구문을 만들어줘야 한다.
+*/
