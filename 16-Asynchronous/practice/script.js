@@ -643,6 +643,7 @@ const whereAmI = async function () {
 
 */
 
+/*
 // [15-265] Running promises in Parallel
 // Promise.all()은 static method로 promise array를 인자로 받은 후 promise들을 병렬로 처리해준다. 그리고 새로운 promise를 반환한다. 이 안에는 array 데이터가 들어있다. 만약 이 중 하나가 rejected되면, 모든 promise가 rejected가 된다.
 const get3Countries = async function () {
@@ -658,7 +659,7 @@ const get3Countries = async function () {
     //   `https://restcountries.eu/rest/v2/name/${c3}`
     // );
     // console.log([data1.capital, data2.capital, data3.capital]);
-  
+
     // 병렬로 진행
     const data = function (c1, c2, c3) {
       [
@@ -676,3 +677,166 @@ const get3Countries = async function () {
 get3Countries('portugal', 'canada', 'usa');
 
 // Promise.all()처럼 여러 promise를 결합해주는 함수를 combinator functions라고 부른다. 그리고 그 종류는 다양하며 다음 강의에서 배운다.
+*/
+
+/*
+// [15-266] Other Promise Combinators: Race, Allsetteled and Any
+
+// Promise combinator의 특징 : Promise 배열을 수신하고 Promise를 반환한다.
+// Promise.race() : 가장 먼저 settled(완료)되는 Promise만을 리턴하는데, 이 Promise가 resolve되는지 reject되는지는 상관 없다.
+(async function () {
+  const res = await Promise.race([
+    getJSON(`https://restcountries.com/v2/name/italy`),
+    getJSON(`https://restcountries.com/v2/name/egypt`),
+    getJSON(`https://restcountries.com/v2/name/usa`),
+  ]);
+  console.log(res);
+})();
+
+// 응용 -> 연결 시간이 초과되는 경우
+const timeout = function (s) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error('Request took to long!'));
+    }, s * 1000);
+  });
+};
+
+Promise.race([
+  getJSON(`https://restcountries.com/v2/name/tanzania`),
+  timeout(5),
+])
+  .then(res => console.log(res))
+  .catch(err => console.err(err));
+
+// Promise.allSettled() : ES2020에서 업데이트 됐다. Promise.all()은 배열 안의 Promise 중 하나라도 reject되면 전체가 reject되고 종료되는데, allSettled()는 하나가 reject되어도 나머지를 계속 실행한다.
+Promise.allSettled([
+  Promise.resolve('Success'),
+  Promise.reject('ERROR'),
+  Promise.resolve('Another success'),
+]).then(res => console.log(res)); // fulfilled와 rejected promise들이 담긴 Array
+
+Promise.all([
+  Promise.resolve('Success'),
+  Promise.reject('ERROR'),
+  Promise.resolve('Another success'),
+])
+  .then(res => console.log(res))
+  .catch(err => console.error(err)); // error문
+
+// Promise.any() : ES2021에 업데이트 됐다. 강의영상을 보면 최신 기능이라서 당시 크롬에서 지원을 안 했다고 한다. Promise.race()와 비슷하게 가장 먼저 resolve된 Promise를 반환하는데, race()와의 차이점은 rejected된 Promise는 무시한다는 것이다.
+// 실습해보니 현재 크롬 브라우저에서는 Promise.any()가 잘 작동한다.
+Promise.any([
+  Promise.reject('ERROR'),
+  Promise.resolve('Success'),
+  Promise.resolve('Another success'),
+])
+  .then(res => console.log(res))
+  .catch(err => console.error(err));
+  */
+
+// [15-267] Coding Challenge #3
+/*
+const wait = function (sec) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, sec * 1000);
+  });
+};
+
+const createImage = function (imgPath) {
+  return new Promise(function (resolve, reject) {
+    const img = document.createElement('img');
+    img.src = imgPath;
+    const imgContainer = document.querySelector('.images');
+
+    img.addEventListener('load', function () {
+      imgContainer.append(img);
+      resolve(img);
+    });
+
+    img.addEventListener('error', function () {
+      reject(new Error('Image not found'));
+    });
+  });
+};
+
+let currentImg;
+
+createImage('img/img-1.jpg')
+  .then(img => {
+    currentImg = img;
+    console.log('Image 1 loaded');
+    return wait(2);
+  })
+  .then(() => {
+    currentImg.style.display = 'none';
+
+    return createImage('img/img-2.jpg');
+  })
+  .then(img => {
+    currentImg = img;
+    return wait(2)
+  })
+  .then(() => {
+    currentImg.style.display = 'none';
+  })
+  .catch(err => console.err(err));
+*/
+
+// 그로고보니 왜 굳이 setTimeout()을 promise에 엮어서 사용할까? 이 이유를 알기 위해서 다시 공부할 필요가 있다. 아마 JS의 call stack 부분과 연관이 있을 듯하다.
+const wait = function (sec) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, sec * 1000);
+  });
+};
+
+const createImage = function (imgPath) {
+  return new Promise(function (resolve, reject) {
+    const img = document.createElement('img');
+    img.src = imgPath;
+    const imgContainer = document.querySelector('.images');
+
+    img.addEventListener('load', function () {
+      imgContainer.append(img);
+      resolve(img);
+    });
+
+    img.addEventListener('error', function () {
+      reject(new Error('Image not found'));
+    });
+  });
+};
+
+/*
+const loadNPause = async function() {
+  try {
+    let img = await createImage('img/img-1.jpg');
+    console.log(1);
+    await wait(2);
+    img.style.display = 'none';
+    img = await createImage('img/img-2.jpg');
+    console.log(2);
+    await wait(2);
+    img.style.display = 'none';
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+loadNPause();
+*/
+
+const loadAll = async function (imgArr) {
+  try {
+    const imgs = imgArr.map(async img => await createImage(img));
+    console.log(imgs);
+    const imgsEl = await Promise.all(imgs);
+    console.log(imgsEl);
+    imgsEl.forEach(img => img.classList.add('parallel'));
+    console.log(imgsEl);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+loadAll(['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']);
