@@ -549,7 +549,6 @@ const whereAmI = async function() {
 }
 */
 
-
 /*
 // [15-263] Error Handling with Try...Catch
 // try-catch 구문은 async/await 나오기 전부터 있었다. 그래서 둘이 원래는 아무 관련이 없는데, 비동기 함수 오류를 잡는데에 탁월해서 같이 잘 쓰인다.
@@ -595,3 +594,85 @@ const whereAmI = async function () {
 whereAmI();
 // fetch()로 가져온 promise의 경우 403 또는 404 에러일 때는 reject()가 일어나지 않는다. 그래서 promise.prototype.ok를 이용해서 따로 오류를 던지는 구문을 만들어줘야 한다.
 */
+
+/*
+// [15-264] Returning Values from Async Functions
+const getPosition = function () {
+  return new Promise(function (reslove, reject) {
+    navigator.geolocation.getCurrentPosition(reslove, reject);
+  });
+};
+
+const whereAmI = async function () {
+  try {
+    const pos = await getPosition();
+    const { latitude: lat, longitude: lng } = pos.coords;
+
+    const geoRes = await fetch(
+      `https://geocode.xyz/${lat},${lng}?geoit=json&auth=370004336917070805707x7354`
+    );
+    if (!geoRes.ok) throw new Error('Problem getting location data');
+    const geoData = await geoRes.json();
+    const res = await fetch(
+      `https://restcountries.com/v2/alpha/${geoData.state}`
+    );
+    if (!res.ok) throw new Error('Problem getting country');
+    const data = await res.json();
+    renderCountry(data);
+
+    return geoData.state;
+  } catch (err) {
+    console.err(`${err}`);
+    renderError(err);
+
+    // Reject promise returned from async function
+    // 비동기 함수는 항상 promise를 반환하는데, 내부에 에러가 있음에도 fulfilled and not rejected 상태가 된다. 그래서 then()의 콜백함수가 작동한다. 따라서 catch 구문에서 한 번 error를 던질 필요가 있다. 그래서 오류를 다음으로 전파해야 한다.
+    throw err;
+  }
+};
+
+(async function () {
+  try {
+    const city = whereAmI();
+  } catch (error) {
+    console.err(`2: ${err.message}`);
+  }
+
+  console.log(`3: Finished getting location`);
+})();
+
+*/
+
+// [15-265] Running promises in Parallel
+// Promise.all()은 static method로 promise array를 인자로 받은 후 promise들을 병렬로 처리해준다. 그리고 새로운 promise를 반환한다. 이 안에는 array 데이터가 들어있다. 만약 이 중 하나가 rejected되면, 모든 promise가 rejected가 된다.
+const get3Countries = async function () {
+  try {
+    // 직렬로 진행
+    // const [data1] = await getJSON(
+    //   `https://restcountries.eu/rest/v2/name/${c1}`
+    // );
+    // const [data2] = await getJSON(
+    //   `https://restcountries.eu/rest/v2/name/${c2}`
+    // );
+    // const [data3] = await getJSON(
+    //   `https://restcountries.eu/rest/v2/name/${c3}`
+    // );
+    // console.log([data1.capital, data2.capital, data3.capital]);
+  
+    // 병렬로 진행
+    const data = function (c1, c2, c3) {
+      [
+        getJSON(`https://restcountries.com/v2/name/${c1}`),
+        getJSON(`https://restcountries.com/v2/name/${c2}`),
+        getJSON(`https://restcountries.com/v2/name/${c3}`),
+      ];
+    };
+    console.log(data.map(e => e.capital));
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+get3Countries('portugal', 'canada', 'usa');
+
+// Promise.all()처럼 여러 promise를 결합해주는 함수를 combinator functions라고 부른다. 그리고 그 종류는 다양하며 다음 강의에서 배운다.
