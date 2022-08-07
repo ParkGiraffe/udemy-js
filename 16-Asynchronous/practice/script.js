@@ -77,7 +77,7 @@ getCountryData('usa');
 
 /*
 
-// [15-250] Welcome to Callback Hell
+// [16-250] Welcome to Callback Hell
 // 비동기과정에서 이처럼 콜백함수가 여러 개가 중첩이 되는 현상이 발생하는데, 보기 흉하고 버그를 야기하기 좋다. ES6이후로 생긴 promise를 통해 이 문제를 해결할 수 있다. (다음 강의로)
 const getCountryAndNeighbour = function (country) {
     // AJAX call country 1
@@ -129,8 +129,8 @@ const getCountryAndNeighbour = function (country) {
   */
 
 /*
-// [15-251] Promises and the Fetch API
-// [15-252] Consuming Promises
+// [16-251] Promises and the Fetch API
+// [16-252] Consuming Promises
 
 // fetch(url) : url로부터 데이터를 얻어온다. promise를 반환한다.
 // promise.prototype.then(함수) : promise가 fulfilled 상태일 때 작동. then 안의 함수는 fulfilled promise의 결과값을 인자로 받을 수 있다. (이 인자를 response라고 많이 표기함. AJAX 용어)
@@ -163,7 +163,7 @@ const renderCountry = function (data, className = '') {
 */
 
 /*
-// [15-253] Chaining promises
+// [16-253] Chaining promises
 // then()메소드는 우리가 무엇을 반환하던 간에 promise를 항상 반환한다. 만약에 return 23이라고 하고 Number를 반환한다면, fulfillment value가 23인 promise를 then()은 반환할 것이다. 그래서 또 뒤에 then() 메소드를 사용할 수 있게 된다.
 // 일련의 promise 체인은 콜백지옥과는 다르게 보기 쉽고 직관적인 모습을 보인다. 이를 Flat chain이라고도 부르는 것으로 보인다.
 const getCountryData = function (country) {
@@ -202,7 +202,7 @@ getCountryData('usa');
 */
 
 /*
-// [15-254] Handling Rejected Promises
+// [16-254] Handling Rejected Promises
 // catch() 메소드는 promises chain에서 종합적인 에러를 한 번에 잡아주는 역할을 해준다. 따라서 중간중간마다 복잡하게 error handling을 해주지 않아도 된다.
 // 이때 catch()가 반환하는 Error도 JavaScript 객체이다. 그래서 err.message로 메시지만 빼올 수 있다.
 
@@ -256,7 +256,7 @@ btn.addEventListener('click', function() {
 */
 
 /*
-// [15-255] Throwing Errors Manually
+// [16-255] Throwing Errors Manually
 // 'throw new Error()'를 통해 미리 설정해놓은 에러상황에 맞추어 Error 객체를 던질 수 있다.
 // promisePrototype.ok는 데이터를 가져온 여부를 bool타입으로 갖는다. promisePrototype.status는 통신 결과 Http 숫자(200, 404)를 가진다.
 const getJSON = function (url, errorMsg = 'Something went wrong') {
@@ -316,7 +316,7 @@ btn.addEventListener('click', function () {
 */
 /*
 
-// [15-256] Coding Challenge #1
+// [16-256] Coding Challenge #1
 
 const renderCountry = function (data, className = '') {
   const html = `
@@ -369,7 +369,7 @@ whereAmI(52.508, 13.38); // Berlin, Germany
 */
 
 /*
-// [15-259] Building a Simple Promise
+// [16-259] Building a Simple Promise
 // Promise를 직접 만들 때는 함수를 생성자에 전달한다. 이 함수는 두 개의 인자를 생성자로부터 받는데, reslove()와 reject()이다. resolve()는 promise의 요청이 fulfilled 됐을 때, reject()는 요청이 reject 됐을 때 각각 성공과 실패 값을 전달해주는 함수이다.
 
 // Building a Simple Promise
@@ -426,7 +426,7 @@ Promise.reject(new Error('Problem!')).catch(x => console.error(x)); // - microta
 */
 
 /*
-// [15-260] Promisifying the Geolocation API
+// [16-260] Promisifying the Geolocation API
 // navigator.geolocation.getCurrentPosition()은 두 개의 함수를 인자로 받는데, 첫 번째는 위치를 불러오는 데 성공했을 경우, 두 번째는 실패했을 경우를 위한 함수이다.
 
 const getPosition = function () {
@@ -476,7 +476,7 @@ btn.addEventListener('click', whereAmI);
 
 */
 
-/* [15-261] Coding Challenge #2
+/* [16-261] Coding Challenge #2
 const wait = function (sec) {
   return new Promise(function (resolve) {
     setTimeout(resolve, sec * 1000);
@@ -524,7 +524,7 @@ createImage('img/img-1.jpg')
 */
 
 /*
-// [15-262] Consuming Promises with Async/Await
+// [16-262] Consuming Promises with Async/Await
 // 현대 자바스크립트는 async/await로 더 쉽게 promise consume을 할 수 있다.
 // fetch받은 promise를 json() 할 때도 await를 사용해야 한다.
 const getPosition = function () {
@@ -550,7 +550,7 @@ const whereAmI = async function() {
 */
 
 /*
-// [15-263] Error Handling with Try...Catch
+// [16-263] Error Handling with Try...Catch
 // try-catch 구문은 async/await 나오기 전부터 있었다. 그래서 둘이 원래는 아무 관련이 없는데, 비동기 함수 오류를 잡는데에 탁월해서 같이 잘 쓰인다.
 
 
@@ -596,7 +596,7 @@ whereAmI();
 */
 
 /*
-// [15-264] Returning Values from Async Functions
+// [16-264] Returning Values from Async Functions
 const getPosition = function () {
   return new Promise(function (reslove, reject) {
     navigator.geolocation.getCurrentPosition(reslove, reject);
@@ -644,7 +644,7 @@ const whereAmI = async function () {
 */
 
 /*
-// [15-265] Running promises in Parallel
+// [16-265] Running promises in Parallel
 // Promise.all()은 static method로 promise array를 인자로 받은 후 promise들을 병렬로 처리해준다. 그리고 새로운 promise를 반환한다. 이 안에는 array 데이터가 들어있다. 만약 이 중 하나가 rejected되면, 모든 promise가 rejected가 된다.
 const get3Countries = async function () {
   try {
@@ -680,7 +680,7 @@ get3Countries('portugal', 'canada', 'usa');
 */
 
 /*
-// [15-266] Other Promise Combinators: Race, Allsetteled and Any
+// [16-266] Other Promise Combinators: Race, Allsetteled and Any
 
 // Promise combinator의 특징 : Promise 배열을 수신하고 Promise를 반환한다.
 // Promise.race() : 가장 먼저 settled(완료)되는 Promise만을 리턴하는데, 이 Promise가 resolve되는지 reject되는지는 상관 없다.
@@ -735,7 +735,7 @@ Promise.any([
   .catch(err => console.error(err));
   */
 
-// [15-267] Coding Challenge #3
+// [16-267] Coding Challenge #3
 /*
 const wait = function (sec) {
   return new Promise(function (resolve) {
