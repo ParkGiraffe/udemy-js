@@ -1,6 +1,5 @@
 // Importing Module
 
-
 /* 
 //[17-272]  Exporting and Importing in ES6 Modules
 
@@ -63,3 +62,50 @@ lastPost.then(last => console.log(last));
 const lastPost2 = await getLastPost();
 console.log(lastPost2);
 */
+
+/*
+// [17-274] The Module Pattern
+// 모듈 패턴의 주요 목표는 기능을 캡슐화하여 개인 데이터를 보호하고 공개 API를 노출하는 것이다. 그리고 이를 잘 실현시키는 방식은 바로 함수를 이용하는 것이다. 함수는 private 데이터를 접근하여 어떠한 값을 return 해주기 때문이다. 그래서 공개 API가 될 수 있다.
+
+// IIFE 내부에서 선언된 변수는 외부에서 볼 수 없다. (== 기능범위를 만들 수 있다. private scope제작 가능) 그리고 IIFE는 변수에 할당할 수 잆는 값을 리턴할 수 있다. 그래서 이를 통해 Module Pattern을 만든다.
+// Module Parttern은 closure를 이용한 scope에 의한 방식이다. 그러다보니 객체랑은 다르다. 당장 밑의 함수만 봐도 this 키워드 없이 작동한다. 함수가 실행이 됐지만, return을 통해 값이 Top-level로 나와있는 상황이고, 그러다보니 birthPlace가 여전히 존재하기 때문에 IIFE 모듈 안의 값을 계속 접근할 수 있는 것이다. (다시 이 내용에 대해 공부하고 싶으면 closure 강의 참조)
+const ShoppingCart2 = (function () {
+  const cart = [];
+  const shoppincCost = 10;
+  const totalPrice = 237;
+  const totalQuantity = 23;
+
+  const addToCart = function (product, quantity) {
+    cart.push({
+      product: product,
+      quantity: quantity
+    });
+    console.log(`${quantity} ${product} added to cart`);
+  };
+
+  const orderStock = function (product, quantity) {
+    cart.push({
+      product: product,
+      quantity: quantity
+    });
+    console.log(`${quantity} ${product} ordered from supplier`);
+  };
+
+  return { // 함수 안에 있는 비공개 데이터를 공개하는 API
+    addToCart,
+    cart,
+    totalPrice,
+    totalQuantity,
+  }
+})();
+
+ShoppingCart2.addToCart('Shoes', 2);
+ShoppingCart2.addToCart('Shirts', 1);
+console.log(ShoppingCart2);
+console.log(ShoppingCart2.shoppincCost); // undefined <- private함.
+
+// 이 기능은 ES6에서 native module이 생기기 전에 사용했던 방식이다. 다만 이 방식은 export import가 안 되다보니 한 파일에 하나의 모듈을 저장하려고 하면 애로사항이 발생한다.
+*/
+
+
+// [17-274] The Module Pattern
