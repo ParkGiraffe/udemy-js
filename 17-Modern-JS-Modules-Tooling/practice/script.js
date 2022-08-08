@@ -108,4 +108,21 @@ console.log(ShoppingCart2.shoppincCost); // undefined <- private함.
 */
 
 
-// [17-274] The Module Pattern
+// [17-275] CommonJS Module
+// ES6 이전, Module Pattern 이외에도 CommonJS를 통한 모듈 구현이 있었다. 그것은 바로 AMD모듈, CommonJS모듈 이다.
+// CommonJS모듈은 Node.js에서 사용되기에 중요하다. -> npm도 마찬가지. 그러다보니 브라우저에서는 작동하지 않고 Node.js에서 작동한다.
+// ES6와 마찬가지로 CommonJS에서 하나의 파일 당 하나의 모듈이다.
+
+// export.moduleNamed, require() 는 브라우저에는 없는 객체, 함수인데 Node.js에서는 있다. 
+
+
+// Export
+export.addTocart = function (product, quantity) {
+  cart.push({ product, quantity });
+  console.log(
+    `${quantity} ${product} added to cart (sipping cost is ${shippingCost})`
+  );
+};
+
+// Import
+const { addTocart } = require('./shoppingCart.js');
