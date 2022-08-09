@@ -130,4 +130,23 @@ const { addTocart } = require('./shoppingCart.js');
 
 
 // [17-277] Introduction to NPM
+// lodash는 JS에서 원래는 당연히 있어야 할 거 같은데 없는 기능들을 추가해주는 모듈이다. 일반 lodash는 moudle bundler를 필요로 하기 때문에, lodash-es를 통해 es module을 이용할 수 있도록 lodash-es를 npm install 해준다.
 
+import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+
+const state = {
+  cart: [
+    { product: 'bread', quantity: 5 },
+    { product: 'pizza', quantity: 5 },
+  ],
+  user: { loggedIn: true },
+};
+const stateClone = Object.assign({}, state);
+const stateDeepClone = cloneDeep(state);
+
+state.user.loggedIn = false;
+
+console.log(stateClone);
+console.log(stateDeepClone);
+// Obejct.assign()을 이용해서 복사한 경우에는 얕은 복사가 진행되어서 원본을 수정할 때 같이 수정되는데, lodash를 이용했더니 깊은 복사가 일어나서 loggedIn에 변경이 없다.
+// 만약 package.json을 전송한 후에 npm 모듈을 일괄 설치하고 싶다면, npm i(install)만 터미널에 입력하면 된다.
