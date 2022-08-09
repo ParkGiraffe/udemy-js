@@ -128,7 +128,7 @@ export.addTocart = function (product, quantity) {
 const { addTocart } = require('./shoppingCart.js');
 */
 
-
+/*
 // [17-277] Introduction to NPM
 // lodash는 JS에서 원래는 당연히 있어야 할 거 같은데 없는 기능들을 추가해주는 모듈이다. 일반 lodash는 moudle bundler를 필요로 하기 때문에, lodash-es를 통해 es module을 이용할 수 있도록 lodash-es를 npm install 해준다.
 
@@ -150,3 +150,45 @@ console.log(stateClone);
 console.log(stateDeepClone);
 // Obejct.assign()을 이용해서 복사한 경우에는 얕은 복사가 진행되어서 원본을 수정할 때 같이 수정되는데, lodash를 이용했더니 깊은 복사가 일어나서 loggedIn에 변경이 없다.
 // 만약 package.json을 전송한 후에 npm 모듈을 일괄 설치하고 싶다면, npm i(install)만 터미널에 입력하면 된다.
+*/
+
+
+// [17-278] Building with Parcel and Npm Scripts
+// parcel을 설치할 때는 'npm parcel --save -dev'로 설치를 진행한다. 애플리케이션 빌드 도구이기에 그러한데, package.json으로 들어가면 devDependencies에 parcel이 있다. dependencies는 실제 코드에 포함되는 regular dependencies이고 Parcel는 빌드 단계에서 쓰이는 도구이기에 devDependencies이다.
+// parcel는 글로벌 설치버전도 있다.(다만 최신버전을 유지하기 위해 프로젝트 단위로 설치하는 방식을 많이 사용한다.) 하지만 프로젝트 안에만 설치한 경우 npx를 이용해서 실행할 수 있다. 'npx parcel index.html' - parcel 명령어 다음에 엔트리 포인트를 입력하는데, 거기에 script.js가 포함되어 있으면 된다. 
+
+// 만약 parcel 설치에 오류가 발생하면 sudo를 이용해서 설치한다. 'sudo npm install parcel'
+
+// parcel이 대신 module을 연결해주기 때문에, html의 Script태그 안 type = "moudle"속성을 제거해줘야 한다. 이는 구 브라우저에서 작동하지 않는 속성인데, Parcel이 이를 대체해준다.
+import cloneDeep from 'lodash-es'; 
+// import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+// Parcel자동으로 모듈의 경로를 찾고 간단하게 엮어준다. 일일이 파일 경로를 찾아줄 필요가 없어진다.
+
+const state = {
+  cart: [
+    { product: 'bread', quantity: 5 },
+    { product: 'pizza', quantity: 5 },
+  ],
+  user: { loggedIn: true },
+};
+const stateClone = Object.assign({}, state);
+const stateDeepClone = cloneDeep(state);
+
+state.user.loggedIn = false;
+
+console.log(stateClone);
+console.log(stateDeepClone);
+
+// parcel의 역할은 dist 폴더를 만드는 것이다. Distribution을 의미하며, 이 폴더가 실제 유저에게 보내지는 파일이 된다. Parcel이 임의로 코드를 붙여놓고 파일을 새로 만들고 지지고볶고 한다.
+
+// parcel은 핫 리로드를 지원한다. module.hot은 오로지 Parcel만 이해할 수 있는데, parcel live-server에서 변수들이 다른 무언가가 변경될 때 마다 다시 로드되는 번거로움을 없앤준다. 프로덕션 빌드에서는 자동으로 제거된다.
+if(module.hot) {
+  module.hot.accept();
+}
+
+// npx 대신에 parcel를 시작하는 방법은 바로 npm 스크립트를 이용하는 것이다. package.json에서 scripts에 스크립트를 추가한다.
+// "scripts": {
+//   "start": "parcel index.html",
+//   "build": "parcel build index.html",
+// },
+// 그리고 npm run start를 터미널에 입력하면 실행이 된다. 스크립트 앞에 npm run을 붙여주면 된다. 참고로 빌드버전은 매우 압축되어 있다. 모든 주석과 필요없는 모듈들을 자동으로 제거해주고, 심지어 띄어쓰기까지 제거한다.
