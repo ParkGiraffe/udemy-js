@@ -153,6 +153,7 @@ console.log(stateDeepClone);
 */
 
 
+/*
 // [17-278] Building with Parcel and Npm Scripts
 // parcel을 설치할 때는 'npm parcel --save -dev'로 설치를 진행한다. 애플리케이션 빌드 도구이기에 그러한데, package.json으로 들어가면 devDependencies에 parcel이 있다. dependencies는 실제 코드에 포함되는 regular dependencies이고 Parcel는 빌드 단계에서 쓰이는 도구이기에 devDependencies이다.
 // parcel는 글로벌 설치버전도 있다.(다만 최신버전을 유지하기 위해 프로젝트 단위로 설치하는 방식을 많이 사용한다.) 하지만 프로젝트 안에만 설치한 경우 npx를 이용해서 실행할 수 있다. 'npx parcel index.html' - parcel 명령어 다음에 엔트리 포인트를 입력하는데, 거기에 script.js가 포함되어 있으면 된다. 
@@ -192,3 +193,20 @@ if(module.hot) {
 //   "build": "parcel build index.html",
 // },
 // 그리고 npm run start를 터미널에 입력하면 실행이 된다. 스크립트 앞에 npm run을 붙여주면 된다. 참고로 빌드버전은 매우 압축되어 있다. 모든 주석과 필요없는 모듈들을 자동으로 제거해주고, 심지어 띄어쓰기까지 제거한다.
+*/
+
+
+// [17-279]
+// Babel은 IE와 같은 옛날 브라우저를 사용하는 사람들을 위해 ES6이전의 JS로 transpiling해주는 프로그램이다. parcel은 babel을 자동으로 사용한다. 기본값 설정을 상요할 수 있다.
+// template literal, const/let, Nullish Operator, arrow function와 같은 것들이 자동으로 변환된다. 단 Promise나 Array.prototype.find()와 같이 ES6 전용기능이어서 ES5로 변경하지 못하는 것들도 있다. 그래서 이에 대한 대안으로 Polyfilling이 있다.
+
+// core-js 모듈을 따로 설치해서 사용하는데, 한 번에 모든 번들을 가져올 수도, 원하는 부분만 가져올 수도 있다.
+import 'core-js/stable';
+// import 'core-js/stable/array/find';
+// import 'core-js/stable/promise';
+
+// 비동기 함수를 폴리핑하기 위해서는 regenerator-runtime모듈을 사용해야 한다.
+// Polifilling async functions
+import 'regenerator-runtime/runtime';
+
+// 주의 - 위의 모듈 사용방식이 강의 영상이 제작된 시점과는 달라질 수 있기 때문에 버전확인을 잘 해야 한다.
