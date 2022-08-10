@@ -195,8 +195,8 @@ if(module.hot) {
 // 그리고 npm run start를 터미널에 입력하면 실행이 된다. 스크립트 앞에 npm run을 붙여주면 된다. 참고로 빌드버전은 매우 압축되어 있다. 모든 주석과 필요없는 모듈들을 자동으로 제거해주고, 심지어 띄어쓰기까지 제거한다.
 */
 
-
-// [17-279]
+/*
+// [17-279] Configuring Babel and Polyfilling
 // Babel은 IE와 같은 옛날 브라우저를 사용하는 사람들을 위해 ES6이전의 JS로 transpiling해주는 프로그램이다. parcel은 babel을 자동으로 사용한다. 기본값 설정을 상요할 수 있다.
 // template literal, const/let, Nullish Operator, arrow function와 같은 것들이 자동으로 변환된다. 단 Promise나 Array.prototype.find()와 같이 ES6 전용기능이어서 ES5로 변경하지 못하는 것들도 있다. 그래서 이에 대한 대안으로 Polyfilling이 있다.
 
@@ -210,3 +210,4 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
 // 주의 - 위의 모듈 사용방식이 강의 영상이 제작된 시점과는 달라질 수 있기 때문에 버전확인을 잘 해야 한다.
+*/
