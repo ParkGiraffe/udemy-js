@@ -1,7 +1,7 @@
 // import icons from '../img/icons.svg'; // parcel 1
 import icons from 'url:../img/icons.svg'; // parcel 2 - 프로그래밍 파일이 아닌 정적 자신(static asset)일 경우에는 앞에 url:을 붙여야 한다.
-import 'core-js/stable'
-import 'regenerator-runtime/runtime'
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 
 const recipeContainer = document.querySelector('.recipe');
 
@@ -12,12 +12,12 @@ const timeout = function (s) {
     }, s * 1000);
   });
 };
- 
+
 // https://forkify-api.herokuapp.com/v2
 
 ///////////////////////////////////////
 
-const renderSpinner = function(parentEl) {
+const renderSpinner = function (parentEl) {
   const markup = `
   <div class="spinner">
       <svg> 
@@ -27,17 +27,19 @@ const renderSpinner = function(parentEl) {
   `;
   parentEl.innerHTML = '';
   parentEl.insertAdjacentHTML('afterbegin', markup);
-}
+};
 
-const showRecipe = async function() {
+const showRecipe = async function () {
   try {
     // 1) Loading Recipe
     renderSpinner(recipeContainer);
-    const res = await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886`);
+    const res = await fetch(
+      `https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886`
+    );
     const data = await res.json();
-    if(!res.ok) throw new Error(`${data.message} (${res.status})`);
+    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
 
-    let {recipe} = data.data;
+    let { recipe } = data.data;
     // 기존에 fetch해온 레시피 객체를 새로운 객체에 담기
     recipe = {
       id: recipe.id,
@@ -50,7 +52,6 @@ const showRecipe = async function() {
       ingredients: recipe.ingredients,
     };
     console.log(recipe, typeof recipe);
-
 
     // 2) Rendering Recipe
     const markup = `
@@ -66,14 +67,18 @@ const showRecipe = async function() {
             <svg class="recipe__info-icon">
               <use href="${icons}.svg#icon-clock"></use>
             </svg>
-            <span class="recipe__info-data recipe__info-data--minutes">${recipe.cookingTime}</span>
+            <span class="recipe__info-data recipe__info-data--minutes">${
+              recipe.cookingTime
+            }</span>
             <span class="recipe__info-text">minutes</span>
           </div>
           <div class="recipe__info">
             <svg class="recipe__info-icon">
               <use href="${icons}.svg#icon-users"></use>
             </svg>
-            <span class="recipe__info-data recipe__info-data--people">${recipe.servings}</span>
+            <span class="recipe__info-data recipe__info-data--people">${
+              recipe.servings
+            }</span>
             <span class="recipe__info-text">servings</span>
 
             <div class="recipe__info-buttons">
@@ -105,8 +110,9 @@ const showRecipe = async function() {
         <div class="recipe__ingredients">
           <h2 class="heading--2">Recipe ingredients</h2>
           <ul class="recipe__ingredient-list">
-            ${recipe.ingredients.map(ing => {
-              return `
+            ${recipe.ingredients
+              .map(ing => {
+                return `
                 <li class="recipe__ingredient">
                   <svg class="recipe__icon">
                     <use href="${icons}.svg#icon-check"></use>
@@ -118,7 +124,8 @@ const showRecipe = async function() {
                   </div>
                 </li>
               `;
-            }).join('')}
+              })
+              .join('')}
           </ul>
         </div>
 
@@ -126,7 +133,9 @@ const showRecipe = async function() {
           <h2 class="heading--2">How to cook it</h2>
           <p class="recipe__directions-text">
             This recipe was carefully designed and tested by
-            <span class="recipe__publisher">${recipe.publisher}</span>. Please check out
+            <span class="recipe__publisher">${
+              recipe.publisher
+            }</span>. Please check out
             directions at their website.
           </p>
           <a
@@ -143,9 +152,7 @@ const showRecipe = async function() {
     `;
     recipeContainer.innerHTML = '';
     recipeContainer.insertAdjacentHTML('afterbegin', markup);
-  } catch (error) {
-    
-  }
+  } catch (error) {}
 };
 
 showRecipe();
