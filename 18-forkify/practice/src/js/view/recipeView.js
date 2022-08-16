@@ -118,6 +118,12 @@ class RecipeView {
     `;
   }
 
+
+  // handler function을 인자로 받아서 subscriber에 대한 엑세스를 얻는다.
+  addHandlerRender(handler) {
+    ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler));
+  }
+
   #generateMarkupIngredient(ing) {
     return `
     <li class="recipe__ingredient">
