@@ -1,4 +1,6 @@
 import { async } from 'regenerator-runtime';
+import { API_URL } from './config';
+import { getJSON } from './view/helper';
 
 export const state = {
   recipe: {},
@@ -6,12 +8,7 @@ export const state = {
 
 export const loadRecipe = async function (id) {
   try {
-    const res = await fetch(
-      `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
-    );
-    const data = await res.json();
-    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
-  
+    const data = await getJSON(`${API_URL}/${id}`);
     const { recipe } = data.data;
     // 기존에 fetch해온 레시피 객체를 새로운 객체에 담기
     state.recipe = {
@@ -26,6 +23,6 @@ export const loadRecipe = async function (id) {
     };
     console.log(state.recipe, typeof state.recipe);
   } catch (error) {
-    alert(error);
+    console.error(error)
   }
 };
