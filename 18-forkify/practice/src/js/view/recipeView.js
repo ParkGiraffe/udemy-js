@@ -1,8 +1,9 @@
 import View from './view';
 import icons from 'url:../../img/icons.svg';
 import { Fraction } from 'fractional';
-
-class RecipeView extends View {
+ 
+class RecipeView extends View{
+  
   // handler function을 인자로 받아서 subscriber에 대한 엑세스를 얻는다.
   addHandlerRender(handler) {
     ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler));
