@@ -7,16 +7,12 @@ import icons from 'url:../img/icons.svg'; // parcel 2 - 프로그래밍 파일�
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import resultView from './view/resultView.js';
-
-const recipeContainer = document.querySelector('.recipe');
+import paginationView from './view/paginationView.js';
 
 // https://forkify-api.herokuapp.com/v2
 
 ///////////////////////////////////////
 
-if (module.hot) {
-  module.hot.accept(); 
-}
 
 const controlRecipe = async function () {
   try {
@@ -46,14 +42,26 @@ const controlSearchResults = async function () {
 
     // 3) render results
     // resultView.render(model.state.search.results);
-    resultView.render(model.getSearchResultPage(1));
+    resultView.render(model.getSearchResultPage());
+
+    // 4) render pagination
+    paginationView.render(model.state.search);
   } catch (error) {
     console.error(error);
   }
 };
 
+const controlPagination = function (goToPage) {
+  // 1) render new results
+  resultView.render(model.getSearchResultPage(goToPage));
+
+  // 2) render new pagination buttons  
+  paginationView.render(model.state.search);
+};
+
 const init = function () {
   recipeView.addHandlerRender(controlRecipe);
   searchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
 };
 init();
