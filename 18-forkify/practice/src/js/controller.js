@@ -6,6 +6,7 @@ import searchView from './view/searchView.js';
 import icons from 'url:../img/icons.svg'; // parcel 2 - 프로그래밍 파일이 아닌 정적 자신(static asset)일 경우에는 앞에 url:을 붙여야 한다.
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
+import resultView from './view/resultView.js';
 
 const recipeContainer = document.querySelector('.recipe');
 
@@ -13,10 +14,14 @@ const recipeContainer = document.querySelector('.recipe');
 
 ///////////////////////////////////////
 
+if (module.hot) {
+  module.hot.accept(); 
+}
+
 const controlRecipe = async function () {
   try {
-    // const id = window.location.hash.slice(1);
-    const id = `5ed6604591c37cdc054bc886`;
+    const id = window.location.hash.slice(1);
+    // const id = `5ed6604591c37cdc054bc886`;
 
     // 1) Loading Recipe
     recipeView.renderSpinner();
@@ -31,6 +36,7 @@ const controlRecipe = async function () {
 
 const controlSearchResults = async function () {
   try {
+    resultView.renderSpinner();
     // 1) get search query
     const query = searchView.getQuery();
     if (!query) return;
@@ -39,6 +45,7 @@ const controlSearchResults = async function () {
     await model.loadSearchResult(query);
 
     // 3) render results
+    resultView.render(model.state.search.results);
   } catch (error) {
     console.error(error);
   }
