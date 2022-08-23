@@ -3,10 +3,28 @@ import icons from 'url:../../img/icons.svg';
 import { Fraction } from 'fractional';
  
 class RecipeView extends View{
-  
+  // 뷰는 클래스 형식으로 구현한다. View라는 부모 클래스를 만들어서 각 뷰마다 상속하면 매우 좋다.
+  // 팁! - 각 뷰에 parentElement 변수를 만들어서, 해당 뷰가 담겨질 부모 요소를 저장해놓으면 정말 편한다.
+  // 아래의 두 private 변수는 모든 뷰에서 공통적으로 들어간다.
+  _parentElement = document.querySelector('.recipe');
+  _data;
+  _errorMessage = 'We could not find that recipe. Please try another one!';
+  _message = '';
+  // #으로 작성하면 parcel과 babel이 아직 인식을 못해서 _로 변경함.
+
   // handler function을 인자로 받아서 subscriber에 대한 엑세스를 얻는다.
   addHandlerRender(handler) {
     ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler));
+  }
+
+  addHandlerUpdateServings(handler) {
+    this._parentElement.addEventListener('click', function(e) {
+      const btn = e.target.closest('.btn--increase-servings');
+      if(!btn) return;
+
+      const { updateTo } = btn.dataset;
+      if(+updateTo > 0) handler(+updateTo);
+    });
   }
 
   _generateMarkupIngredient(ing) {
@@ -55,12 +73,12 @@ class RecipeView extends View{
             <span class="recipe__info-text">servings</span>
 
             <div class="recipe__info-buttons">
-              <button class="btn--tiny btn--increase-servings">
+              <button class="btn--tiny btn--increase-servings" data-update-to="${this._data.servings - 1}">
                 <svg>
                   <use href="${icons}.svg#icon-minus-circle"></use>
                 </svg>
               </button>
-              <button class="btn--tiny btn--increase-servings">
+              <button class="btn--tiny btn--increase-servings" data-update-to="${this._data.servings + 1}">
                 <svg>
                   <use href="${icons}.svg#icon-plus-circle"></use>
                 </svg>
