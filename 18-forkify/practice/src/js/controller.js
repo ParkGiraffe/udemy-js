@@ -8,6 +8,7 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import resultView from './view/resultView.js';
 import paginationView from './view/paginationView.js';
+import bookmarksView from './view/bookmarksView.js';
 
 // https://forkify-api.herokuapp.com/v2
 
@@ -23,6 +24,7 @@ const controlRecipe = async function () {
 
     // 0) Update results view to mark selected search result
     resultView.update(model.getSearchResultPage());
+    bookmarksView.update(model.state.bookmarks);
 
     // 1) Loading Recipe
     await model.loadRecipe(id); // async함수는 promise를 반환하기에 await를 사용해줘야 함을 잊지 말자.
@@ -71,10 +73,16 @@ const controlServings = function (newServings) {
 };
 
 const controlAddBookmark = function () {
+  // 1) Add/Remove bookmark
   if(!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe)
   else if(model.state.recipe.bookmarked) model.deleteBookmark(model.state.recipe.id);
+
+  // 2) Update recipe view
   recipeView.update(model.state.recipe);
-};
+
+  // 3) Render bookmarks
+  bookmarksView.render(model.state.bookmarks);
+}
 
 
 
