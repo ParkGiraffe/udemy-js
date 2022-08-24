@@ -27,6 +27,15 @@ class RecipeView extends View{
     });
   }
 
+  /** recipe view는 recipe데이터를 불러온 후, 마크업을 나중에 만들어서 보여주는 형식이라 바로 해당 클래스에 핸들러를 추가할 수 없다. 이럴 때는 상위요소에서 이벤트를 수신 한 후 하위 요소로 핸들러를 위임해주는 방식을 사용하면 된다.*/
+  addHandlerRenderAddBookmark(handler) {
+    this._parentElement.addEventListener('click', function(e) {
+      const btn = e.target.closest('.btn--bookmark');
+      if(!btn) return
+      handler();
+    })
+  }
+
   _generateMarkupIngredient(ing) {
     return `
     <li class="recipe__ingredient">
@@ -91,9 +100,9 @@ class RecipeView extends View{
               <use href="${icons}.svg#icon-user"></use>
             </svg>
           </div>
-          <button class="btn--round">
+          <button class="btn--round btn--bookmark">
             <svg class="">
-              <use href="${icons}.svg#icon-bookmark-fill"></use>
+              <use href="${icons}.svg#icon-bookmark${this._data.bookmarked ? '-fill' : ''}"></use>
             </svg>
           </button>
         </div>

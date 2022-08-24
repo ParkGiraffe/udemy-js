@@ -13,24 +13,22 @@ import paginationView from './view/paginationView.js';
 
 ///////////////////////////////////////
 
-
 const controlRecipe = async function () {
   try {
     const id = window.location.hash.slice(1);
     // const id = `5ed6604591c37cdc054bc886`;
 
-    if(!id) return;
+    if (!id) return;
     recipeView.renderSpinner();
-    
+
     // 0) Update results view to mark selected search result
-    resultView.update(model.getSearchResultPage())
+    resultView.update(model.getSearchResultPage());
 
     // 1) Loading Recipe
     await model.loadRecipe(id); // async함수는 promise를 반환하기에 await를 사용해줘야 함을 잊지 말자.
 
     // 2) Rendering Recipe
     recipeView.render(model.state.recipe);
-
   } catch (error) {
     recipeView.renderError();
   }
@@ -61,22 +59,30 @@ const controlPagination = function (goToPage) {
   // 1) render new results
   resultView.render(model.getSearchResultPage(goToPage));
 
-  // 2) render new pagination buttons  
+  // 2) render new pagination buttons
   paginationView.render(model.state.search);
 };
 
-const controlServings = function(newServings) {
+const controlServings = function (newServings) {
   // Update the recipe servings (in state)
   model.updateServings(newServings);
   // Update the recipe view
   recipeView.update(model.state.recipe);
-}
+};
 
-  const init = function () {
+const controlAddBookmark = function () {
+  if(!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe)
+  else if(model.state.recipe.bookmarked) model.deleteBookmark(model.state.recipe.id);
+  recipeView.update(model.state.recipe);
+};
+
+
+
+const init = function () {
   recipeView.addHandlerRender(controlRecipe);
   recipeView.addHandlerUpdateServings(controlServings);
+  recipeView.addHandlerRenderAddBookmark(controlAddBookmark)
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
 };
 init();
-
