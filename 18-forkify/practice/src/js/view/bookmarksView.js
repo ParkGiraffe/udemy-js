@@ -8,6 +8,12 @@ class BookmarksView extends View {
   _errorMessage = 'No bookrmarks yet, Find a nice recipe and bookmark it :)';
   _message = '';
 
+
+  /** 북마크를 로드 때마다 렌더 */
+  addHandlerRender(handler) {
+    window.addEventListener('load', handler);
+  }
+
   _generateMarkup() {
     return this._data.map(bookmark => previewView.render(bookmark, false)).join('');
   }
