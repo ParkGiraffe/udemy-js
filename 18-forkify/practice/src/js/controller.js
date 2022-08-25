@@ -9,6 +9,7 @@ import 'regenerator-runtime/runtime';
 import resultView from './view/resultView.js';
 import paginationView from './view/paginationView.js';
 import bookmarksView from './view/bookmarksView.js';
+import addRecipeView from './view/addRecipeView.js';
 
 // https://forkify-api.herokuapp.com/v2
 
@@ -89,6 +90,11 @@ const controlBookmarks = function() {
   bookmarksView.render(model.state.bookmarks);
 }
 
+const controlAddRecipe = function(newRecipe) {
+  console.log(newRecipe);
+
+  // Upload the new recipe data
+}
 
 const init = function () {
   bookmarksView.addHandlerRender(controlBookmarks);
@@ -97,5 +103,6 @@ const init = function () {
   recipeView.addHandlerRenderAddBookmark(controlAddBookmark)
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
+  addRecipeView.addHandlerUpload(controlAddRecipe);
 };
 init();
