@@ -1,5 +1,5 @@
-import { API_URL, RES_PER_PAGE } from './config';
-import { getJSON } from './view/helper';
+import { API_URL, KEY, RES_PER_PAGE } from './config';
+import { AJAX } from './view/helper';
 
 export const state = {
   recipe: {},
@@ -14,19 +14,8 @@ export const state = {
 
 export const loadRecipe = async function (id) {
   try {
-    const data = await getJSON(`${API_URL}/${id}`);
-    const { recipe } = data.data;
-    // 기존에 fetch해온 레시피 객체를 새로운 객체에 담기
-    state.recipe = {
-      id: recipe.id,
-      title: recipe.title,
-      publisher: recipe.publisher,
-      sourceUrl: recipe.source_url,
-      image: recipe.image_url,
-      servings: recipe.servings,
-      cookingTime: recipe.cooking_time,
-      ingredients: recipe.ingredients,
-    };
+    const data = await AJAX(`${API_URL}/${id}?key=${KEY}`);
+    state.recipe = createRecipeObject(data);
     if (state.bookmarks.some(bookmark => bookmark.id === id))
       state.recipe.bookmarked = true;
     else state.recipe.bookmarked = false;
@@ -40,7 +29,7 @@ export const loadSearchResult = async function (query) {
   try {
     state.search.query = query;
 
-    const data = await getJSON(`${API_URL}?search=${query}`);
+    const data = await AJAX(`${API_URL}?search=${query}&key=${KEY}`);
     const { recipes } = data.data;
     state.search.results = recipes.map(rec => {
       return {
@@ -48,6 +37,7 @@ export const loadSearchResult = async function (query) {
         title: rec.title,
         publisher: rec.publisher,
         image: rec.image_url,
+        ...(rec.key && { key: rec.key }),
       };
     });
     state.search.page = 1;
@@ -106,3 +96,56 @@ init();
 const clearBookmark = function () {
   localStorage.clear('bookmarks');
 };
+
+export const uploadRecipe = async function (newRecipe) {
+  try {
+    const ingredients = Object.entries(newRecipe)
+      .filter(e => e[0].startsWith('ingredient') && e[1] !== '')
+      .map(ing => {
+        const ingArr = ing[1].split(',').map(e => e.trim());
+        // const ingArr = ing[1].replaceAll(' ', '').split(',');
+        if (ingArr.length !== 3)
+          throw new Error(
+            'Wrong Ingredient format! Please use the correct format :)'
+          );
+
+        const [quantity, unit, description] = ingArr;
+        return { quantity: quantity ? +quantity : null, unit, description };
+      });
+    const recipe = {
+      publisher: newRecipe.publisher,
+      title: newRecipe.title,
+      source_url: newRecipe.sourceUrl,
+      image_url: newRecipe.image,
+      servings: +newRecipe.servings,
+      cooking_time: +newRecipe.cookingTime,
+      ingredients,
+      // fetch함수로 보낼 때 자동으로 KEY와 id가 생성됨.
+    };
+
+    const data = await AJAX(`${API_URL}?key=${KEY}`, recipe);
+    state.recipe = createRecipeObject(data);
+    addBookmark(state.recipe); // 생성한 레시피는 자동 북마크
+    
+    // 생성한 레시피에 API key property 추가
+  } catch (error) {
+    throw error;
+  }
+};
+
+/** promise로 불러온 데이터를 비구조화 한 후, 각 속성을 알맞게 변환해줌. (server:snake <-> state:camel) */
+function createRecipeObject(data) {
+  const { recipe } = data.data;
+  // 기존에 fetch해온 레시피 객체를 새로운 객체에 담기
+  return {
+    id: recipe.id,
+    title: recipe.title,
+    publisher: recipe.publisher,
+    sourceUrl: recipe.source_url,
+    image: recipe.image_url,
+    servings: recipe.servings,
+    cookingTime: recipe.cooking_time,
+    ingredients: recipe.ingredients,
+    ...(recipe.key && { key: recipe.key }), // 조건부 생성, 인수로 받은 recipe 데이터에 recipe.key가 있을 경우 속성에 추가. - 내가 만든 recipe에 key property를 추가하기 위한 기능 && 기존에 key가 있는 레시피를 구별하기 위한 기능
+  };
+}

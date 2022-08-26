@@ -10,6 +10,8 @@ import resultView from './view/resultView.js';
 import paginationView from './view/paginationView.js';
 import bookmarksView from './view/bookmarksView.js';
 import addRecipeView from './view/addRecipeView.js';
+import { async } from 'regenerator-runtime';
+import { MODAL_CLOSE_SEC } from './config.js';
 
 // https://forkify-api.herokuapp.com/v2
 
@@ -90,10 +92,39 @@ const controlBookmarks = function() {
   bookmarksView.render(model.state.bookmarks);
 }
 
-const controlAddRecipe = function(newRecipe) {
-  console.log(newRecipe);
+const controlAddRecipe = async function(newRecipe) {
+  try {
+    // Show loading spinner
+    addRecipeView.renderSpinner();
 
-  // Upload the new recipe data
+    // Upload the new recipe data
+    await model.uploadRecipe(newRecipe);
+
+    // Render recipe
+    recipeView.render(model.state.recipe);
+
+
+    // Success message
+    addRecipeView.renderMessage();
+
+    // Render bookmark vie w
+    bookmarksView.render(model.state.bookmarks); // 새로운 요소를 삽입하는 것이기 때문에 update X
+
+    // Change ID in URL
+    // 브라우저의 history API를 사용한다.
+    // pushState()를 통해 페이지를 리로딩 하지 않고서 url를 변경할 수 있다. 이 메소드는 세 개의 인자를 받는다. (state, title, url)이다. 여기서 url이 가장 중요하다. 
+    window.history.pushState(null, '', `#${model.state.recipe.id}`);
+
+    // Close form window
+    setTimeout(function() {
+      addRecipeView.toggleWindow()
+    }, MODAL_CLOSE_SEC * 1000);
+
+  } catch (error) {
+    console.error(error);
+    addRecipeView.renderError(error.message);
+
+  }
 }
 
 const init = function () {
